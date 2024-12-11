@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-24086.htm" />
+    <meta charset="utf-8">
+    <title>[ Shell ] 通过 Shell 脚本导出 GDSII/OASIS 文件</title>
+        <meta name="description" content="https://www.cnblogs.com/yeungchie/ 常见的集成电路版图数据库文件格式有 GDSII 和 OASIS，virtuoso 提供了下面两个工具，可以用来通过命令行导出版图数" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">[ Shell ] 通过 Shell 脚本导出 GDSII/OASIS 文件</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                          				  				  				<p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/yeungchie/"  title="https://www.cnblogs.com/yeungchie/" target="_blank" rel="nofollow">https://www.cnblogs.com/yeungchie/</a></p> <p>常见的集成电路版图数据库文件格式有 GDSII 和 OASIS，virtuoso 提供了下面两个工具，可以用来通过命令行导出版图数据。</p> <ul> <li> <p>strmout (导出为 GDSII 格式)</p> <details> <summary>strmout -help</summary> <pre><code class="language-text">Usage: Usage: strmout     -library                        &lt;Input Library&gt;     -strmFile                       &lt;Output Stream File&gt;     [-strmVersion]                  &lt;Stream Version Number&gt;     [-runDir]                       &lt;Run Directory&gt;     [-topCell]                      &lt;Toplevel Cells to Translate&gt;     [-view]                         &lt;Toplevel Cell View Name&gt;     [-logFile]                      &lt;Output Log File Name&gt;     [-summaryFile]                  &lt;Output Summary File&gt;     [-techLib]                      &lt;Technology Library&gt;     [-hierDepth]                    &lt;Hierarchical Depth to Translate to&gt;     [-layerMap]                     &lt;Quoted List of Layer Map Files&gt;     [-translateUnmappedLPP]         &lt;Allow undefined LPP to be translated by incrementally mapping LPP using layerMap file, SKILL hook poLayerMap, and automatic layer mapping&gt;     [-labelMap]                     &lt;Input Label Map File&gt;     [-labelDepth]                   &lt;Hierarchical Depth to Add Labels to&gt;     [-replaceBusBitChar]            &lt;Replace "&lt;&gt;" With "[]"&gt;     [-cellMap]                      &lt;Input Cell Map File&gt;     [-fontMap]                      &lt;Input Font Map File&gt;     [-propMap]                      &lt;Input Property Map File&gt;     [-objectMap]                    &lt;Quoted List of Object Mapping Files&gt;     [-viaMap]                       &lt;Via Mapping File&gt;     [-viaCutArefThreshold]          &lt;Threshold Value For Creating AREF For Cut Geometries For Via&gt;     [-userSkillFile]                &lt;User Skill File&gt;     [-refLibList]                   &lt;Name of The File Containing Refliblist &gt;     [-arrayInstToScalar]     [-cellNamePrefix]               &lt;Cell Name Prefix&gt;     [-cellNameSuffix]               &lt;Cell Name Suffix&gt;     [-ignoreTopCellPrefixSuffix]    &lt;Ignores cellName Prefix and Suffix for topCell&gt;     [-case]                         &lt;upper | lower | preserve &gt;     [-labelCase]                    &lt;upper | lower | preserve &gt;     [-ignoreLines]     [-noOutputTextDisplays]     [-noOutputUnplacedInst]         &lt;Do not Output Unplaced Instances&gt;     [-convertDot]                   &lt;node | polygon | ignore &gt;     [-convertPin]                   &lt;geometry | text | geometryAndText | ignore &gt;     [-pinAttNum]                    &lt;Stream Attribute Num (1-127) For Preserving Pins&gt;     [-pathToPolygon]                &lt;Convert Paths to Polygons&gt;     [-diagonalPathToPolygon]        &lt;Convert Paths with non-orthogonal segments to polygons&gt;     [-propValueOnly]                &lt;Output Property Values Only&gt;     [-rectToBox]     [-respectGDSIINameLimit]     [-gdsCellNameLength]            &lt;Truncate GDS Cell/STRUCT name length to specified value (&gt;=10)&gt;     [-flattenPcells]     [-flattenVias]     [-outputViaShapesToViaPurp]     &lt;Output Shapes of Via to Via Purpose&gt;     [-doNotPreservePcellPins]     [-snapToGrid]     [-dbuPerUU]                     &lt;DB Units per user units&gt;     [-reportPrecisionLoss]          &lt;Report Precision Loss Because of dbuPerUU Value&gt;     [-noObjectProp]     [-ignorePcellEvalFail]     [-mergePathSegsToPath]          &lt;Merging pathSegs into a single PATH&gt;     [-noConvertHalfWidthPath]       &lt;Do not Convert The Half Width Path to Boundary&gt;     [-checkPolygon]                 &lt;Report Bad Polygons And Paths&gt;     [-backupGdsLogFiles]            &lt;Backup GDSII and LOG files, if they already exist&gt;     [-maxVertices]                  &lt;Maximum Limit of Vertices (5-4000) Allowed in Stream File&gt;     [-strmTextNS]                   &lt;NameSpace of The TEXT Records in The Stream File&gt;     [-templateFile]                 &lt;Name of The File Containing Option Names And Values&gt;     [-cellListFile]                 &lt;Name of the file containing cellList&gt;     [-outputDir]                    &lt;output directory&gt;     [-noInfo]                       &lt;Quoted List of Info Message Ids&gt;     [-noWarn]                       &lt;Quoted List of Warning Message Ids&gt;     [-warnToErr]                    &lt;Quoted List of warning Message Ids&gt;     [-infoToWarn]                   &lt;Quoted List of Info Message Ids&gt;     [-donutNumSides]                &lt;Number of sides (4-131072) for the BOUNDARY of donut&gt;     [-ellipseNumSides]              &lt;Number of sides (4-131072) for the BOUNDAR of ellipse&gt;     [-wildCardInCellMap]            &lt;Wild Card in cell map file&gt;     [-ignoreMissingCells]           &lt;Ignores Missing cellViews During Translation and Continue Translation&gt;     [-ignoreMissingVias]            &lt;Ignores Missing standard/custom vias During Translation and Continue Translation&gt;     [-subMasterSeparator]           &lt;Separator to used for sub-master naming (default: "_CDNS_")&gt;     [-convertPcellPin]              &lt;geometry | text | geometryAndText | ignore (default: convertPin value)&gt;     [-guiHistory]                   &lt;Use options of last successful translation from the XStream Out GUI&gt;     [-ignoreZeroWidthPathSeg]       &lt;Ignores zero width PathSeg during translation&gt;     [-ignoreObjectMapFromTech]      &lt;Ignores object map file from technology&gt;     [-ignoreCurrentTimestamp]       &lt;Ignores current timestamp&gt;     [-verbose]                      &lt;Generate detailed information in the log and summary files&gt;ose] &lt;Generate detailed information in the log and summary files&gt;</code></pre> </details> </li> <li> <p>oasisout (导出为 OASIS 格式)</p> <details> <summary>oasisout -help</summary> <pre><code class="language-text">Usage: oasisout     -library                        &lt;Input Library&gt;     -oasisFile                      &lt;Output OASIS File&gt;     [-arrayInstToScalar]            &lt;Convert Arrays to Scalar Instances&gt;     [-backupOasisLogFiles]          &lt;Backup OASIS and LOG files, if they    already exist&gt;     [-case]                         &lt;upper | lower | preserve&gt;     [-cellMap]                      &lt;Input cell map file&gt;     [-cellListFile]                 &lt;Name of the file containing cellList&gt;     [-cellNamePrefix]               &lt;Cell name prefix&gt;     [-cellNameSuffix]               &lt;Cell name suffix&gt;     [-checkPolygon]                 &lt;Report bad polygons and paths&gt;     [-circleToPolygon]              &lt;Convert Cricle/Ellipse object to Polygon&gt;     [-compress]                     &lt;Enable CBLOCK compression&gt;     [-compressLevel]                &lt;Set the compression level for CBLOCK   compression&gt;     [-convertDot]                   &lt;polygon | circle | ignore&gt;     [-convertPcellPin]              &lt;geometry | text | geometryAndText |    ignore (default: convertPin value)&gt;     [-convertPin]                   &lt;geometry | text | geometryAndText |    ignore&gt;     [-dbuPerUU]                     &lt;DB Units per user units&gt;     [-diagonalPathToPolygon]        &lt;Convert Paths with non-orthogonal  segments to Polygons&gt;     [-doNotPreservePcellPins]       &lt;Do not preserve the PCell Pins&gt;     [-donutNumSides]                &lt;Number of sides (4-131072) for the     BOUNDARY of Donut&gt;     [-ellipseNumSides]              &lt;Number of sides (4-131072) for the     BOUNDAR of Circle/Ellipse&gt;     [-flattenPcells]                &lt;Flatten the PCell Instances&gt;     [-flattenViaShapesToViaPurp]    &lt;Flatten Vias' Shapes to Via Purpose&gt;     [-flattenVias]                  &lt;Flatten the Vias&gt;     [-GDSIICompatible]              &lt;Generate the OASIS file with GDSII     specific limits&gt;     [-guiHistory]                   &lt;Use options of last successful     translation from the XOasis Out GUI&gt;     [-hierDepth]                    &lt;Hierarchical depth to translate to&gt;     [-ignoreLines]                  &lt;Ignore Line objects&gt;     [-ignoreMissingCells]           &lt;Ignore missing cellViews during    translation and continue translation&gt;     [-ignoreMissingVias]            &lt;Ignore missing standard/custom vias    during translation and continue translation&gt;     [-ignoreObjectMapFromTech]      &lt;Ignore object map file from technology&gt;     [-ignorePcellEvalFail]          &lt;Ignore the PCell evaluation failure&gt;     [-ignoreRoutes]                 &lt;Ignore Route objects&gt;     [-ignoreZeroWidthPathSeg]       &lt;Ignore zero width PathSeg during   translation&gt;     [-infoToWarn]                   &lt;Quoted list of Info message Ids&gt;     [-labelMap]                     &lt;Input label map file&gt;     [-labelDepth]                   &lt;Hierarchical depth to add labels to&gt;     [-layerMap]                     &lt;Quoted list of layer map files&gt;     [-logFile]                      &lt;Output log file name&gt;     [-mergePathSegsToPath]          &lt;Merge pathSegs into a single PATH&gt;     [-noConvertHalfWidthPath]       &lt;Do not convert the half width Path to  Boundary&gt;     [-noInfo]                       &lt;Quoted list of info message Ids&gt;     [-noObjectProp]                 &lt;Do not write the special object    properties&gt;     [-noOutputTextDisplays]         &lt;Do not output Text Displays&gt;     [-noOutputUnplacedInst]         &lt;Do not output Unplaced Instances&gt;     [-noWarn]                       &lt;Quoted list of warning message Ids&gt;     [-objectMap]                    &lt;Quoted list of object mapping files&gt;     [-outputDir]                    &lt;output directory&gt;     [-pathToPolygon]                &lt;Convert Path object to Polygon&gt;     [-preservePinAtt]               &lt;Preserve Pin connectivity information&gt;     [-preserveTextAtt]              &lt;Preserve Text attributes as properties&gt;     [-propMap]                      &lt;Input property map file&gt;     [-refLibList]                   &lt;Name of the file containing reference  libraries list&gt;     [-replaceBusBitChar]            &lt;Replace "&lt;&gt;" with "[]"&gt;     [-runDir]                       &lt;Run directory&gt;     [-snapToGrid]                   &lt;Snap to grid&gt;     [-subMasterSeparator]           &lt;Separator to used for sub-master naming    (default: "_CDNS_")&gt;     [-summaryFile]                  &lt;Output summary file&gt;     [-techLib]                      &lt;Technology library&gt;     [-templateFile]                 &lt;Name of the file containing option names   And values&gt;     [-textCase]                     &lt;upper | lower | preserve&gt;     [-topCell]                      &lt;Toplevel cells to translate&gt;     [-translateUnmappedLPP]         &lt;Allow undefined LPP to be translated by    incrementally mapping LPP using layerMap file, SKILL hook poLayerMap, and  automatic layer mapping&gt;     [-userSkillFile]                &lt;User skill file&gt;     [-verbose]                      &lt;Generate detailed information in the log   and summary files&gt;     [-viaMap]                       &lt;Via mapping file&gt;     [-view]                         &lt;Toplevel cell view name&gt;     [-warnToErr]                    &lt;Quoted list of warning message Ids&gt;     [-wildCardInCellMap]            &lt;Wild card in cell map file&gt;</code></pre> </details> </li> </ul> <p>OASIS 的文件体积声称可以比 GDSII 小 10~50 倍，实际在我的使用中这个数字可以到 20+（以项目情况而定），当项目数据较大的情况下，文件小了确实可以加快运行速度、节省时间（估计是硬盘读写环节拖累了整体运行时间）。<br /><code>oasisout</code> 和<code>strmout</code> 几个常用的参数都是相同的，下面讲下如何使用。</p> <blockquote> <p>另外，命令的运行路径必须在 virtuoso 启动路径（能在当前路径下找得到 cds.lib 文件）。</p> </blockquote> <h2 id="参数解释">参数解释</h2> <h3 id="必要的">必要的</h3> <p>首先有几个必要的运行条件和参数。</p> <ul> <li> <p>-library</p> <p>这个参数用来指定导出的单元库 (library) 名。</p> </li> <li> <p>-strmFile</p> <p>当使用<code>strmout</code> 时，这个参数用来指定导出的 GDSII 文件名称。</p> </li> <li> <p>-oasisFile</p> <p>当使用<code>oasisout</code> 时，这个参数用来指定导出的 OASIS 文件名称。</p> </li> </ul> <h3 id="推荐的">推荐的</h3> <p>其次还有几个是可选的参数，但是建议也指定一下。</p> <ul> <li> <p>-topCell</p> <p>指定导出单元的顶层 Cell 名称，指定了顶层 Cell 就不会导出该顶层没有调用的单元，否则会导出当前库下的所有 Cell 。</p> </li> <li> <p>-view</p> <p>指定导出单元的顶层 View 名称，默认为<code>layout</code> 。</p> </li> <li> <p>-runDir</p> <p>指定运行路径。</p> <blockquote> <p>注意这里的<strong>运行路径</strong> 不同于前面提到的命令的运行路径。<br /> 当定义了<code>-runDir</code> 后<code>-strmFile</code>、<code>-oasisFile</code>、<code>-logFile</code>、<code>-summaryFile</code> 等参数如果定义的是相对路径，则会以<code>-runDir</code> 为参考。</p> </blockquote> </li> <li> <p>-logFile</p> <p>生成 log 文件，默认生成文件名为<code>strmOut.log</code>、<code>oasisOut.log</code> 。</p> </li> <li> <p>-summaryFile</p> <p>生成 summary 文件，默认不生成。</p> </li> <li> <p>-layerMap</p> <p>指定 layermap 文件，默认情况是调用 attach tech 中的 layermap，当对层次转换有特殊要求时可以通过这个参数来指定自定义的 layermap 。</p> </li> </ul> <h2 id="编写脚本-export_layout">编写脚本 export_layout</h2> <p>下面写个脚本优化一下这个运行方式。</p> <details> <summary>点击查看完整代码</summary> <pre><code class="language-bash">#!/bin/bash #-------------------------- # Program  : export_layout.sh # Language : Bash # Author   : YEUNGCHIE # Version  : 2022.04.05 #-------------------------- HelpInfo(){     cat &lt;&lt;EOF ------------------------------------------------- Export Layout ( GDSII or OASIS ) File ------------------------------------------------- Usage: export_layout -path cdslibDir -lib libName -cell cellName [ OPTIONS ]      -path       Path where the cds.lib file is located     -lib        Layout top cell libName     -cell       Layout top cell cellName     -view       Layout top cell viewName    ( Default: layout )     -file       Output file name            ( Default: &lt;cellName&gt;.gds or &lt;cellName&gt;.oasis )     -log        Log file                    ( Default: export_layout.log )     -sum        Summary file     -layermap   Specified the layermap file     -oasis      Specified the file format is OASIS, and GDSII if not specified     -h, -help   Display this help  Examples:   export_layout\\                 -path       \$project/work/                 -lib        Xeon                 -cell       X999                 -oasis  Output:     OASIS file - X999.oasis EOF }  viewName='layout' logFile='export_layout.log'  # 命令行参数分析 while [[ -n $1 ]]; do     if [[ -n $opt ]]; then         case $opt in             lib_opt)    libName=$1  ;;             cell_opt)   cellName=$1 ;;             view_opt)   viewName=$1 ;;             file_opt)   file=$1     ;;             path_opt)   path=$1     ;;             log_opt)    logFile=$1  ;;             map_opt)                 mapCmd="-layerMap $1"             ;;             sum_opt)                 sumCmd="-summaryFile $1"             ;;         esac         unset opt     else         case $1 in             -lib)       opt='lib_opt'   ;;             -cell)      opt='cell_opt'  ;;             -view)      opt='view_opt'  ;;             -file)      opt='file_opt'  ;;             -path)      opt='path_opt'  ;;             -log)       opt='log_opt'   ;;             -sum)       opt='sum_opt'   ;;             -layermap)  opt='map_opt'   ;;             -oasis)     OASIS=1         ;;             -h|-help)                 HelpDoc &gt;&amp;2                 exit 1             ;;             *)                 echo "Invalid option - '$1'" &gt;&amp;2                 echo "Try -h or -help for more infomation." &gt;&amp;2                 exit 1             ;;         esac     fi     shift done  # 记录当前路径 runDir=$(pwd -P)  # 参数检查 if [[ ! ( $path &amp;&amp; $libName &amp;&amp; $cellName ) ]]; then     # 缺少必要参数时，打印 help 并退出     HelpInfo &gt;&amp;2     exit 1 elif [[ -d $path ]]; then     cd $path else     # 找不到目标路径文件，打印报错     echo "No such directory - $path" &gt;&amp;2     echo "Try -h or -help for more infomation." &gt;&amp;2     exit 1 fi  ## 不同的文件格式 if [[ $OASIS ]]; then     if [[ ! $file ]]; then file="${cellName}.oasis" ; fi     command="oasisout -oasisFile $file" else     if [[ ! $file ]]; then file="${cellName}.gds" ; fi     command="strmout -strmFile $file" fi  command="$command -runDir $runDir -library $libName -topCell $cellName -view $viewName -logFile $logFile $sumCmd $mapCmd"  # 运行 exec $command</code></pre> </details> <p>优化后的脚本有三个必要的参数需要指定</p> <ul> <li>-path<br /> 指定 cds.lib 文件所在的文件夹路径</li> <li>-lib<br /> 指定导出单元的顶层 Library 名称</li> <li>-cell<br /> 指定导出单元的顶层 Cell 名称</li> </ul> <blockquote> <p>通过 -path 参数来定义 virtuoso 启动路径，实现在任意路径下可运行，生成的文件都在当前路径下。</p> </blockquote> <h3 id="运行实例">运行实例</h3> <p>例：cdslib 文件所在路径为 ../project</p> <ol> <li> <p>导出版图<code>verify/ad01d0/layout</code> 单元为 GDSII 文件。</p> <pre><code class="language-bash">export_layout -path ../project -lib verify -cell ad01d0</code></pre> </li> <li> <p>导出版图<code>verify/inv0d0/layout</code> 单元为 OASIS 文件，指定输出文件名<code>inv.oasis</code>，指定 log 文件为<code>inv.log</code> 。</p> <pre><code class="language-bash">export_layout -path ../project -lib verify -cell inv0d0 -file inv.oasis -oasis -log inv.log</code></pre> </li> </ol> <h2 id="相关拓展"></h2> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-24085.htm">Java中的DatagramPacket与DatagramSocket的初步</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-7-clash-node.htm" title="10月7日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.2M/S">10月7日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-clash-windows.htm" title="11月16日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.2M/S">11月16日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-26-clash-v2ray-ss-ssr.htm" title="11月26日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.2M/S">11月26日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-free-high-speed-nodes.htm" title="10月14日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22.5M/S">10月14日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-6-shadowrocket-node.htm" title="6月6日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.4M/S">6月6日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-10-clash-node.htm" title="8月10日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.5M/S">8月10日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-free-v2ray-subscribe.htm" title="10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.7M/S">10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-7-node-share-links.htm" title="9月7日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.2M/S">9月7日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-23-clash-node.htm" title="6月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度22.2M/S">6月23日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度22.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-21-free-node-subscribe-links.htm" title="10月21日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S">10月21日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度19.5M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
