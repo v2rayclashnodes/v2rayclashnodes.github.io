@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-27145.htm" />
+    <meta charset="utf-8">
+    <title>Netty集成ProtoBuf开发私有协议</title>
+        <meta name="description" content="私有协议 广义上区分，通信协议可以分为公有协议和私有协议。由于私有协议的灵活性，它往往会在某个公司或者组织内部使用，按需定制，也因为如此，升级起来会非常方便，灵活性好。绝大多数的私有协议传输层都基于T" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">Netty集成ProtoBuf开发私有协议</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                          				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <blockquote> </h1> </blockquote> <h2><a id="_2" rel="nofollow"></a>私有协议</h2> <p>广义上区分，通信协议可以分为公有协议和私有协议。由于私有协议的灵活性，它往往会在某个公司或者组织内部使用，按需定制，也因为如此，升级起来会非常方便，灵活性好。绝大多数的私有协议传输层都基于TCP/IP，所以利用Netty的NIO TCP协议栈可以非常方便地进行私有协议的定制和开发。</p> <h2><a id="_6" rel="nofollow"></a>通信模型</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/dbb21fe6c427fd17cfe8d23202c19724.jpg" alt="Netty集成ProtoBuf开发私有协议"></p> <p>(1) Netty协议栈客户端发送握手请求消息，携带节点ID等有效身份认证信息;<br /> (2) Netty 协议栈服务端对握手请求消息进行合法性校验，包括节点ID有效性校验、节点重复登录校验和IP地址合法性校验，校验通过后，返回登录成功的握手应答消息:<br /> (3)链路建立成功之后，客户端发送业务消息;<br /> (4)链路成功之后，服务端发送心跳消息;<br /> (5)链路建立成功之后，客户端发送心跳消息;<br /> (6)链路建立成功之后，服务端发送业务消息;<br /> (7)服务端退出时，服务端关闭连接，客户端感知对方关闭连接后，被动关闭客户端连接。</p> <h2><a id="ProtoBuf_18" rel="nofollow"></a>ProtoBuf数据格式</h2> <pre><code>syntax = "proto3"; option java_package = "com.fy.protobuf"; option java_outer_classname="CustomMessageData";  message MessageData{     int64 length = 1;     Content content = 2;     enum DataType {         REQ_LOGIN = 0;  //上线登录验证环节 等基础信息上报         RSP_LOGIN = 1;  //返回上线登录状态与基础信息         PING = 2;  //心跳         PONG = 3;  //心跳         REQ_ACT = 4;  //动作请求         RSP_ACT = 5;  //动作响应         REQ_CMD = 6;  //指令请求         RSP_CMD = 7;  //指令响应         REQ_LOG = 8 ;//日志请求         RSP_LOG = 9;  //日志响应     }     DataType order = 3;     message Content{         int64 contentLength = 1;         string data = 2;     } }</code></pre> <h2><a id="_48" rel="nofollow"></a>开发步骤</h2> <p>tip????下列步骤有点吃力的小伙伴可以看看之前的文章：https://blog.csdn.net/kunfeisang5551/article/details/107957256</p> <p>1、在D盘protobuf路径下执行命令：protoc.exe --java_out=D:\protobuf CustomMsg.proto</p> <p>2、将生成的文件拷贝到项目中</p> <h3><a id="Coding_56" rel="nofollow"></a>开始Coding~</h3> <p>1、新建maven项目，引入依赖</p> <pre><code>&lt;dependency&gt;     &lt;groupId&gt;io.netty&lt;/groupId&gt;     &lt;artifactId&gt;netty-all&lt;/artifactId&gt;     &lt;version&gt;4.1.51.Final&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt;     &lt;groupId&gt;com.google.protobuf&lt;/groupId&gt;     &lt;artifactId&gt;protobuf-java&lt;/artifactId&gt;     &lt;version&gt;3.11.0&lt;/version&gt; &lt;/dependency&gt;</code></pre> <p>2、创建服务端启动代码</p> <pre><code>public class CustomServer {     public void bind(int port) {         EventLoopGroup bossGroup = new NioEventLoopGroup();         EventLoopGroup workGroup = new NioEventLoopGroup();         try {             ServerBootstrap bootstrap = new ServerBootstrap();             bootstrap                     .group(bossGroup, workGroup)                     .channel(NioServerSocketChannel.class)                     .handler(new LoggingHandler(LogLevel.INFO))                     .childHandler(new ChannelInitializer&lt;SocketChannel&gt;() {                         @Override                         protected void initChannel(SocketChannel socketChannel) throws Exception {                             socketChannel.pipeline()                                     //消息头定长                                     .addLast(new ProtobufVarint32FrameDecoder())                                     //解码指定的消息类型                                     .addLast(new ProtobufDecoder(CustomMessageData.MessageData.getDefaultInstance()))                                     //消息头设置长度                                     .addLast(new ProtobufVarint32LengthFieldPrepender())                                     //解码                                     .addLast(new ProtobufEncoder())                                     //心跳检测，超过设置的时间将会抛出异常ReadTimeoutException                                     .addLast(new ReadTimeoutHandler(8))                                     //消息处理                                     .addLast(new CustomServerHandler())                                     //心跳响应                                     .addLast(new CustomServerHeartBeatHandler());                         }                     });             // 绑定端口同步等待启动成功             ChannelFuture sync = bootstrap.bind(port).sync();              // 等待服务监听端口关闭             sync.channel().closeFuture().sync();         } catch (Exception e) {             e.printStackTrace();         } finally {             bossGroup.shutdownGracefully();             workGroup.shutdownGracefully();         }     } }</code></pre> <p>3、创建服务端消息处理代码</p> <pre><code>public class CustomServerHandler extends ChannelInboundHandlerAdapter {      private String[] whiteIPv4List = {"127.0.0.1", "192.168.1.188"};     public static ConcurrentHashMap nodeCheck = new ConcurrentHashMap();      @Override     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {         CustomMessageData.MessageData messageData = (CustomMessageData.MessageData) msg;         if (messageData.getOrder() == CustomMessageData.MessageData.DataType.UNRECOGNIZED) {             // 无法识别的消息类型             ctx.close();         }          if (messageData.getOrder() == CustomMessageData.MessageData.DataType.REQ_LOGIN) {             // 检查重复登录             String nodeIndex = ctx.channel().remoteAddress().toString();             if (nodeCheck.contains(nodeIndex)) {                 // 重复登录                 ctx.writeAndFlush(builderResp(false));                 return;             } else {                 InetSocketAddress socketAddress = (InetSocketAddress) ctx.channel().remoteAddress();                 String ip = socketAddress.getAddress().getHostAddress();                 boolean isOk = false;                 // 检查白名单                 for (String s : whiteIPv4List) {                     if (s.equals(ip)) {                         isOk = true;                         break;                     }                 }                 // 成功响应                 CustomMessageData.MessageData responseData = isOk ? builderResp(true) : builderResp(false);                 if (isOk) {                     nodeCheck.put(nodeIndex, true);                 }                 ctx.writeAndFlush(responseData);             }         } else {             //心跳消息处理             ctx.fireChannelRead(msg);         }     }      @Override     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {         nodeCheck.remove(ctx.channel().remoteAddress().toString());         if (ctx.channel().isActive()) {             ctx.close();         }     }      public CustomMessageData.MessageData builderResp(boolean isOk) {         String r = isOk ? "SUCCESS" : "FAILED";         CustomMessageData.MessageData.Content responseContent = CustomMessageData.MessageData.Content.newBuilder().setData(r).setContentLength(r.length()).build();         CustomMessageData.MessageData responseData = CustomMessageData.MessageData.newBuilder().setOrder(CustomMessageData.MessageData.DataType.RSP_LOGIN).setContent(responseContent).build();         return responseData;     } }</code></pre> <p>4、创建服务端心跳响应代码</p> <pre><code>public class CustomServerHeartBeatHandler extends ChannelInboundHandlerAdapter {      @Override     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {         CustomMessageData.MessageData messageData = (CustomMessageData.MessageData) msg;         if (messageData.getOrder() == CustomMessageData.MessageData.DataType.PING) {             CustomMessageData.MessageData req = CustomMessageData.MessageData.newBuilder()                     .setOrder(CustomMessageData.MessageData.DataType.PONG).build();             System.out.println("Send-Client:PONG,time:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));             ctx.writeAndFlush(req);         } else {             ctx.fireChannelRead(msg);         }     } }</code></pre> <p>5、创建客户端启动代码</p> <pre><code>public class CustomClient {     public void bind(int port) {         EventLoopGroup group = new NioEventLoopGroup();         try {             Bootstrap b = new Bootstrap();             b.group(group)                     .channel(NioSocketChannel.class)                     .handler(new ChannelInitializer&lt;SocketChannel&gt;() {                         @Override                         protected void initChannel(SocketChannel socketChannel) throws Exception {                             socketChannel.pipeline()                                     .addLast(new ProtobufVarint32FrameDecoder())                                     .addLast(new ProtobufDecoder(CustomMessageData.MessageData.getDefaultInstance()))                                     .addLast(new ProtobufVarint32LengthFieldPrepender())                                     .addLast(new ProtobufEncoder())                                     // 消息处理                                     .addLast(new CustomClientHandler())                                     // 心跳响应                                     .addLast(new CustomClientHeartBeatHandler());                         }                     });             ChannelFuture f = b.connect("127.0.0.1", port).sync();              f.channel().closeFuture().sync();         } catch (Exception e) {             e.printStackTrace();         } finally {             // 短线重连 定时5秒             group.execute(() -&gt; {                 try {                     TimeUnit.MILLISECONDS.sleep(5);                     bind(port);                 } catch (InterruptedException e) {                     e.printStackTrace();                 }             }); //            group.shutdownGracefully();         }     } }</code></pre> <p>6、创建客户端消息处理代码</p> <p>这里的逻辑主要是通道激活后马上发送业务消息，然后保持心跳</p> <pre><code>public class CustomClientHandler extends ChannelInboundHandlerAdapter {      @Override     public void channelActive(ChannelHandlerContext ctx) throws Exception {         CustomMessageData.MessageData reqData = CustomMessageData                 .MessageData                 .newBuilder()                 .setOrder(CustomMessageData.MessageData.DataType.REQ_LOGIN)                 .build();         ctx.channel().writeAndFlush(reqData);     }      @Override     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {         CustomMessageData.MessageData respData = (CustomMessageData.MessageData) msg;         if (respData.getOrder() == CustomMessageData.MessageData.DataType.RSP_LOGIN) {             // 响应登录请求处理逻辑             boolean equals = respData.getContent().getData().equals("SUCCESS");             if (equals) {                 System.out.println("Receive-Server:LoginSuccess,time:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));                 System.out.println(respData.toString());                 // 传递下一个handler                 ctx.fireChannelRead(msg);             } else {                 // 登录失败                 if (ctx.channel().isActive()) {                     ctx.close();                 }             }         } else {             // 响应心跳处理逻辑             ctx.fireChannelRead(msg);         }      }      @Override     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {         super.exceptionCaught(ctx, cause);         if (ctx.channel().isActive()) {             ctx.close();         }     } }</code></pre> <p>7、创建客户端心跳保持代码</p> <pre><code>public class CustomClientHeartBeatHandler extends ChannelInboundHandlerAdapter {      private static ScheduledFuture heartbeatFuture;      @Override     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {         CustomMessageData.MessageData messageData = (CustomMessageData.MessageData) msg;         if (messageData.getOrder() == CustomMessageData.MessageData.DataType.RSP_LOGIN) {             // 登录成功后保持心跳 间隔为5秒             heartbeatFuture = ctx.executor().scheduleAtFixedRate(() -&gt; {                 CustomMessageData.MessageData req = CustomMessageData.MessageData.newBuilder()                         .setOrder(CustomMessageData.MessageData.DataType.PING).build();                 System.out.println("Send-Server:PING,time:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));                 ctx.writeAndFlush(req);             }, 0, 5, TimeUnit.SECONDS);         } else if (messageData.getOrder() == CustomMessageData.MessageData.DataType.PONG) {             System.out.println("Receive-Server:PONG,time:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));             System.out.println();         } else {             ctx.fireChannelRead(msg);         }     }      @Override     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {         // 发生异常就取消心跳保持         if (heartbeatFuture != null) {             heartbeatFuture.cancel(true);             heartbeatFuture = null;         }         ctx.fireExceptionCaught(cause);     } }</code></pre> <p>8、启动服务端</p> <pre><code>public class Server {     public static void main(String[] args) throws Exception {         new CustomServer().bind(8080);     } }</code></pre> <p>9、启动客户端</p> <pre><code>public class Client {     public static void main(String[] args) {         new CustomClient().bind(8080);     } }</code></pre> <h2><a id="_359" rel="nofollow"></a>控制台打印</h2> <p>1、客户端</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/a234e7e177863623734f052b39bc3725.jpg" alt="Netty集成ProtoBuf开发私有协议"></p> <pre><code>Receive-Server:LoginSuccess,time:2020-08-12 17:31:47 content {   contentLength: 7   data: "SUCCESS" } order: RSP_LOGIN  Send-Server:PING,time:2020-08-12 17:31:47 Receive-Server:PONG,time:2020-08-12 17:31:47  Send-Server:PING,time:2020-08-12 17:31:52 Receive-Server:PONG,time:2020-08-12 17:31:52  Send-Server:PING,time:2020-08-12 17:31:57 Receive-Server:PONG,time:2020-08-12 17:31:57  Send-Server:PING,time:2020-08-12 17:32:02 Receive-Server:PONG,time:2020-08-12 17:32:02</code></pre> <p>我们可以看到，当客户端发送登录请求后，服务端响应登录成功消息，然后交替打印心跳保持信息，间隔为5秒。</p> <p>2、服务端</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/81a1137e78feaa320f7467b4e9e3e679.jpg" alt="Netty集成ProtoBuf开发私有协议"></p> <pre><code>Send-Client:PONG,time:2020-08-12 17:31:47 Send-Client:PONG,time:2020-08-12 17:31:52 Send-Client:PONG,time:2020-08-12 17:31:57 Send-Client:PONG,time:2020-08-12 17:32:02 Send-Client:PONG,time:2020-08-12 17:32:07</code></pre> <p>服务端响应登录请求后交替打印心跳保持信息。</p> <p>3、测试服务端异常</p> <p>我们先停掉服务端，看看客户端有啥反应，客户端日志：</p> <pre><code>Connection refused: no further information</code></pre> <p>客户端5秒打印一次异常信息，说明短线重连逻辑正常</p> <p>我们接着再启动服务端，看看客户端有啥反应</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/180499dbf51e4c95119d5b8873166415.jpg" alt="Netty集成ProtoBuf开发私有协议"></p> <pre><code>io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: /127.0.0.1:8080 Caused by: java.net.ConnectException: Connection refused: no further information 	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method) 	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717) 	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:330) 	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334) 	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:702) 	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:650) 	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:576) 	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:493) 	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989) 	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74) 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30) 	at java.lang.Thread.run(Thread.java:748) Receive-Server:LoginSuccess,time:2020-08-12 17:44:15 content {   contentLength: 7   data: "SUCCESS" } order: RSP_LOGIN  Send-Server:PING,time:2020-08-12 17:44:15 Receive-Server:PONG,time:2020-08-12 17:44:15  Send-Server:PING,time:2020-08-12 17:44:20 Receive-Server:PONG,time:2020-08-12 17:44:20</code></pre> <p>可以看到由异常转为正常啦~</p> <p>通过测试可以验证是否符合私有协议的约定：</p> <p>(1)客户端是否能够正常发起重连:<br /> (2)重连成功之后，不再重连:<br /> (3)断连期间，心跳定时器停止工作，不再发送心跳请求消息;<br /> (4)服务端重启成功之后，允许客户端重新登录;<br /> (5)服务端重启成功之后，客户端能够重连和握手成功:<br /> (6)重连成功之后，双方的心跳能够正常互发。<br /> (7)性能指标:重连期间，客户端资源得到了正常回收，不会导致句柄等资源泄漏。</p> <p>GitHub服务端地址：https://github.com/GoodBoy2333/netty-server-maven.git</p> <p>GitHub客户端地址：https://github.com/GoodBoy2333/netty-client-maven.git</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-26684.htm">武汉宠物批发市场（武汉宠物批发市场有几个）</a></p>
+                                        <p>下一个：<a href="/news/article-27147.htm">宠物狗粮上市公司排名（宠物狗粮上市公司排名榜）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-19304.htm" title="动物接种疫苗多少钱一次打的啊（动物疫苗一般多少钱）">动物接种疫苗多少钱一次打的啊（动物疫苗一般多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-11-free-ssr-node.htm" title="7月11日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度22.6M/S">7月11日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度22.6M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-clash-windows.htm" title="10月30日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.6M/S">10月30日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.6M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-26-clash-node.htm" title="9月26日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度22.8M/S">9月26日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度22.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-free-subscribe-node.htm" title="11月4日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.3M/S">11月4日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-6-clash-node-daily-updates.htm" title="8月6日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22.6M/S">8月6日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22.6M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-6-28-node-share.htm" title="6月28日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.5M/S">6月28日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-16-free-clash.htm" title="7月16日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度20.7M/S">7月16日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-7-22-shadowrocket-node.htm" title="7月22日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22.2M/S">7月22日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度22.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-17-clash-windows.htm" title="10月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.3M/S">10月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.3M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
