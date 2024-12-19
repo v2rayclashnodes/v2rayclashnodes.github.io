@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-28066.htm" />
+    <meta charset="utf-8">
+    <title>k8s入门之PV和PVC</title>
+        <meta name="description" content="某些应用是要持久化数据的，如果直接持久化在pod所在节点，当pod因为某种原因重建或被调度另外一台节点，是无法访问到之前持久化的数据，所以需要一个公共存储数据的地方，无论pod删除重建或重新调度到其他" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">k8s入门之PV和PVC</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>某些应用是要持久化数据的，如果直接持久化在pod所在节点，当pod因为某种原因重建或被调度另外一台节点，是无法访问到之前持久化的数据，所以需要一个公共存储数据的地方，无论pod删除重建或重新调度到其他节点都能访问原来的数据，使用nfs就可以到达此目的。</p> <p><strong>一、安装nfs</strong></p> <p><strong>1.在k8sMaster主节点上安装nfs服务端</strong></p> <pre><code>apt install -y nfs-kernel-server systemctl start nfs-server systemctl enable nfs-server systemctl status nfs-server</code></pre> <p>查看安装后的状态为active</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/879cebab13db5835f7e4285ae6ae8dba.jpg" alt="k8s入门之PV和PVC"></p> <p>创建目录并设置权限</p> <pre><code>mkdir -p /nfs/data echo "/nfs/data/ *(insecure,rw,sync,no_root_squash)" &gt; /etc/exports</code></pre> <p>不要忘了重启nfs-server</p> <pre><code>systemctl restart nfs-server</code></pre> <p><strong>2.在两台k8sworker节点上安装nfs客户端</strong></p> <pre><code>apt install -y nfs-common mkdir -p /nfs/data # 把本地的/nfs/data挂载到主节点上 mount 192.168.59.110:/nfs/data /nfs/data</code></pre> <p><strong>3.测试</strong></p> <p>在某台worker节点上往目录中写入测试文件数据</p> <pre><code>echo "nfs data" &gt;&gt; /nfs/data/test.txt</code></pre> <p>在所有节点上都能查看到写入的数据，并且是一样的</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/d0733bdecbdd9fe156711c05d2b1406c.jpg" alt="k8s入门之PV和PVC"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e757bc998a6abce471855a7a7ff5f10c.jpg" alt="k8s入门之PV和PVC"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/7cb643e3c01a69386a74146eda1eea0b.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>二、使用原始方式挂载pod数据目录</strong></p> <p><strong>1.先删除之前dev名称空间下的所有资源</strong></p> <pre><code>kubectl delete ns dev</code></pre> <p><strong>2.把ns、deployment、svc资源的描述合并在一个yaml文件中</strong></p> <pre><code>vi nginx-deploy-svc.yaml</code></pre> <pre><code>apiVersion: v1 kind: Namespace metadata:   name: dev --- apiVersion: apps/v1 kind: Deployment metadata:   labels:     app: nginx   name: nginx   namespace: dev spec:   replicas: 3   selector:     matchLabels:       app: nginx   template:     metadata:       labels:         app: nginx     spec:       containers:       - image: nginx         name: nginx         volumeMounts:         - name: nginxvolume           mountPath: /usr/share/nginx/html       volumes:       - name: nginxvolume         #通过nfs服务挂载         nfs:           server: 192.168.59.110           # 此处要特别注意：一定要手动创建nginx子目录，否则pod在过载的时候会报目录不存在异常           path: /nfs/data/nginx --- apiVersion: v1 kind: Service metadata:   labels:     app: svc-nginx   name: svc-nginx   namespace: dev spec:   selector:     app: nginx   type: NodePort   ports:   - port: 8000     protocol: TCP     targetPort: 80</code></pre> <p><strong>3.创建资源对象</strong></p> <pre><code>kubectl apply -f nginx-deploy-svc.yaml</code></pre> <p>查看svc的ip与端口号</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/faa3957448e67853d2d9dc563fcc8224.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>4.测试</strong></p> <p>在挂载目录中创建index.html</p> <pre><code>echo "hello,nfs" &gt;&gt; /nfs/data/nginx/index.html</code></pre> <p>通过ip端口访问，可以看到读取的就是nfs目录中的内容</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c602dcb7183e54f2f1d553cdbfcc0edd.jpg" alt="k8s入门之PV和PVC"></p> <p>现在你可以把dev名称空间删除，然后重新创建这些资源，再次访问的时候，发现数据还在。</p> <p><strong>三、PV</strong></p> <p>PV：持久卷（Persistent Volume），将应用需要持久化的数据保存到指定位置，与namespace无关</p> <p><strong>1.先创建nfs目录</strong></p> <pre><code># 在master节点执行 mkdir -p /nfs/data/01 mkdir -p /nfs/data/02 mkdir -p /nfs/data/03</code></pre> <p><strong>2.创建基于nfs的pv对象</strong></p> <p>（1）创建pv资源文件</p> <pre><code>vi pv.yaml</code></pre> <p>（2）编写三个pv资源对象，大小分别是：10M，1G，5G</p> <pre><code>apiVersion: v1 kind: PersistentVolume metadata:   name: pv-10m spec:   capacity:     storage: 10M   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/01     server: 192.168.59.110 ---  apiVersion: v1 kind: PersistentVolume metadata:   name: pv-1gi spec:   capacity:     storage: 1Gi   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/02     server: 192.168.59.110 ---  apiVersion: v1 kind: PersistentVolume metadata:   name: pv-5gi spec:   capacity:     storage: 5Gi   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/03     server: 192.168.59.110</code></pre> <p>（3）创建pv对象</p> <pre><code>kubectl apply -f pv.yaml</code></pre> <p><strong>3.查看创建结果</strong></p> <pre><code>kubectl get pv</code></pre> <p>pv对象列表</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8db63d2059dd5b170077a57224fbbff2.jpg" alt="k8s入门之PV和PVC"></p> <p>某个pv对象的详细信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/92b9f69416add6a9dff26473fdfb5e9c.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>四、PVC</strong></p> <p>PVC：持久卷申明（Persistent Volume Claim），申明需要使用的持久卷规格</p> <p><strong>1.创建pvc</strong></p> <p>（1）创建pvc资源文件</p> <pre><code>vi pvc.yaml</code></pre> <p>（2）编写pvc资源申明信息</p> <pre><code>kind: PersistentVolumeClaim apiVersion: v1 metadata:   name: nginx-pvc   namespace: dev spec:   accessModes:     - ReadWriteMany   resources:     requests:       # 申请200M的空间       storage: 200Mi   storageClassName: nfs</code></pre> <p>（3）创建pvc对象</p> <pre><code>kubectl apply -f pvc.yaml</code></pre> <p><strong>2.查看创建结果</strong></p> <pre><code>kubectl get pvc -owide -n dev</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/07ca156768fbf72114ce5488eb6e6c80.jpg" alt="k8s入门之PV和PVC"></p> <p>由于申请的是200M空间，可以看到k8s自定绑定到合适的pv对象上，即选择大小为1G的pv对象。</p> <p>再回过头来查看pv对象的绑定信息，可以看到已经和刚刚创建的pvc对象绑定了。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/dbc7ee03eb3611855b59b650887914df.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>五、绑定pod与pvc</strong></p> <p><strong>1.创建新的yaml文件</strong></p> <p>（1）新建资源文件</p> <pre><code>vi nginx-dp-svc-pvc.yaml</code></pre> <p>（2）使用persistentVolumeClaim属性指定刚刚创建的nginx-pvc对象</p> <pre><code>apiVersion: v1 kind: Namespace metadata:   name: dev --- apiVersion: apps/v1 kind: Deployment metadata:   labels:     app: nginx   name: nginx   namespace: dev spec:   replicas: 3   selector:     matchLabels:       app: nginx   template:     metadata:       labels:         app: nginx     spec:       containers:       - image: nginx         name: nginx         volumeMounts:         - name: nginxvolume           mountPath: /usr/share/nginx/html       volumes:       - name: nginxvolume         # 使用pvc         persistentVolumeClaim:           claimName: nginx-pvc --- apiVersion: v1 kind: Service metadata:   labels:     app: svc-nginx   name: svc-nginx   namespace: dev spec:   selector:     app: nginx   type: NodePort   ports:   - port: 8000     protocol: TCP     targetPort: 80</code></pre> <p>（3）创建pod，svc对象</p> <pre><code>kubectl apply -f nginx-dp-svc-pvc.yaml</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ffc5f7f523bf11c8701b840fc7f2bdd2.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>2.测试</strong></p> <p>由于申请的是pvc是与名称为pv-1gi的pv对象绑定的，所以往/nfs/data/02文件夹中写入index.htm文件进行测试</p> <pre><code>echo "hello,pv" &gt;&gt; /nfs/data/02/index.html</code></pre> <p>使用ip访问服务，可以看到正确输出了内容</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/f96076fb5aa52f923ffaa7dd68b24c73.jpg" alt="k8s入门之PV和PVC"></p> <p>再次查看pv,pvc信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3e8c5c37d3f303aabc038d4fa75733f7.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>3.删除pod</strong></p> <p>当删除pod，与之绑定的pvc对象也会被删除，pv对象的状态变成Released</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/b5a8f726d0e5a1b4cabd708888c9f8bf.jpg" alt="k8s入门之PV和PVC"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-27608.htm">宠物领养协议书范本大全最新图片 宠物领养协议书范本大全最新图片下载</a></p>
+                                        <p>下一个：<a href="/news/article-28067.htm">十个有用的自定义Vue钩子函数总结_vue.js</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-6-14-free-v2ray-subscribe.htm" title="6月14日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度20M/S">6月14日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度20M/S</a></li>
+                        <li class="py-2"><a href="/news/article-25283.htm" title="猫粮制作机器 猫粮制作机器多少钱">猫粮制作机器 猫粮制作机器多少钱</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-5-free-ssr-node.htm" title="9月5日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.4M/S">9月5日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-20676.htm" title="合肥宠物领养吧百度贴吧（合肥宠物狗领养）">合肥宠物领养吧百度贴吧（合肥宠物狗领养）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-1-node-share.htm" title="12月1日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度21.3M/S">12月1日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度21.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-free-high-speed-nodes.htm" title="10月23日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20.8M/S">10月23日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-25-free-node-subscribe.htm" title="9月25日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度21.8M/S">9月25日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度21.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-clash-windows.htm" title="11月16日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.2M/S">11月16日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.2M/S</a></li>
+                        <li class="py-2"><a href="/news/article-26217.htm" title="昆明市宠物猫领养（昆明市宠物猫领养中心）">昆明市宠物猫领养（昆明市宠物猫领养中心）</a></li>
+                        <li class="py-2"><a href="/news/article-26683.htm" title="基于YARN HA集群的Spark HA集群">基于YARN HA集群的Spark HA集群</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
