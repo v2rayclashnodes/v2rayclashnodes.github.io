@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-44543.htm" />
+    <meta charset="utf-8">
+    <title>SpringBoot入门，Dubbo+Zookeeper简单入门案例</title>
+        <meta name="description" content="1、Dubbo：一款高性能，轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。架构如下图所示（摘自官网）  &nbsp;   " />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-44543.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="SpringBoot入门，Dubbo+Zookeeper简单入门案例" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/ef4972e5506a9de512d13d70b9798cd8.webp" />
+        <meta property="og:release_date" content="2025-01-22T10:13:34" />
+    <meta property="og:updated_time" content="2025-01-22T10:13:34" />
+        <meta property="og:description" content="1、Dubbo：一款高性能，轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。架构如下图所示（摘自官网）  &nbsp;   " />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot入门，Dubbo+Zookeeper简单入门案例">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">SpringBoot入门，Dubbo+Zookeeper简单入门案例</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>1、Dubbo：一款高性能，轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。架构如下图所示（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://dubbo.apache.org/zh-cn/"  rel="nofollow">摘自官网</a>）</p> <p style="text-align:center;"><img fetchpriority="high" decoding="async" alt="" class="has" height="382" src="http://img.555519.xyz/uploads/20230110/c700aee4496a12ed61b9398d3d355e72.jpg"></p> <p>&nbsp;</p> <table border="1" cellpadding="1" cellspacing="1" style="width:500px;"> <caption>   节点及说明<br />  </caption> <tbody> <tr> <td>节点</td> <td>说明</td> </tr> <tr> <td>Consumer</td> <td>调用远程服务的服务消费方</td> </tr> <tr> <td>Provider</td> <td>暴露服务的服务提供方</td> </tr> <tr> <td>Container</td> <td>服务运行容器</td> </tr> <tr> <td>Registry</td> <td>服务注册与发现的注册中心</td> </tr> <tr> <td>Monitor</td> <td>统计服务的调用次数和调用时间的监控中心</td> </tr> </tbody> </table> <p>&nbsp;</p> <table border="1" cellpadding="1" cellspacing="1"> <caption>   调用关系说明<br />  </caption> <tbody> <tr> <td style="width:51px;">0</td> <td>服务容器负责启动，加载，运行服务提供者。</td> </tr> <tr> <td style="width:51px;">1</td> <td>服务提供者在启动时，向注册中心注册自己提供的服务。</td> </tr> <tr> <td style="width:51px;">2</td> <td>服务消费者在启动时，向注册中心订阅自己所需的服务。</td> </tr> <tr> <td style="width:51px;">3</td> <td>注册中心返回服务提供者地址列表给消费者，如果有变更，注册中心将基于长连接推送变更数据给消费者。</td> </tr> <tr> <td style="width:51px;">4</td> <td>服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。</td> </tr> <tr> <td style="width:51px;">5</td> <td>服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。</td> </tr> </tbody> </table> <p>&nbsp;</p> <p>2.Zookeeper：Apacahe Hadoop 的子项目，是一个树型的目录服务，支持变更推送，适合作为 Dubbo 服务的注册中心，工业强度较高，可用于生产环境，Dubbo官方推荐使用。执行流程如下图所示（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://dubbo.apache.org/zh-cn/docs/user/references/registry/zookeeper.html"  rel="nofollow">摘自网站</a>）</p> <p style="text-align:center;"><img decoding="async" alt="/user-guide/images/zookeeper.jpg" class="has" src="http://img.555519.xyz/uploads/20230110/c82dac970da98ec6fd2ac0c1fb0282ab.jpg"></p> <p>&nbsp;</p> <table border="1" cellpadding="1" cellspacing="1"> <caption>   流程说明<br />  </caption> <tbody> <tr> <td> <ul> <li>服务提供者启动时: 向&nbsp;<code>/dubbo/com.foo.BarService/providers</code>&nbsp;目录下写入自己的 URL 地址</li> </ul> </td> </tr> <tr> <td> <ul> <li>服务消费者启动时: 订阅&nbsp;<code>/dubbo/com.foo.BarService/providers</code>&nbsp;目录下的提供者 URL 地址。并向&nbsp;<code>/dubbo/com.foo.BarService/consumers</code>&nbsp;目录下写入自己的 URL 地址</li> </ul> </td> </tr> <tr> <td> <ul> <li>监控中心启动时: 订阅&nbsp;<code>/dubbo/com.foo.BarService</code>&nbsp;目录下的所有提供者和消费者 URL 地址。</li> </ul> </td> </tr> </tbody> </table> <p>&nbsp;</p> <p>Dubbo与Zookeeper就简单介绍到这，详细请参考官方文档，下面开始进入实战练习。</p> </h1> <ul> <li>下载地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/"  rel="nofollow">https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/</a>，我下载是的3.5.5版本，选择3.5.5，之后下载 <pre class="has"><code class="language-html">apache-zookeeper-3.5.5-bin.tar.gz </code></pre> </li> <li>下载完后解压，目录结构如下：</li> </ul> <p><img decoding="async" alt="" class="has" height="299" src="http://img.555519.xyz/uploads/20230110/7dda2ce964f464b118513309bb279b5b.jpg"></p> <ul> <li>修改配置文件，进入conf文件夹下，将zoo_sample.cfg重命名为zoo.cfg，zookeeper启动会默认加载这个配置文件，之后修改配置文件内容，设置数据及日志存储路径，并修改启动端口，避免与其他冲突，完整配置文件如下，主要配置的是<span style="color:#f33b45;"><strong>dataDir数据存储路径</strong></span>、<span style="color:#f33b45;"><strong>dataLogDir日志存储路径</strong></span>以及<span style="color:#f33b45;">a<strong>dmin.serverPort服务启动端口（避免与其他端口冲突）</strong></span>。</li> </ul> <pre class="has"><code class="language-java"># The number of milliseconds of each tick tickTime=2000 # The number of ticks that the initial  # synchronization phase can take initLimit=10 # The number of ticks that can pass between  # sending a request and getting an acknowledgement syncLimit=5 # the directory where the snapshot is stored. # do not use /tmp for storage, /tmp here is just  # example sakes.   dataDir=D:\\Zookeeper-3.5.5\\data dataLogDir=D:\\Zookeeper-3.5.5\\logs   # the port at which the clients will connect   clientPort=2181 admin.serverPort=8082   # the maximum number of client connections. # increase this if you need to handle more clients #maxClientCnxns=60 # # Be sure to read the maintenance section of the  # administrator guide before turning on autopurge. # # http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance # # The number of snapshots to retain in dataDir #autopurge.snapRetainCount=3 # Purge task interval in hours # Set to "0" to disable auto purge feature #autopurge.purgeInterval=1 </code></pre> <ul> <li>启动zookeeper，修改完配置文件后，进入到bin文件夹下，由于我是在window下，所以双击<span style="color:#f33b45;"><strong>zkServer.cmd</strong></span>启动，启动成功如下图所示</li> </ul> <p><img decoding="async" alt="" class="has" height="742" src="http://img.555519.xyz/uploads/20230110/3e5a793941f1382df2cf161c17f8d8bc.jpg"></p> <p><span style="color:#f33b45;"><strong>启动后不要关闭窗口，最小化就行。</strong></span></p> </h1> <p>新建一个SpringBoot项目<span style="color:#f33b45;"><strong>dubbo-demo</strong></span>，包含三个子模块，分别为<span style="color:#f33b45;"><strong>dubbo-demo-api</strong></span>、<span style="color:#f33b45;"><strong>demo-demo-consumer</strong></span>及<span style="color:#f33b45;"><strong>dubbo-demo-provider</strong></span>，目录结构如下：</p> <p>&nbsp;&nbsp;</p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" class="has" height="298" src="http://img.555519.xyz/uploads/20230110/bcc1d389005c42efac5f54f19edf7702.jpg"></p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" class="has" height="463" src="http://img.555519.xyz/uploads/20230110/a14f395f6c353437f385b7e8da73f2a8.jpg"></p> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" class="has" height="408" src="http://img.555519.xyz/uploads/20230110/4756a7e825134a2f871b49ac22ec41d2.jpg"></p> <h2><span style="color:#f33b45;"><strong>其中dubbo-demo-consumer和dubbo-demo-provider都引入dubbo-demo-api，依赖关如下：</strong></span></h2> <p style="text-align:center;"><img loading="lazy" decoding="async" alt="" class="has" height="321" src="http://img.555519.xyz/uploads/20230110/c92e2d7d5c920c3b1d6d1344a1be1ce6.jpg"></p> <table border="1" cellpadding="1" cellspacing="1" style="width:500px;"> <tbody> <tr> <td style="width:185px;">dubbo-demo-api</td> <td style="width:314px;">公共api接口</td> </tr> <tr> <td style="width:185px;">dubbo-demo-consumer</td> <td style="width:314px;">服务消费者</td> </tr> <tr> <td style="width:185px;">dubbo-demo-provier</td> <td style="width:314px;">服务提供者</td> </tr> </tbody> </table> <h2>（1）dubbo-demo-api</h2> <ul> <li> <h3>pom文件内容如下：就是新建一个springboot模块，没有引入其他依赖的默认状态</h3> </li> </ul> <pre class="has"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;     &lt;parent&gt;         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;         &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;         &lt;version&gt;2.2.1.RELEASE&lt;/version&gt;         &lt;relativePath/&gt;     &lt;/parent&gt;     &lt;groupId&gt;dubbo.demo.api&lt;/groupId&gt;     &lt;artifactId&gt;dubbo-demo-api&lt;/artifactId&gt;     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;     &lt;name&gt;dubbo-demo-api&lt;/name&gt;     &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;      &lt;properties&gt;         &lt;java.version&gt;1.8&lt;/java.version&gt;         &lt;project.bulid.sourceEncoding&gt;UTF-8&lt;/project.bulid.sourceEncoding&gt;         &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;     &lt;/properties&gt;      &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;         &lt;/dependency&gt;          &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;             &lt;scope&gt;test&lt;/scope&gt;             &lt;exclusions&gt;                 &lt;exclusion&gt;                     &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;                     &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;                 &lt;/exclusion&gt;             &lt;/exclusions&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt; </code></pre> <ul> <li> <h3>IDeviceService内容如下：简单定义了一个借口，包含一个sayHello()的方法</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.api;  import java.io.Serializable;  public interface IDemoService {     Serializable sayHello(); } </code></pre> <h2>（2）dubbo-demo-consumer</h2> <ul> <li> <h3>pom文件内容如下：引入dubbo-demo-api，dubbo，zookeeper依赖，顺便复习了下整合swagger，<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/qq_27317475/article/details/102854536"  rel="nofollow">参考我的上一篇博客</a>。</h3> </li> </ul> <pre class="has"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;     &lt;parent&gt;         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;         &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;         &lt;version&gt;2.2.1.RELEASE&lt;/version&gt;         &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;     &lt;/parent&gt;     &lt;groupId&gt;dubbo.demo.consumer&lt;/groupId&gt;     &lt;artifactId&gt;dubbo-demo-consumer&lt;/artifactId&gt;     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;     &lt;name&gt;dubbo-demo-consumer&lt;/name&gt;     &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;      &lt;properties&gt;         &lt;java.version&gt;1.8&lt;/java.version&gt;         &lt;project.bulid.sourceEncoding&gt;UTF-8&lt;/project.bulid.sourceEncoding&gt;         &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;     &lt;/properties&gt;     &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;         &lt;/dependency&gt;          &lt;!-- 引入dubbo-demo-api依赖 --&gt;         &lt;dependency&gt;             &lt;groupId&gt;dubbo.demo.api&lt;/groupId&gt;             &lt;artifactId&gt;dubbo-demo-api&lt;/artifactId&gt;             &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;         &lt;/dependency&gt;          &lt;!-- 引入swagger2依赖 --&gt;         &lt;dependency&gt;             &lt;groupId&gt;io.springfox&lt;/groupId&gt;             &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;             &lt;version&gt;2.9.2&lt;/version&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupId&gt;io.springfox&lt;/groupId&gt;             &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;             &lt;version&gt;2.9.2&lt;/version&gt;         &lt;/dependency&gt;          &lt;!-- 引入dubbo zookeeper依赖--&gt;         &lt;dependency&gt;             &lt;groupId&gt;com.alibaba.boot&lt;/groupId&gt;             &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;             &lt;version&gt;0.2.0&lt;/version&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;             &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;             &lt;version&gt;3.5.5&lt;/version&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;             &lt;scope&gt;test&lt;/scope&gt;             &lt;exclusions&gt;                 &lt;exclusion&gt;                     &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;                     &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;                 &lt;/exclusion&gt;             &lt;/exclusions&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt; </code></pre> <ul> <li> <h3>Swagger2Config内容如下：</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.consumer.config;  import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import springfox.documentation.builders.ApiInfoBuilder; import springfox.documentation.builders.PathSelectors; import springfox.documentation.builders.RequestHandlerSelectors; import springfox.documentation.service.ApiInfo; import springfox.documentation.service.Contact; import springfox.documentation.spi.DocumentationType; import springfox.documentation.spring.web.plugins.Docket; import springfox.documentation.swagger2.annotations.EnableSwagger2;  @EnableSwagger2 @Configuration public class Swagger2Config {     @Bean     public Docket swaggerPluginConfig(){         return new Docket(DocumentationType.SWAGGER_2)                 .apiInfo(apiInfo())                     //Api文档描述                 .select()                               //选择哪些路径和Api会生成文档                 .apis(RequestHandlerSelectors.basePackage("dubbo.demo.consumer.controller"))    //对指定路径下Api进行监控                 .paths(PathSelectors.any())             //对所有路径进行监控                 .build();     }      private ApiInfo apiInfo(){         return new ApiInfoBuilder()                 .title("Dubbo Demo接口文档")                 .description("API 接口文档")                 .termsOfServiceUrl("http://localhost")                 .version("1.0.0")                 .contact(new Contact("takano","","xxxxxx@qq.com"))                 .build();     } } </code></pre> <ul> <li> <h3>DemoController内容如下：简单定义了一个请求方法sayHello()，通过<span style="color:#f33b45;">@Reference</span>来标记IDemoSerice接口的成员变量 demoService 是一个 dubbo 服务的引用，在sayHello()方法内的通过该接口向远端的服务提供者发起调用，客户端并没有实现IDemoService接口。其中参数<span style="color:#f33b45;">version指定了服务的版本号，要与提供者提供的服务版本号一致</span>。除此之外，@Reference还有许多其他的参数，<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://dubbo.apache.org/zh-cn/blog/dubbo-annotation.html"  rel="nofollow">请参考文档</a>。</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.consumer.controller;  import com.alibaba.dubbo.config.annotation.Reference; import dubbo.demo.api.IDemoService; import io.swagger.annotations.Api; import io.swagger.annotations.ApiOperation; import org.springframework.web.bind.annotation.GetMapping; import org.springframework.web.bind.annotation.RestController;  import java.io.Serializable;  @Api(value = "DemoController",tags = "dubbo-demo控制器") @RestController public class DemoController {      @Reference(version = "1.0.0")     private IDemoService demoService;      @ApiOperation(value = "测试方法",tags = "dubbo-demo控制器")     @GetMapping("/sayHello")     public Serializable sayHello(){         return demoService.sayHello();     } } </code></pre> <ul> <li> <h3>启动文件内容如下：使用<span style="color:#f33b45;"><strong>@EnableDubbo</strong></span>注解启用dubbo，它是<span style="color:#f33b45;"><strong>@EnableDubboConfig</strong></span>和<span style="color:#f33b45;"><strong>@DubboComponentScan</strong></span>的组合形式，用来扫描服务消费者，即用@Reference注解标注，对其进行组装初始化操作，最终完成服务引用工作。</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.consumer;  import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication;  @EnableDubbo @SpringBootApplication public class DubboDemoConsumerApplication {      public static void main(String[] args) {         SpringApplication.run(DubboDemoConsumerApplication.class, args);     }  } </code></pre> <ul> <li> <h3>配置文件内容如下：</h3> </li> </ul> <pre class="has"><code>#服务启动端口 server.port=9001  #dubbo #当前服务名 dubbo.application.name=dubbo-demo-consumer #注册中心的协议和地址 dubbo.registry.protocol=zookeeper dubbo.registry.address=localhost:2181 #连接监控中心 dubbo.monitor.protocol=registry  </code></pre> <h2>（3）dubbo-demo-provider</h2> <ul> <li> <h3>pom文件内容如下：引入dubbo-demo-api，dubbo，zookeeper依赖。</h3> </li> </ul> <pre class="has"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;     &lt;parent&gt;         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;         &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;         &lt;version&gt;2.2.1.RELEASE&lt;/version&gt;         &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;     &lt;/parent&gt;     &lt;groupId&gt;dubbo.demo.provider&lt;/groupId&gt;     &lt;artifactId&gt;dubbo-demo-provider&lt;/artifactId&gt;     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;     &lt;name&gt;dubbo-demo-provider&lt;/name&gt;     &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;      &lt;properties&gt;         &lt;java.version&gt;1.8&lt;/java.version&gt;         &lt;project.bulid.sourceEncoding&gt;UTF-8&lt;/project.bulid.sourceEncoding&gt;         &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;     &lt;/properties&gt;      &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;         &lt;/dependency&gt;          &lt;!-- 引入dubbo-demo-api依赖 --&gt;         &lt;dependency&gt;             &lt;groupId&gt;dubbo.demo.api&lt;/groupId&gt;             &lt;artifactId&gt;dubbo-demo-api&lt;/artifactId&gt;             &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;         &lt;/dependency&gt;          &lt;!-- 引入dubbo zookeeper依赖 --&gt;         &lt;dependency&gt;             &lt;groupId&gt;com.alibaba.boot&lt;/groupId&gt;             &lt;artifactId&gt;dubbo-spring-boot-starter&lt;/artifactId&gt;             &lt;version&gt;0.2.0&lt;/version&gt;         &lt;/dependency&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;             &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;             &lt;version&gt;3.5.5&lt;/version&gt;         &lt;/dependency&gt;          &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;             &lt;scope&gt;test&lt;/scope&gt;             &lt;exclusions&gt;                 &lt;exclusion&gt;                     &lt;groupId&gt;org.junit.vintage&lt;/groupId&gt;                     &lt;artifactId&gt;junit-vintage-engine&lt;/artifactId&gt;                 &lt;/exclusion&gt;             &lt;/exclusions&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt; </code></pre> <ul> <li> <h3>DemoService内容如下：实现了demo-service-api的IDemoService接口，并实现了具体方法，使用<span style="color:#f33b45;">“dubbo的@Service”</span>注解配置服务提供者，暴露该服务。<span style="color:#f33b45;">version</span>指定了服务的版本号，<span style="color:#f33b45;">interfaceClass</span>指定了服务提供者实现的接口类，其他相关参数<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://dubbo.apache.org/zh-cn/blog/dubbo-annotation.html"  rel="nofollow">请查看文档</a>。@Component声明该类是一个组件。</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.provider.service;  import com.alibaba.dubbo.config.annotation.Service; import dubbo.demo.api.IDemoService; import org.springframework.stereotype.Component;  import java.io.Serializable;  @Service(version = "1.0.0",interfaceClass = IDemoService.class) @Component public class DemoService implements IDemoService {     @Override     public Serializable sayHello() {         return "Hello World";     } } </code></pre> <ul> <li> <h3>启动文件内容如下：同样使用@EnableDubbo注解启动dubbo。</h3> </li> </ul> <pre class="has"><code class="language-java">package dubbo.demo.provider;  import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication;  @EnableDubbo @SpringBootApplication public class DubboDemoProviderApplication {      public static void main(String[] args) {         SpringApplication.run(DubboDemoProviderApplication.class, args);     }  } </code></pre> <ul> <li> <h3>配置文件内容如下：</h3> </li> </ul> <pre class="has"><code>#服务启动端口 server.port=9002  #dubbo #当前服务名 dubbo.application.name=dubbo-demo-provider #注册中心的协议和地址 dubbo.registry.protocol=zookeeper dubbo.registry.address=localhost:2181 #通信规则 dubbo.protocol.name=dubbo dubbo.protocol.port=8365 #连接监控中心 dubbo.monitor.protocol=registry </code></pre> </h1> <ul> <li> <h2>先启动服务提者dubbo-demo-provider，启动成功后，可以在zookeeper窗口下看到如下信息，说明在zookeeper中注册成功。</h2> </li> </ul> <p><img loading="lazy" decoding="async" alt="" class="has" height="28" src="http://img.555519.xyz/uploads/20230110/da899525ced8cd72b8ce165d49e50115.jpg"></p> <ul> <li> <h3>启动服务消费者dubbo-demo-consumer：同样，可以再zookeeper窗口下看到一条输出信息，说明在zookeeper中订阅成功。</h3> </li> </ul> <p><img loading="lazy" decoding="async" alt="" class="has" height="25" src="http://img.555519.xyz/uploads/20230110/1c934c1a8f0bb136a08cb6712ce0f654.jpg"></p> <ul> <li> <h3>由于我再服务消费者中整合了swagger，所以在浏览器中输入<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://localhost:9001/swagger-ui.html"  rel="nofollow">localhost:9001/swagger-ui.html</a>，即可进入到api文档界面，测试暴露的api，也可以直接在浏览器输入<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://localhost:9001/sayHello"  rel="nofollow">localhost:9001/sayHello</a>测试，结果如下图所示：</h3> </li> </ul> <p><img loading="lazy" decoding="async" alt="" class="has" height="774" src="http://img.555519.xyz/uploads/20230110/0adf69e5bf5347947341ddfa2de3762a.jpg"></p> <h3>可以看到我们成功的远程调用了服务提供者，并返回结果。至此一个简单的dubbo+zookeeper入门案例就完成了。</h3> <blockquote> <p>如有错误请批评指正，我会及时修改，欢迎大佬指点，让我更快进步。</p> </blockquote> </h1> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-44027.htm">不能养的宠物猫有哪些（不能养的宠物猫有哪些呢）</a></p>
+                                        <p>下一个：<a href="/news/article-44544.htm">领养宠物信息（领养宠物信息费）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-32798.htm" title="宠物犬领养流程（宠物犬领养流程视频）">宠物犬领养流程（宠物犬领养流程视频）</a></li>
+                        <li class="py-2"><a href="/news/article-33297.htm" title="动物疫苗厂家查询电话（动物疫苗经销商）">动物疫苗厂家查询电话（动物疫苗经销商）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-high-speed-nodes.htm" title="12月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.7M/S">12月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-24-free-v2ray-subscribe.htm" title="12月24日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.6M/S">12月24日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度20.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-33752.htm" title="windows下安装redis_在线工具">windows下安装redis_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-43048.htm" title="美联众合动物医院营业时间 美联众合动物医院总部电话">美联众合动物医院营业时间 美联众合动物医院总部电话</a></li>
+                        <li class="py-2"><a href="/news/article-38589.htm" title="动物诊疗许可证多久能申请下来啊（动物诊疗许可证多久能申请下来啊知乎）">动物诊疗许可证多久能申请下来啊（动物诊疗许可证多久能申请下来啊知乎）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-free-clash-subscribe.htm" title="10月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度20.1M/S">10月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度20.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-36624.htm" title="动物疫苗法规最新文件（动物疫苗管理制度）">动物疫苗法规最新文件（动物疫苗管理制度）</a></li>
+                        <li class="py-2"><a href="/news/article-25283.htm" title="猫粮制作机器 猫粮制作机器多少钱">猫粮制作机器 猫粮制作机器多少钱</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
