@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-45527.htm" />
+    <meta charset="utf-8">
+    <title>HTML如何在图片上添加内容（如文字，菜单栏，按钮等）</title>
+        <meta name="description" content="演示效果 &nbsp; 最近做的一个效果是网页头部有一张大图，菜单栏漂浮在图片之上。我看到网上讲的很简单，大致原理就是图片定为相对定位，文字定为绝对定位即可。不过我实现的并不顺利，花了几个小时才让菜单" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-45527.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/9b193f6572f8495b9a19e7c3ce671856.webp" />
+        <meta property="og:release_date" content="2025-01-24T09:28:12" />
+    <meta property="og:updated_time" content="2025-01-24T09:28:12" />
+        <meta property="og:description" content="演示效果 &nbsp; 最近做的一个效果是网页头部有一张大图，菜单栏漂浮在图片之上。我看到网上讲的很简单，大致原理就是图片定为相对定位，文字定为绝对定位即可。不过我实现的并不顺利，花了几个小时才让菜单" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">HTML如何在图片上添加内容（如文字，菜单栏，按钮等）</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p><span style="font-size:18px"><a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://115.29.45.115/ifox/"  rel="nofollow">演示效果</a></span></p> <p><span style="font-size:24px"><span style="font-size:14px">&nbsp; 最近做的一个效果是网页头部有一张大图，菜单栏漂浮在图片之上。我看到网上讲的很简单，大致原理就是图片定为相对定位，文字定为绝对定位即可。不过我实现的并不顺利，花了几个小时才让菜单栏漂浮在图片上。以下是效果图。</span></span></p> <h2>首先布好局：</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220609/1a05c21111c221cf5d7809ac070c7d15.jpg" alt="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）"></p> <p><span style="font-size:14px">请注意到此时菜单栏和文字并没有在图片之上，我给菜单栏设置的背景色是半透明的黑色，它若成功漂浮在图片之上，会是半透明的。</span></p> <p><span style="font-size:14px">现在为图片和文字的盒子.imgw添加位置属性：position:relative;（相对定位）</span></p> <p><span style="font-size:14px">为文字的盒子.words添加：position:absolute;(绝对定位)</span></p> <p><span style="font-size:14px">也为菜单栏nav添加：<span style="font-size:14px">position:absolute;(绝对定位)</span></span></p> <p><span style="font-size:14px"><span style="font-size:14px">这三个定位很重要！！<br /></span></span></p> <p><span style="font-size:14px">此时效果如下：</span></p> <p><span style="font-size:14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220609/cb00ab9cfdd4d3236f5acbe1df7a1972.jpg" alt="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）"></span></p> <p><span style="font-size:14px">定位完了以后可以看到菜单栏不见了，文字也没有漂浮在图片上。不要着急，菜单栏只是被盖住了，现在给菜单栏设置z-index:10，</span></p> <p><span style="font-size:14px">文字为它设置距离top:50%,距离left:30%。<br /></span></p> <p></p> <p><span style="font-size:14px"><img decoding="async" src="http://img.555519.xyz/uploads3/20220609/6a510f5c01dc2aac818858b8b4ac2e94.jpg" alt="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）"></span></p> <p><span style="font-size:14px">这里是完整代码：</span></p> <p><span style="font-size:14px"></span></p> <pre><code class="language-html">&lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; 	&lt;title&gt;&lt;/title&gt; 	&lt;meta charset = "utf-8"&gt; &lt;/head&gt; &lt;style type="text/css"&gt; 	nav{ 		width: 100%; 		height: 60px;	 		background: rgba(0,0,0,.3); 		position: absolute; 		z-index: 10; 	} 	nav ul{ 		list-style: none; 		margin: 0; 		padding: 0; 	} 	nav ul li{ 		text-align: center; 		float: left; 		line-height: 60px; 	} 	nav ul li a{ 		width: 100px; 		color: #fff; 		font-size: 20px; 		font-weight: 600; 		display: block; 	} 	nav ul li a:hover,nav ul li a:visited{ 		text-decoration: none; 		background: rgba(0,0,0,.5); 		color: #fff; 	} 	.words{font-size: 40px; 			letter-spacing: 10px; 			position: absolute; 			top:50%; 			left: 30%;} 	.imgw{position: relative;} &lt;/style&gt; &lt;body&gt; 	&lt;nav&gt; 		&lt;ul&gt; 			&lt;li class="active"&gt;&lt;a href="#"&gt;首页&lt;/a&gt;&lt;/li&gt; 			&lt;li&gt;&lt;a href="#"&gt;服务&lt;/a&gt;&lt;/li&gt; 			&lt;li&gt;&lt;a href="#"&gt;支持&lt;/a&gt;&lt;/li&gt; 			&lt;li&gt;&lt;a href="#"&gt;博客&lt;/a&gt;&lt;/li&gt; 			&lt;li&gt;&lt;a href="#"&gt;下载&lt;/a&gt;&lt;/li&gt; 		&lt;/ul&gt; 	&lt;/nav&gt; 	&lt;div class="imgw"&gt; 		&lt;img src="images/header1.png" alt="HTML如何在图片上添加内容（如文字，菜单栏，按钮等）" alt= "" width="100%"&gt; 		&lt;div class="words"&gt;飞流太萌了&lt;/div&gt; 	&lt;/div&gt; &lt;/body&gt; &lt;/html&gt;</code></pre> <p></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-45036.htm">猫三联三针有什么区别图片（猫三联每针的作用）</a></p>
+                                        <p>下一个：<a href="/news/article-45528.htm">git下载安装教程</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-30893.htm" title="兽药企业名录大全（兽药生产企业名录）">兽药企业名录大全（兽药生产企业名录）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-17-shadowrocket-node.htm" title="12月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.4M/S">12月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度22.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-33298.htm" title="穷人养殖业什么最稳泥秋（穷人养羊怎么样）">穷人养殖业什么最稳泥秋（穷人养羊怎么样）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-29-shadowrocket-node.htm" title="10月29日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度21.5M/S">10月29日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度21.5M/S</a></li>
+                        <li class="py-2"><a href="/news/article-36622.htm" title="狗狗领养平台公众号（狗狗领养平台公众号有哪些）">狗狗领养平台公众号（狗狗领养平台公众号有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-32321.htm" title="领养宠物狗的平台（领养犬平台）">领养宠物狗的平台（领养犬平台）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-free-node-subscribe-links.htm" title="12月6日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.8M/S">12月6日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-7-free-clash-subscribe.htm" title="1月7日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度22.4M/S">1月7日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度22.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-ssr-subscribe.htm" title="10月10日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.1M/S">10月10日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-24817.htm" title="国内宠物粮生产厂家排名 国内宠物粮生产厂家排名前十">国内宠物粮生产厂家排名 国内宠物粮生产厂家排名前十</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
