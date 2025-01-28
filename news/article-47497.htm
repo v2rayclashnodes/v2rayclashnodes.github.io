@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-47497.htm" />
+    <meta charset="utf-8">
+    <title>SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程</title>
+        <meta name="description" content="由于Feign中生成RPC接口JDK动态代理实例涉及的InvocationHandler调用处理器有多种，导致Feign远程调用的执行流程稍微有所区别，但是远程调用执行流程的主要步骤是一致的。这里主要" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-47497.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/934c2849bbfe6a2679cb6f9643cf4716.webp" />
+        <meta property="og:release_date" content="2025-01-28T09:33:16" />
+    <meta property="og:updated_time" content="2025-01-28T09:33:16" />
+        <meta property="og:description" content="由于Feign中生成RPC接口JDK动态代理实例涉及的InvocationHandler调用处理器有多种，导致Feign远程调用的执行流程稍微有所区别，但是远程调用执行流程的主要步骤是一致的。这里主要" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>由于Feign中生成RPC接口JDK动态代理实例涉及的InvocationHandler调用处理器有多种，导致Feign远程调用的执行流程稍微有所区别，但是远程调用执行流程的主要步骤是一致的。这里主要介绍与两类InvocationHandler调用处理器相关的RPC执行流程：</p> <p>（1）与默认的调用处理器FeignInvocationHandler相关的RPC执行流程。</p> <p>（2）与Hystrix调用处理器HystrixInvocationHandler相关的RPC执行流程。</p> <p>还是以uaa-provider启动过程中的DemoClient接口的动态代理实例的执行过程为例演示和分析远程调用的执行流程。</p> </h1> <p>FeignInvocationHandler是默认的调用处理器，如果进行特殊的配置，那么Feign将默认使用此调用处理器。</p> <p>结合uaa-provider服务中DemoClient的动态代理实例的hello()方法远程调用执行过程，这里详细介绍与FeignInvocationHandler相关的远程调用执行流程，如图3-25所示。</p> <p style="text-align:center;"><img decoding="async" alt="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程" src="http://img.555519.xyz/uploads/20221201/ed1ce4cd8abca9b7bd480cdc22a1d6ef.jpg"></p> <p>图3-25 与FeignInvocationHandler相关的远程调用执行流程</p> <p>整体的远程调用执行流程大致分为4步，具体如下：</p> <p>（1）通过Spring IOC容器实例完成动态代理实例的装配。</p> <p>前文讲到，Feign在启动时会为加上了@FeignClient注解的所有远程接口（包括DemoClient接口）创建一个FactoryBean工厂实例，并注册到Spring IOC容器。然后在uaa-provider的DemoRPCController控制层类中，通过@Resource注解从Spring IOC容器找到FactoryBean工厂实例，通过其getObject()方法获取到动态代理实例，装配给DemoRPCController实例的成员变量demoClient。</p> <p>在需要进行hello()远程调用时，直接通过demoClient成员变量调用JDK动态代理实例的hello()方法。</p> <p>（2）执行InvocationHandler调用处理器的invoke（...）方法。</p> <p>前面讲到，JDK动态代理实例的方法调用过程是通过委托给InvocationHandler调用处理器完成的，故在调用demoClient的hello()方法时，会调用到它的调用处理器FeignInvocationHandler实例的invoke（...）方法。</p> <p>大家知道，FeignInvocationHandler实例内部保持了一个远程调用方法反射实例和方法处理器的dispatch映射。FeignInvocationHandle在它的invoke（...）方法中会根据hello()方法的Java反射实例在dispatch映射对象中找到对应的MethodHandler方法处理器，然后由后者完成实际的HTTP请求和结果的处理。</p> <p>（3）执行MethodHandler方法处理器的invoke（...）方法。</p> <p>通过前面关于MethodHandler方法处理器的组件介绍，大家都知道，feign默认的方法处理器为SynchronousMethodHandler同步调用处理器，它的invoke（...）方法主要通过内部feign。Client类型的client成员实例完成远程URL请求执行和获取远程结果。</p> <p>feign.Client客户端有多种类型，不同的类型完成URL请求处理的具体方式不同。（4）通过feign.Client客户端成员完成远程URL请求执行和获取远程结果。</p> <p>如果MethodHandler方法处理器client成员实例是默认的feign.Client.Default实现类，就通过JDK自带的HttpURLConnnection类完成远程URL请求执行和获取远程结果。</p> <p>如果MethodHandler方法处理器实例的client客户端是ApacheHttpClient客户端实现类，就使用ApacheHttpClient开源组件完成远程URL请求执行和获取远程结果。</p> <p>如果MethodHandler方法处理器实例的client客户端是LoadBalancerFeignClient负载均衡客户端实现类，就使用Ribbon结算出最佳的Provider节点，然后由内部的delegate委托客户端成员去请求Provider服务，完成URL请求处理。</p> <p>以上4步基本上就是Spring Cloud中的Feign远程调用的执行流程。</p> <p>然而，默认的基于FeignInvocationHandler调用处理器的执行流程在运行机制和调用性能上都满足不了生产环境的要求，大致原因有以下两点：</p> <p>（1）在远程调用过程中没有异常的熔断监测和恢复机制。</p> <p>（2）没有用到高性能的HTTP连接池技术。</p> <p>接下来将为大家介绍一种结合Hystrix进行RPC保护的远程调用处理流程。在该流程中所使用的InvocationHandler调用处理器叫作HystrixInvocationHandler调用处理器。</p> <p>这里作为铺垫，首先为大家介绍HystrixInvocationHandler调用处理器本身的具体实现。</p> </h1> <p>HystrixInvocationHandler调用处理器类位于feign.hystrix包中，其字节码文件不是处于feign核心包feign-core-*.jar中，而是在扩展包feignhystrix-*.jar中。这里的*表示的是与Spring Cloud版本配套的版本号，当Spring Cloud的版本为Finchley.RELEASE时，feign-core和feign-hystrix两个JAR包的版本号都为9.5.1。</p> <p>HystrixInvocationHandler是具备RPC保护能力的调用处理器，它实现了InvocationHandler接口，对接口的invoke（...）抽象方法的实现如下：</p> <pre><code>package feign.hystrix; //省略import final class HystrixInvocationHandler implements InvocationHandler { ... //... Map映射：Key为RPC方法的反射实例，value为方法处理器 private final Map&lt;Method, MethodHandler&gt; dispatch; ... public Object invoke(Object proxy, final Method method, final Object[] args) throws Throwable {  //创建一个HystrixCommand命令，对同步方法调用器进行封装  HystrixCommand&lt;Object&gt; hystrixCommand =  new HystrixCommand&lt;Object&gt;  ( (Setter)this.setterMethodMap.get(method) ) {  protected Object run() throws Exception {  try { SynchronousMethodHandler handler=HystrixInvocationHandler.this.dispatch.get(method)；  return handler.invoke(args);  } catch (Exception var2) {  throw var2;  } catch (Throwable var3) {  throw (Error)var3;  }  }  protected Object getFallback() {  //省略HystrixCommand的异常回调  }  };  //根据method的返回值类型，或返回hystrixCommand，或直接执行  if (this.isReturnsHystrixCommand(method)) {  return hystrixCommand;  } else if (this.isReturnsObservable(method)) {  return hystrixCommand.toObservable();  } else if (this.isReturnsSingle(method)) {  return hystrixCommand.toObservable().toSingle();  } else {  //直接执行  return this.isReturnsCompletable(method) ?  hystrixCommand.toObservable().toCompletable() : hystrixCommand.execute();  }  ... }</code></pre> <p>HystrixInvocationHandler调用处理器与默认调用处理器FeignInvocationHandler有一个共同点：都有一个非常重要的Map类型成员dispatch映射，保存着RPC方法反射实例到MethodHandler方法处理器的映射。</p> <p>在源码中，HystrixInvocationHandler的invoke（...）方法会创建hystrixCommand命令实例，对从dispatch获取的SynchronousMethodHandler实例进行封装，然后对RPC方法实例method进行判断，判断是直接返回hystrixCommand命令实例，还是立即执行其execute()方法。默认情况下，都是立即执行它的execute()方法。</p> <p>HystrixCommand具备熔断、隔离、回退等能力，如果它的run()方法执行发生异常，就会执行getFallback()失败回调方法，这一点后面会详细介绍。</p> <p>回到uaa-provider服务中DemoClient动态代理实例的hello()方法的具体执行过程，在执行命令处理器hystrixCommand实例的run()方法时，步骤如下：</p> <p>（1）根据RPC方法DemoClient.hello()的反射实例在dispatch映射对象中找到对应的方法处理器MethodHandler实例。</p> <p>（2）调用MethodHandler方法处理器的invoke（...）方法完成实际的hello()方法所配置的远程URL的HTTP请求和结果的处理。</p> <p>如果MethodHandler内的RPC调用出现异常，比如远程server宕机、网络延迟太大而导致请求超时、远程server来不及响应等，hystrixCommand命令器就会调用失败回调方法getFallback()返回回退结果。</p> <p>而hystrixCommand的getFallback()方法最终会调用配置在RPC接口@FeignClient注解的fallback属性上的失败回退类中对应的回退方法，执行业务级别的失败回退处理。</p> <p>使用HystrixInvocationHandler方法处理器进行远程调用，总体流程与使用默认的方法处理器FeignInvocationHandler进行远程调用大致是相同的。</p> <p>以uaa-provider模块的DemoClient中hello()方法的远程调用执行过程为例，进行整体流程的展示，具体的时序图如图3-26所示。</p> <p style="text-align:center;"><img decoding="async" alt="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程" src="http://img.555519.xyz/uploads/20221201/f87c765d8f2cd0cefd6c22eef48cec2f.jpg"></p> <p>图3-26 与HystrixInvocationHandler相关的远程调用执行流程</p> <p>总体来说，使用HystrixInvocationHandler处理器的执行流程与使用FeignInvocationHandler默认的调用处理器相比大致是相同的。不同的是，HystrixInvocationHandler增加了RPC的保护机制。</p> </h1> <p>Feign是一个声明式的RPC调用组件，它整合了Ribbon和Hystrix，使得服务调用更加简单。Feign提供了HTTP请求的模板，通过编写简单的接口和方法注解就可以定义好HTTP请求的参数、格式、地址等信息。</p> <p>Feign极大地简化了RPC远程调用，大家只需要像调用普通方法一样就可以完成RPC远程调用。</p> <p>Feign远程调用的核心是通过一系列封装和处理，将以JAVA注解方式定义的RPC方法最终转换成HTTP请求，然后将HTTP请求的响应结果解码成POJO对象返回给调用者。</p> <p>Feign远程调用的完整流程如图3-27所示。</p> <p style="text-align:center;"><img decoding="async" alt="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程" src="http://img.555519.xyz/uploads/20221201/7cb65ed94cfa5c647704b43ee3e5df45.jpg"></p> <p>图3-27 Feign远程调用的完整流程</p> <p>从图3-27可以看到，Feign通过对RPC注解的解析将请求模板化。当实际调用时传入参数，再根据参数应用到请求模板上，进而转化成真正的Request请求。通过Feign及其动态代理机制，Java开发人员不用再通过HTTP框架封装HTTP请求报文的方式完成远程服务的HTTP调用。</p> <p>Spring Cloud Feign具有如下特性：</p> <p>（1）可插拔的注解支持，包括Feign注解和Spring MVC注解。</p> <p>（2）支持可插拔的HTTP编码器和解码器。</p> <p>（3）支持Hystrix和它的RPC保护机制。</p> <p>（4）支持Ribbon的负载均衡。</p> <p>（5）支持HTTP请求和响应的压缩。</p> <p>总体来说，使用Spring Cloud Feign组件本身整合了Ribbon和Hystrix，可设计一套稳定可靠的弹性客户端调用方案，避免整个系统出现雪崩效应。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-47009.htm">动物医院专业就业前景怎么样（动物医院专业排名）</a></p>
+                                        <p>下一个：<a href="/news/article-47498.htm">小型狗粮加工设备价格表图片（小型狗粮生产设备）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-23424.htm" title="JavaScript查找句子的平均单词长度">JavaScript查找句子的平均单词长度</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-free-subscribe-node.htm" title="11月3日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.9M/S">11月3日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-40067.htm" title="动物医院下载app 动物医院下载无限金币">动物医院下载app 动物医院下载无限金币</a></li>
+                        <li class="py-2"><a href="/news/article-43544.htm" title="动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-shadowrocket-node.htm" title="1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S">1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-free-ssr-subscribe.htm" title="1月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度22.2M/S">1月12日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度22.2M/S</a></li>
+                        <li class="py-2"><a href="/news/article-37613.htm" title="国内动物医院排行（中国最好的动物医学院）">国内动物医院排行（中国最好的动物医学院）</a></li>
+                        <li class="py-2"><a href="/news/article-24820.htm" title="和田宠物医院污水处理项目（和田宠物医院在哪儿）">和田宠物医院污水处理项目（和田宠物医院在哪儿）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-19-clash-node.htm" title="1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S">1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-3-free-clash-subscribe.htm" title="12月3日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.3M/S">12月3日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.3M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
