@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-48379.htm" />
+    <meta charset="utf-8">
+    <title>C语言 推理证明带环链表详细过程_C 语言</title>
+        <meta name="description" content="目录  什么是带环链表： 判断链表是否带环： 环形链表 I 找带环形链表入环的第一个结点： 环形链表 II    什么是带环链表： 带环链表是链表最后一个结点的指针域不是指向空指针，而是指向链表之前的" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-48379.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="C语言 推理证明带环链表详细过程_C 语言" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/d76a899c6d25ea72669d1e5481edff33.webp" />
+        <meta property="og:release_date" content="2025-01-30T06:45:13" />
+    <meta property="og:updated_time" content="2025-01-30T06:45:13" />
+        <meta property="og:description" content="目录  什么是带环链表： 判断链表是否带环： 环形链表 I 找带环形链表入环的第一个结点： 环形链表 II    什么是带环链表： 带环链表是链表最后一个结点的指针域不是指向空指针，而是指向链表之前的" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="C语言 推理证明带环链表详细过程_C 语言">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">C语言 推理证明带环链表详细过程_C 语言</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="navCategory"> <h5 class="catalogue">目录</h5> <ul class="first_class_ul"> <li><a href="#_label0" rel="nofollow">什么是带环链表：</a></li> <li><a href="#_label1" rel="nofollow">判断链表是否带环：</a></li> <li><a href="#_label2" rel="nofollow">环形链表 I</a></li> <li><a href="#_label3" rel="nofollow">找带环形链表入环的第一个结点：</a></li> <li><a href="#_label4" rel="nofollow">环形链表 II</a></li> </ul> </div> <p class="maodian"><a name="_label0" rel="nofollow"></a></p> <h2>什么是带环链表：</h2> <p>带环链表是链表最后一个结点的指针域不是指向空指针，而是指向链表之前的结点，这样就形成了环状的链表结构。</p> <p>如图所示：</p> <p style="text-align:center"><img fetchpriority="high" decoding="async" alt="" height="133" src="http://img.555519.xyz/uploads3/20220420/f1d9ad96200f78fa0a8fc64742c7872c.jpg"></p> <p class="maodian"><a name="_label1" rel="nofollow"></a></p> <h2>判断链表是否带环：</h2> <p>那么问题来了，如何判断一个链表是否带环呢？</p> <p>这里我们再次运用了快慢指针，但是快慢指针又该如何具体设置呢？</p> <ul> <li>判断思路：</li> </ul> <p>先定义一个快指针fast，一个慢指针slow。</p> <p>快指针一定是比慢指针先进环的，当slow进环时，fast指针便开始了追slow指针，当快指针和慢指针相遇的时候，快指针便追上了慢指针，此时就可以判断该链表是有环的，但凡快指针指向空就说明该链表是不带环的。</p> <ul> <li>那么快慢指针一次各走几步最合适呢？</li> </ul> <p>假设slow刚进环时，fast与slow之间的距离为N，环的长度为C。</p> <ul> <li>这里我们要多组讨论一下：（先讨论有代表的两组）</li> </ul> <p>1.slow一次走1步，fast一次走2步一定能追上吗？</p> <p>2.slow一次走1步，fast一次走3步一定能追上吗？</p> <p>…………………</p> <p>图为当slow刚进环时，假设fast所在的位置：</p> <p style="text-align:center"><img decoding="async" alt="" height="257" src="http://img.555519.xyz/uploads3/20220420/a9fd9f8a5c910974aadb6bac7fb6743a.jpg"></p> <p>1.slow一次走1步，fast一次走2步一定能追上吗？</p> <p>每次追击，fast与slow之间的距离就缩小1，当距离N缩小为0的时候，便追上了。</p> <p>N - 1，N - 2，N - 3，……，0</p> <p>所以这种情况一定能追上。</p> <p>2.slow一次走1步，fast一次走3步一定能追上吗？</p> <p>每次追击，fast与slow之间的距离就缩小2，这里要对N进行讨论：</p> <p>（1）当N为偶数时，N每次缩小2，当距离N缩小为0的时候，便追上了。</p> <p>         N - 2，N - 4，N - 6，……，0</p> <p>（2）当N为奇数时，N每次缩小2，当距离N缩小为1的时候，下次追击二者距离扔缩小2，此时               fast就会超过slow，距离N变为 -1 ，也就是C - 1，这时又要对C  - 1进行讨论。</p> <ul> <li>当C - 1为偶数时就能追上。 </li> <li>当C - 1为奇数时就扔会错过，N再次变成C - 1，那么就会永远错过也就永远追不上。</li> </ul> <p>所以这种情况不一定能追上，有可能永远追不上。 </p> <p>3.slow一次走1步，fast一次走4步一定能追上吗？ </p> <p>每次追击，fast与slow之间的距离就缩小3，这里又要对N进行讨论：</p> <p>（1）当N为3的倍数时，N每次缩小3，当距离N缩小为0的时候，便追上了。</p> <p>         N - 3，N - 6，N - 9，……，0</p> <p>（2）当N不为3的倍数时，那么fast会与slow错过，至于错过时fast超过slow多少距离还需讨论               （超过的距离取决于一开始N的长度）。</p> <ul> <li>当追上后，fast超过slow距离为1时，此时fast追slow追击距离为N即（C - 1），此时又要对C - 1进行上述讨论，即C - 1是否为3的倍数的讨论。 </li> <li>当追上后，fast超过slow距离为2时，此时fast追slow追击距离为N即（C - 2），此时又要对C - 2进行上述讨论，即C - 2是否为3的倍数的讨论。</li> </ul> <p> 所以这种情况只有当N为3的倍数的时候才能追得上。</p> <p>综上：能不能追得上取决于两个指针之间的距离N和环的大小C。</p> <p>下面提供一个结论个人小结：（仅供参考，可能存在局限性）</p> <p>只要快慢指针的速度差是2的时候，就可能会出现永远追不上的问题。假设fast与slow的速度差为x，那么fast追赶slow一次，他们之间的距离就减少x，途中有可能刚好追上，也有可能错过。当错过的时候，fast在slow前面，这时fast超过slow的距离的取值只可能是在[1 ~ (x - 1)]之间（x取整数）。同时任意一个正整数，假设记作m，（m &gt; x）当m整除一个整数x有余数时，对这个整数m减去[1 ~ (x - 1)]中任意一个值，总能找到一个值x，使得m - x的值能够整除x。所以无论环的长度为多长，假设环的长度为C，总有C减去[1 ~ (x - 1)]中任意一个值，使得C - x能够整除x并且没余数，既然没余数那就是刚好追上的情况。</p> <p>当fast和slow的速度差为2时，即x = 2的时候，C - x，x属于[1 ~ (x - 1)]，那么C - x就只能是C - 1，那么当C - 1去整除2的时候，如果C - 1为奇数，那么C - 1整除2必然有余数，并且余数为1，下次还是C - 1去整除2，还是会余1，所以这时fast就永远追不上slow。</p> <p>总结：</p> <p>设置fast一次走2步，slow一次走1步的时候最保险。 因为快慢指针相距N，每追击一次N就减1，总会减到0，N缩小到0就是追到了。</p> <p class="maodian"><a name="_label2" rel="nofollow"></a></p> <h2>环形链表 I</h2> <p>环形链表</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://leetcode-cn.com/problems/linked-list-cycle/description/"  target="_blank" rel="nofollow">OJ链接</a></p> <p>给你一个链表的头节点 head ，判断链表中是否有环。</p> <p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。注意：pos 不作为参数进行传递 。仅仅是为了标识链表的实际情况。</p> <p>如果链表中存在环 ，则返回 true 。 否则，返回 false 。</p> <p>示例 1：</p> <p style="text-align:center"><img decoding="async" alt="" height="105" src="http://img.555519.xyz/uploads3/20220420/0198bcaafbae3d520ba4c54de6d7a926.jpg"></p> <p>输入：</p> <blockquote> <p>head = [3,2,0,-4], pos = 1</p> </blockquote> <p>输出：</p> <blockquote> <p>true</p> </blockquote> <p>解释：链表中有一个环，其尾部连接到第二个节点。</p> <p>示例 2：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="78" src="http://img.555519.xyz/uploads3/20220420/9e2caffa32a9792381acf79b8cbc0093.jpg"></p> <p>输入：</p> <blockquote> <p>head = [1,2], pos = 0</p> </blockquote> <p>输出：</p> <blockquote> <p>true</p> </blockquote> <p>解释：链表中有一个环，其尾部连接到第一个节点。</p> <p>示例 3：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="50" src="http://img.555519.xyz/uploads3/20220420/aa91394c13efe9bf2315d079cda219d4.jpg"></p> <p>输入：</p> <blockquote> <p>head = [1], pos = -1</p> </blockquote> <p>输出：</p> <blockquote> <p>false</p> </blockquote> <p>解释：链表中没有环。</p> <div class="ay1code"> <pre class="brush:cpp;">/**   * Definition for singly-linked list.   * struct ListNode {   *     int val;   *     struct ListNode *next;   * };   */  bool hasCycle(struct ListNode *head)  {      struct ListNode* fast, *slow;      fast = slow = head;      while(fast &amp;&amp; fast-&gt;next)      {          fast = fast-&gt;next-&gt;next;          slow = slow-&gt;next;          if(slow == fast)          return true;      }         return false;  }</pre> </div> <p>思路：</p> <p>运用上述判断环形链表的结论，fast一次走2步，slow每次走1步，只要是环状就一定会追的到。</p> <p class="maodian"><a name="_label3" rel="nofollow"></a></p> <h2>找带环形链表入环的第一个结点：</h2> <p>接下来更深层次的问题来了，带环链表环的入口该怎么找呢？</p> <p>以后带环问题通常都用fast一次走2步，slow一次走1步。</p> <p>当快指针追到慢指针时，假设相遇点为meet，slow指针和fast指针在如图所示的：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="248" src="http://img.555519.xyz/uploads3/20220420/23e7d8ad0e4866f89b031d688076ed6c.jpg"></p> <p>注意：</p> <p>这里快指针一定是先进环，slow后进环。</p> <p>slow指针进环后，在走一圈的时间内，一定是会被fast追上的 。</p> <p> 思路：</p> <p>在是slow指针和fast指针，同时从head头开始走，直到在meet点相遇，又因为fast指针的速度为slow指针速度的二倍，那么就一定满足一个等式关系：</p> <p>快指针走的距离 = 慢指针走的距离 * 2</p> <p>还需讨论的是当slow进环时，fast在环内走了多久的问题：</p> <ul> <li>当L足够长而C很小时：slow进环时fast可能已经在环内走了好多圈了（假设为n圈）。</li> <li>当L很小而C足够大时：slow进环时fast可能在环内 连一圈还没走。</li> </ul> <p>综合考虑之后再结合上述等式关系变得到下列等式：</p> <p>L + nC + X = 2 * (L+ X) </p> <p>化简得：</p> <p>L = n * C - X</p> <p> 这个公式充分说明了，一个指针从head走，一个指针从相遇点meet走，并且每次都走一步，一     直走下去，它们最终会在环的入口点相遇！！！</p> <p class="maodian"><a name="_label4" rel="nofollow"></a></p> <h2>环形链表 II</h2> <p>环形链表 II</p> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://leetcode-cn.com/problems/linked-list-cycle-ii/description/"  target="_blank" rel="nofollow">OJ链接</a></p> <p>给定一个链表的头节点  head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p> <p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。不允许修改 链表。</p> <p>示例 1：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="105" src="http://img.555519.xyz/uploads3/20220420/b17c57727101152d7fe45c0e1e84d688.jpg"></p> <p>输入：</p> <blockquote> <p>head = [3,2,0,-4], pos = 1</p> </blockquote> <p>输出：</p> <blockquote> <p>返回索引为 1 的链表节点</p> </blockquote> <p>解释：链表中有一个环，其尾部连接到第二个节点。 示例 2：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="78" src="http://img.555519.xyz/uploads3/20220420/081751483e02bd797054713312c56f13.jpg"></p> <p>输入：</p> <blockquote> <p>head = [1,2], pos = 0</p> </blockquote> <p>输出：</p> <blockquote> <p>返回索引为 0 的链表节点</p> </blockquote> <p>解释：链表中有一个环，其尾部连接到第一个节点。</p> <p>示例 3：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="52" src="http://img.555519.xyz/uploads3/20220420/effd215f49e12f059f97663a9d002afb.jpg"></p> <p>输入：</p> <blockquote> <p>head = [1], pos = -1</p> </blockquote> <p>输出：</p> <blockquote> <p>返回 null</p> </blockquote> <p>解释：链表中没有环。</p> <div class="ay1code"> <pre class="brush:cpp;">/**   * Definition for singly-linked list.   * struct ListNode {   *     int val;   *     struct ListNode *next;   * };   */  struct ListNode *detectCycle(struct ListNode *head)  {      struct ListNode* fast, *slow;      slow = fast = head;      while(fast &amp;&amp; fast-&gt;next)      {          fast = fast-&gt;next-&gt;next;          slow = slow-&gt;next;          if(slow == fast)          {              struct ListNode* meet = slow;              while(head != meet)              {                  meet = meet-&gt;next;                  head = head-&gt;next;              }              return meet;          }      }      return NULL;  }</pre> </div> <p>思路1： </p> <p>先运用上述判断环形链表的结论找到相遇点，再运用上述找环形入口点的结论，就能轻松找到环的入口点。</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="237" src="http://img.555519.xyz/uploads3/20220420/0a3ec452d638521e8498c3f191c00ea5.jpg"></p> <p>思路2：</p> <p>先运用上述判断环形链表的结论找到相遇点，再将相遇点断开，这时就变成了上一篇博客找相交链表公共结点的问题，示意图如下：</p> <p style="text-align:center"><img loading="lazy" decoding="async" alt="" height="279" src="http://img.555519.xyz/uploads3/20220420/b9d7041d115a9e7ebda5cf9d7a54de3e.jpg"></p> <p> 参考代码如下：</p> <div class="ay1code"> <pre class="brush:cpp;">/**   * Definition for singly-linked list.   * struct ListNode {   *     int val;   *     struct ListNode *next;   * };   */  struct ListNode *detectCycle(struct ListNode *head)  {      struct ListNode* fast, *slow;      slow = fast = head;      int len1 = 0,len2 = 0;      while(fast &amp;&amp; fast-&gt;next)      {          fast = fast-&gt;next-&gt;next;          slow = slow-&gt;next;          if(slow == fast)          {              struct ListNode* shortList, *longList, *meet, *longTail, *shortTail;              longList = longTail = head;              meet = shortList = shortTail = slow-&gt;next;              slow-&gt;next = NULL;              while(shortTail)              {                  shortTail = shortTail-&gt;next;                  len1++;              }              while(longTail)              {                  longTail = longTail-&gt;next;                  len2++;              }              int gap = abs(len1 - len2);              if(len1 &gt; len2)              {                  longList = meet;                  shortList = head;              }                     while(gap--)              {                  longList = longList-&gt;next;              }                   while(shortList != longList)              {                  longList = longList-&gt;next;                  shortList = shortList-&gt;next;              }              return longList;          }      }      return NULL;  }</pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-47981.htm">C#实现DataTable转TXT、CSV文件_C#教程_</a></p>
+                                        <p>下一个：<a href="/news/article-48380.htm">领养协议范本模板图片（领养协议有法律效力吗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-23-node-share-links.htm" title="12月23日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S">12月23日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19M/S</a></li>
+                        <li class="py-2"><a href="/news/article-33297.htm" title="动物疫苗厂家查询电话（动物疫苗经销商）">动物疫苗厂家查询电话（动物疫苗经销商）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-shadowrocket-node.htm" title="1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S">1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/news/article-42050.htm" title="一只跳蚤一晚上能咬多少包（跳蚤咬了一般多久自愈）">一只跳蚤一晚上能咬多少包（跳蚤咬了一般多久自愈）</a></li>
+                        <li class="py-2"><a href="/news/article-46529.htm" title="中国十大宠物粮品牌排行榜最新名单（国内十大宠物粮食品牌）">中国十大宠物粮品牌排行榜最新名单（国内十大宠物粮食品牌）</a></li>
+                        <li class="py-2"><a href="/news/article-27608.htm" title="宠物领养协议书范本大全最新图片 宠物领养协议书范本大全最新图片下载">宠物领养协议书范本大全最新图片 宠物领养协议书范本大全最新图片下载</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-28-node-share-links.htm" title="11月28日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.4M/S">11月28日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度19.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-high-speed-nodes.htm" title="12月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.7M/S">12月29日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度21.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-26-free-subscribe-node.htm" title="10月26日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.4M/S">10月26日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-clash-node.htm" title="11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度21.1M/S">11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度21.1M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

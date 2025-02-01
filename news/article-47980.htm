@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-47980.htm" />
+    <meta charset="utf-8">
+    <title>k8s client-go源码分析 informer源码概要分析</title>
+        <meta name="description" content="k8s informer概述 我们都知道可以使用k8s的Clientset来获取所有的原生资源对象，那么怎么能持续的获取集群的所有资源对象，或监听集群的资源对象数据的变化呢？这里不需要轮询去不断执行L" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-47980.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="k8s client-go源码分析 informer源码概要分析" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/9b1bbda239d2da6072d9b4d98b19c73c.webp" />
+        <meta property="og:release_date" content="2025-01-29T10:28:22" />
+    <meta property="og:updated_time" content="2025-01-29T10:28:22" />
+        <meta property="og:description" content="k8s informer概述 我们都知道可以使用k8s的Clientset来获取所有的原生资源对象，那么怎么能持续的获取集群的所有资源对象，或监听集群的资源对象数据的变化呢？这里不需要轮询去不断执行L" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="k8s client-go源码分析 informer源码概要分析">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">k8s client-go源码分析 informer源码概要分析</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2 id="k8s-informer概述">k8s informer概述</h2> <p>我们都知道可以使用k8s的Clientset来获取所有的原生资源对象，那么怎么能持续的获取集群的所有资源对象，或监听集群的资源对象数据的变化呢？这里不需要轮询去不断执行List操作，而是调用Watch接口，即可监听资源对象的变化，当资源对象发生变化，客户端即可通过Watch接口收到资源对象的变化。</p> <p>Watch接口虽然可以直接使用，但一般情况下很少直接使用，因为往往由于集群中的资源较多，我们需要自己在客户端去维护一套缓存，而这个维护成本比较大。</p> <p>也是因为如此，client-go提供了自己的实现机制，Informers应运而生。informers实现了持续获取集群的所有资源对象、监听集群的资源对象变化功能，并在本地维护了全量资源对象的内存缓存，以减少对apiserver、对etcd的请求压力。Informers在启动的时候会首先在客户端调用List接口来获取全量的对象集合，然后通过Watch接口来获取增量的对象，然后更新本地缓存。</p> <p>此外informers也有很强的健壮性，当长期运行的watch连接中断时，informers会尝试拉起一个新的watch请求来恢复连接，在不丢失任何事件的情况下恢复事件流。另外，informers还可以配置一个重新同步的周期参数，每间隔该周期，informers就会重新List全量数据。</p> <p>在informers的使用上，通常每个GroupVersionResource（GVR）只实例化一个informers，但有时候我们在一个应用中往往会在多个地方对同一种资源对象都有informer的需求，所以就有了共享informer，即SharedInformerFactory。所以可以通过使用SharedInformerFactory来实例化informers，这样本地内存缓存就只有一份，通知机制也只有一套，大大提高了效率，减少了资源浪费。</p> <h4 id="k8s-informer架构">k8s informer架构</h4> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e84c5c1ba6b9799756e48843ac3103fc.jpg" alt="k8s client-go源码分析 informer源码概要分析"></p> <p>k8s client-go informer主要包括以下部件：<br /> （1）Reflector：Reflector从kube-apiserver中list&amp;watch资源对象，然后调用DeltaFIFO的Add/Update/Delete/Replace方法将资源对象及其变化包装成Delta并将其丢到DeltaFIFO中；<br /> （2）DeltaFIFO：DeltaFIFO中存储着一个map和一个queue，即map[object key]Deltas以及object key的queue，Deltas为Delta的切片类型，Delta装有对象及对象的变化类型（Added/Updated/Deleted/Sync） ，Reflector负责DeltaFIFO的输入，Controller负责处理DeltaFIFO的输出；<br /> （3）Controller：Controller从DeltaFIFO的queue中pop一个object key出来，并获取其关联的 Deltas出来进行处理，遍历Deltas，根据对象的变化更新Indexer中的本地内存缓存，并通知Processor，相关对象有变化事件发生；<br /> （4）Processor：Processor根据对象的变化事件类型，调用相应的ResourceEventHandler来处理对象的变化；<br /> （5）Indexer：Indexer中有informer维护的指定资源对象的相对于etcd数据的一份本地内存缓存，可通过该缓存获取资源对象，以减少对apiserver、对etcd的请求压力；<br /> （6）ResourceEventHandler：用户根据自身处理逻辑需要，注册自定义的的ResourceEventHandler，当对象发生变化时，将触发调用对应类型的ResourceEventHandler来做处理。</p> <p>根据informer架构，对k8s informer的分析将分为以下几部分进行，本篇为概要分析：<br /> （1）informer概要分析；<br /> （2）informer之初始化与启动分析；<br /> （3）informer之Reflector分析；<br /> （4）informer之DeltaFIFO分析；<br /> （5）informer之Controller&amp;Processor分析；<br /> （6）informer之Indexer分析；</p> <h4 id="informer使用示例代码">informer使用示例代码</h4> <p>使用大致过程如下：<br /> （1）构建与kube-apiserver通信的config配置；<br /> （2）初始化与apiserver通信的clientset；<br /> （3）利用clientset初始化shared informer factory以及pod informer；<br /> （4）注册informer的自定义ResourceEventHandler；<br /> （5）启动shared informer factory，开始informer的list &amp; watch操作；<br /> （6）等待informer从kube-apiserver同步资源完成，即informer的list操作获取的对象都存入到informer中的indexer本地缓存中；<br /> （7）创建lister，可以从informer中的indexer本地缓存中获取对象；</p> <pre><code>func main() {     // 自定义与kube-apiserver通信的config配置     master := "192.168.1.10" // apiserver url     kubeconfig := "/.kube/config"     config, err = clientcmd.BuildConfigFromFlags(master, kubeconfig)     if err != nil { 		klog.Fatalf("Failed to create config: %v", err) 	} 	// 或使用k8s serviceAccount机制与kube-apiserver通信 	// config, err = rest.InClusterConfig()          // 初始化与apiserver通信的clientset     clientset, err := kubernetes.NewForConfig(config) 	if err != nil { 		klog.Fatalf("Failed to create client: %v", err) 	} 	 	// 初始化shared informer factory以及pod informer 	factory := informers.NewSharedInformerFactory(clientset, 30*time.Second) 	podInformer := factory.Core().V1().Pods() 	informer := podInformer.Informer() 	 	// 注册informer的自定义ResourceEventHandler 	informer.AddEventHandler(cache.ResourceEventHandlerFuncs{ 		AddFunc:    xxx, 		UpdateFunc: xxx, 		DeleteFunc: xxx, 	}) 	 	// 启动shared informer factory，开始informer的list &amp; watch操作 	stopper := make(chan struct{}) 	go factory.Start(stopper) 	 	// 等待informer从kube-apiserver同步资源完成，即informer的list操作获取的对象都存入到informer中的indexer本地缓存中  	// 或者调用factory.WaitForCacheSync(stopper) 	if !cache.WaitForCacheSync(stopper, informer.HasSynced) { 		runtime.HandleError(fmt.Errorf("Timed out waiting for caches to sync")) 		return 	} 	 	// 创建lister 	podLister := podInformer.Lister() 	// 从informer中的indexer本地缓存中获取对象 	podList, err := podLister.List(labels.Everything()) 	if err != nil { 		fmt.Println(err) 	} 	 }</code></pre> <h2 id="总结">总结</h2> <p>以上只是对K8s informer做了简单的介绍，以及简单的写了一下如何使用informer的示例代码，后面将开始对informer的各个部件做进一步的源码分析，敬请期待。</p> <p>最后以一张k8s informer的架构图作为结尾总结，大家回忆一下k8s informer的架构组成以及各个部件的作用。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/25384d61327c7aa702c7f90e101e9a18.jpg" alt="k8s client-go源码分析 informer源码概要分析"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-47498.htm">小型狗粮加工设备价格表图片（小型狗粮生产设备）</a></p>
+                                        <p>下一个：<a href="/news/article-47981.htm">C#实现DataTable转TXT、CSV文件_C#教程_</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-10-31-free-v2ray-subscribe.htm" title="10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.7M/S">10月31日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/news/article-29001.htm" title="重庆58同城宠物领养 重庆58同城宠物领养电话">重庆58同城宠物领养 重庆58同城宠物领养电话</a></li>
+                        <li class="py-2"><a href="/news/article-48379.htm" title="C语言 推理证明带环链表详细过程_C 语言">C语言 推理证明带环链表详细过程_C 语言</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-node-share.htm" title="12月16日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度22.5M/S">12月16日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度22.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-clash-node.htm" title="12月15日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度19.9M/S">12月15日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度19.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-29453.htm" title="太原哪里可以免费领养狗狗（太原哪里可以免费领养狗狗狗）">太原哪里可以免费领养狗狗（太原哪里可以免费领养狗狗狗）</a></li>
+                        <li class="py-2"><a href="/news/article-41557.htm" title="如何将CONCAT_WS()函数与MySQL WHERE子句一起使用？">如何将CONCAT_WS()函数与MySQL WHERE子句一起使用？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-17-clash-windows.htm" title="10月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.3M/S">10月17日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度21.3M/S</a></li>
+                        <li class="py-2"><a href="/news/article-44027.htm" title="不能养的宠物猫有哪些（不能养的宠物猫有哪些呢）">不能养的宠物猫有哪些（不能养的宠物猫有哪些呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-10-free-subscribe-node.htm" title="12月10日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.3M/S">12月10日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度22.3M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
