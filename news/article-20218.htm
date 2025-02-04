@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-20218.htm" />
@@ -7,7 +7,35 @@
     <title>时域和频域的麦克斯韦方程组</title>
         <meta name="description" content="&nbsp; &nbsp; &nbsp; &nbsp; 时域和频域的麦克斯韦方程组，并通过一组势函数来求解麦克斯韦方程组，然后对核磁共振探测的基本原理进行了概述。然后本文介绍大地网格划分，FFT快速傅" />
         <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-20218.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="时域和频域的麦克斯韦方程组" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/ef4972e5506a9de512d13d70b9798cd8.webp" />
+        <meta property="og:release_date" content="2024-12-02T07:58:10" />
+    <meta property="og:updated_time" content="2024-12-02T07:58:10" />
+        <meta property="og:description" content="&nbsp; &nbsp; &nbsp; &nbsp; 时域和频域的麦克斯韦方程组，并通过一组势函数来求解麦克斯韦方程组，然后对核磁共振探测的基本原理进行了概述。然后本文介绍大地网格划分，FFT快速傅" />
+        
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="时域和频域的麦克斯韦方程组">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +44,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Libraries Stylesheet -->
-    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="__ADDON__/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
     <!-- Template Stylesheet -->
@@ -102,16 +130,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-22-clash-node.htm" title="12月22日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S">12月22日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度22.4M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-free-ssr-node.htm" title="9月24日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度18.6M/S">9月24日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度18.6M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-8-free-clash-subscribe.htm" title="8月8日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度21.9M/S">8月8日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度21.9M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-v2ray.htm" title="11月22日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S">11月22日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-15-free-node-subscribe-links.htm" title="10月15日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20.1M/S">10月15日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度20.1M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-21-free-node-subscribe.htm" title="9月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S">9月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.4M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-29-free-clash.htm" title="8月29日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.5M/S">8月29日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20.5M/S</a></li>
-                        <li class="py-2"><a href="/news/article-28538.htm" title="redis在CentOs服务器上的安装和设置开机自启动">redis在CentOs服务器上的安装和设置开机自启动</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-4-clash-node-daily-updates.htm" title="12月4日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度20.2M/S">12月4日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度20.2M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-shadowrocket-node.htm" title="11月14日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S">11月14日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-22508.htm" title="猫多久会认人（猫多久会认得主人,知道自己的名字）">猫多久会认人（猫多久会认得主人,知道自己的名字）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-21-clash-node.htm" title="11月21日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度21.4M/S">11月21日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度21.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-35460.htm" title="宠物医院开办批准手续需要多久（办个宠物医院需要什么条件?）">宠物医院开办批准手续需要多久（办个宠物医院需要什么条件?）</a></li>
+                        <li class="py-2"><a href="/news/article-46527.htm" title="宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全">宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全</a></li>
+                        <li class="py-2"><a href="/news/article-29738.htm" title="发芽糙米的吃法和用途(发芽糙米有什么好处)">发芽糙米的吃法和用途(发芽糙米有什么好处)</a></li>
+                        <li class="py-2"><a href="/news/article-38080.htm" title="宠物粮食排名榜最新（宠物粮食排名榜最新）">宠物粮食排名榜最新（宠物粮食排名榜最新）</a></li>
+                        <li class="py-2"><a href="/news/article-32321.htm" title="领养宠物狗的平台（领养犬平台）">领养宠物狗的平台（领养犬平台）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-18-node-share-links.htm" title="1月18日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度18.4M/S">1月18日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度18.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-30424.htm" title="动物疫苗生产厂家排名榜前十名有哪些 动物疫苗生产厂家排名榜前十名有哪些品种">动物疫苗生产厂家排名榜前十名有哪些 动物疫苗生产厂家排名榜前十名有哪些品种</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-13-free-v2ray.htm" title="1月13日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.4M/S">1月13日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度18.4M/S</a></li>
                     </ul>
     </div>
 </div>
@@ -123,28 +151,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2024-07/" title="2024-07 归档">2024-07</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">29</span> <a href="/date/2024-06/" title="2024-06 归档">2024-06</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

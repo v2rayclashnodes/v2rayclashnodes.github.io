@@ -120,6 +120,7 @@
                   				  				  				<blockquote> <p>这是一个系列博客，最终目的是要做一个基于 HTML Canvas 的、类似于微软 Office 的 Web Office 套件（包括：文档、表格、幻灯片……等等）。<br /> 博客园：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/forzhaokang/p/15907371.html"  target="_blank" rel="nofollow">《从零开始, 开发一个 Web Office 套件》系列博客目录</a><br /> 富文本编辑器 Github repo 地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/zhaokang555/canvas-text-editor"  target="_blank" rel="nofollow">https://github.com/zhaokang555/canvas-text-editor</a><br /> 富文本编辑器 在线 Demo：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://zhaokang555.github.io/canvas-text-editor/"  target="_blank" rel="nofollow">https://zhaokang555.github.io/canvas-text-editor/</a></p> </blockquote> </h1> <h2 id="229-feature拖动控制点调整编辑器大小">2.29 Feature：拖动控制点，调整编辑器大小</h2> <h3 id="2291-算法">2.29.1 算法</h3> <ol> <li>监听控制点的拖动事件，将拖动的距离记为<code>(dx, dy)</code>。根据控制点所处方位，平移编辑器或者改变其大小： <ol> <li>如果拖动的是左上角（TopLeft）的控制点，则： <ol> <li>将编辑器平移<code>(dx, dy)</code></li> <li>将编辑器宽高增加<code>(-dx, -dy)</code></li> </ol> </li> <li>如果拖动的是顶部中央（Top）的控制点，则： <ol> <li>将编辑器平移<code>(0, dy)</code></li> <li>将编辑器高度增加<code>-dy</code></li> </ol> </li> <li>如果拖动的是右上角（TopRight）的控制点，则： <ol> <li>将编辑器平移<code>(0, dy)</code></li> <li>将编辑器宽高增加<code>(dx, -dy)</code></li> </ol> </li> <li>如果拖动的是右侧中央（Right）的控制点，则将编辑器宽度增加<code>dx</code></li> <li>如果拖动的是右下角（BottomRight）的控制点，则将编辑器宽高增加<code>(dx, dy)</code></li> <li>如果拖动的是底部中央（Bottom）的控制点，则将编辑器高度增加<code>dy</code></li> <li>如果拖动的是左下角（BottomLeft）的控制点，则： <ol> <li>将编辑器平移<code>(dx, 0)</code></li> <li>将编辑器宽高增加<code>(-dx, dy)</code></li> </ol> </li> <li>如果拖动的是左侧中央（Left）的控制点，则： <ol> <li>将编辑器平移<code>(dx, 0)</code></li> <li>将编辑器宽度增加<code>-dx</code></li> </ol> </li> </ol> </li> <li>如果平移了编辑器，就会进入上一节讲到的平移编辑器的逻辑，这里就不再赘述；</li> <li>如果调整了编辑即的宽度，则需要： <ol> <li>将上边框和下边框横向拉伸，但是高度不变</li> <li>将左边框和右边框平移</li> <li>将不同位置的控制点平移不同距离</li> </ol> </li> <li>如果调整了编辑即的高度，则需要： <ol> <li>将左边框和右边框纵向拉伸，但是宽度不变</li> <li>将上边框和下边框平移</li> <li>将不同位置的控制点平移不同距离</li> </ol> </li> </ol> <h3 id="2292-实现">2.29.2 实现</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/328f036e35bb6652a116dd7dd4230edc.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/a874bff5052292629192f8ea90db421a.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/229d5d28f209cd91653aa059eb486e07.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <h3 id="2293-效果">2.29.3 效果</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e5992c910cdd11f4f39af193b8263d92.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <h3 id="2294-bug-平移或调整大小后点击编辑器空白处光标不能正确定位">2.29.4 Bug: 平移或调整大小后，点击编辑器空白处，光标不能正确定位</h3> <p>Bug表现：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/17bb65e6dc1662267ac100272a115e73.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <p>原因分析：这是因为编辑器平移或调整大小后，editor.blankSpace没有及时更新。</p> <p>修复：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e262281f2e10760a9edb55e525d5a53b.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <h3 id="2295-最终效果">2.29.5 最终效果</h3> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/a7780385e4ec10e880fd6ee52769fa36.jpg" alt="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具"></p> <p>（未完待续）</p> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-49502.htm">K8S 中的pod 和 node 区别</a></p>
+                                        <p>下一个：<a href="/news/article-50016.htm">redis专题：redis键值设计、性能优化以及redis连接池配置</a></p>
                                     </div>
                                     </div>
                     <div class="col-md-3">
@@ -129,16 +130,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-10-18-free-subscribe-node.htm" title="10月18日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度21M/S">10月18日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度21M/S</a></li>
-                        <li class="py-2"><a href="/news/article-46031.htm" title="unity 编辑器扩展简单入门">unity 编辑器扩展简单入门</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-23-free-node-subscribe-links.htm" title="11月23日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S">11月23日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.8M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-shadowrocket-node.htm" title="11月14日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S">11月14日 | 最新V2ray/SSR/Clash/Shadowrocket高速免费节点，最高速度18.4M/S</a></li>
-                        <li class="py-2"><a href="/news/article-31279.htm" title="天津市宠物领养机构电话（天津市宠物领养中心地址）">天津市宠物领养机构电话（天津市宠物领养中心地址）</a></li>
-                        <li class="py-2"><a href="/news/article-28540.htm" title="广州宠物领养网免费地址查询电话（广州宠物领养中心具体地址）">广州宠物领养网免费地址查询电话（广州宠物领养中心具体地址）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-6-free-node-subscribe-links.htm" title="12月6日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.8M/S">12月6日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度20.8M/S</a></li>
-                        <li class="py-2"><a href="/news/article-25283.htm" title="猫粮制作机器 猫粮制作机器多少钱">猫粮制作机器 猫粮制作机器多少钱</a></li>
-                        <li class="py-2"><a href="/news/article-44543.htm" title="SpringBoot入门，Dubbo+Zookeeper简单入门案例">SpringBoot入门，Dubbo+Zookeeper简单入门案例</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-30-clash-windows.htm" title="10月30日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.6M/S">10月30日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度19.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-44544.htm" title="领养宠物信息（领养宠物信息费）">领养宠物信息（领养宠物信息费）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-3-free-clash-subscribe.htm" title="12月3日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.3M/S">12月3日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度22.3M/S</a></li>
+                        <li class="py-2"><a href="/news/article-36622.htm" title="狗狗领养平台公众号（狗狗领养平台公众号有哪些）">狗狗领养平台公众号（狗狗领养平台公众号有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-39574.htm" title="宠物领养中心需要什么条件（宠物领养中心要钱吗）">宠物领养中心需要什么条件（宠物领养中心要钱吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-11-free-subscribe-node.htm" title="11月11日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度18.7M/S">11月11日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度18.7M/S</a></li>
+                        <li class="py-2"><a href="/news/article-19760.htm" title="被猫抓了把血挤出来了并打疫苗（被猫抓了把血挤出来了并打疫苗可以吗）">被猫抓了把血挤出来了并打疫苗（被猫抓了把血挤出来了并打疫苗可以吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-15-free-clash.htm" title="1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18.9M/S">1月15日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度18.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-43543.htm" title="动物疫苗查询系统怎么查不到信息（动物疫苗批号查询系统）">动物疫苗查询系统怎么查不到信息（动物疫苗批号查询系统）</a></li>
+                        <li class="py-2"><a href="/news/article-27608.htm" title="宠物领养协议书范本大全最新图片 宠物领养协议书范本大全最新图片下载">宠物领养协议书范本大全最新图片 宠物领养协议书范本大全最新图片下载</a></li>
+                        <li class="py-2"><a href="/news/article-47497.htm" title="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程">SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程</a></li>
                     </ul>
     </div>
 </div>
@@ -150,7 +151,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
@@ -159,10 +160,7 @@
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

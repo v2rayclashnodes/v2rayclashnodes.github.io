@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-51034.htm" />
+    <meta charset="utf-8">
+    <title>EFCore 的 DbFirst 模式</title>
+        <meta name="description" content="1 前言 EF6 时代，可以通过界面操作，添加数据库实体。 EF Core 需要通过 CLI 来进行该操作，具体请参考EF Core官方文档：反向工程。 当然，EF Core 也有界面化操作的工具，E" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-51034.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="EFCore 的 DbFirst 模式" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/1c3003b3261cd1d9fff42c22ae315819.webp" />
+        <meta property="og:release_date" content="2025-02-04T00:28:54" />
+    <meta property="og:updated_time" content="2025-02-04T00:28:54" />
+        <meta property="og:description" content="1 前言 EF6 时代，可以通过界面操作，添加数据库实体。 EF Core 需要通过 CLI 来进行该操作，具体请参考EF Core官方文档：反向工程。 当然，EF Core 也有界面化操作的工具，E" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="EFCore 的 DbFirst 模式">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                                <a href="#" class="nav-item nav-link">关于</a>
+                        <a href="#" class="nav-item nav-link">联系</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">EFCore 的 DbFirst 模式</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h2 id="1-前言">1 前言</h2> <p>EF6 时代，可以通过界面操作，添加数据库实体。</p> <p>EF Core 需要通过 CLI 来进行该操作，具体请参考<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/scaffolding?tabs=dotnet-core-cli"  target="_blank" rel="nofollow">EF Core官方文档：反向工程</a>。</p> <p>当然，EF Core 也有界面化操作的工具，EF Core Power Tools，具体请见最后介绍。</p> <p></p> <h2 id="2-前置条件">2 前置条件</h2> <ul> <li> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/ef/core/cli/powershell"  target="_blank" rel="nofollow">PMC 工具</a>（仅限 Visual Studio）或<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/ef/core/cli/dotnet"  target="_blank" rel="nofollow">CLI 工具</a>。</p> </li> <li> <p>核心 NuGet 包：Microsoft.EntityFrameworkCore.Design</p> </li> <li> <p>还需要为要进行反向工程的数据库架构安装适当的<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/ef/core/providers/"  target="_blank" rel="nofollow">数据库提供程序</a></p> </li> </ul> <p></p> <h2 id="3-主命令">3 主命令</h2> <pre><code class="language-bash">dotnet ef dbcontext scaffold "[数据库连接串]" [提供程序]</code></pre> <p>如：</p> <pre><code class="language-bash">dotnet ef dbcontext scaffold "server=localhost;database=efcore;uid=sa;pwd=Qwe123456;" Microsoft.EntityFrameworkCore.SqlServer</code></pre> <p></p> <h2 id="4-命令参数">4 命令参数</h2> <h4 id="41-生成指定表--table">4.1 生成指定表（--table）</h4> <p>上述命令，会生成整个数据库的表，如果需要指定特定的表，需要使用如下：</p> <pre><code class="language-bash">dotnet ef dbcontext scaffold "[数据库连接串]" [提供程序] --table table_name1 --table table_name2</code></pre> <h4 id="42-保留数据库名称--use-database-names">4.2 保留数据库名称（--use-database-names）</h4> <p>默认情况会修正表/列名，使用该参数尽量保留原名称。</p> <pre><code class="language-bash">-UseDatabaseNames    #PMC --use-database-names #.NET Core CLI</code></pre> <h4 id="43-fluent-api-和数据注释--data-annotations">4.3 Fluent API 和数据注释（--data-annotations）</h4> <p>默认情况下，使用 Fluent API 配置实体类型。使用下面的命令，可以改为使用数据注释。</p> <pre><code class="language-bash">-DataAnnotations   #PMC --data-annotations #.NET Core CLI</code></pre> <p>Fluent API</p> <pre><code class="language-csharp">entity.Property(e =&gt; e.Title)     .IsRequired()     .HasMaxLength(160);</code></pre> <p>数据注释</p> <pre><code class="language-csharp">[Required] [StringLength(160)] public string Title { get; set; }</code></pre> <h4 id="44-指定-dbcontext-名称--context">4.4 指定 DbContext 名称（--context）</h4> <p>指定将生成的 DbContext 类的名称</p> <pre><code class="language-bash">-Context  #PMC --context #.NET Core CLI</code></pre> <h4 id="45-指定保存目录--context-dir-和---output-dir">4.5 指定保存目录（--context-dir 和 --output-dir）</h4> <pre><code class="language-bash">-ContextDir Data -OutputDir Models     #PMC --context-dir Data --output-dir Models #.NET Core CLI</code></pre> <h4 id="46-指定命名空间--namespace-和---context-namespace">4.6 指定命名空间（--namespace 和 --context-namespace）</h4> <pre><code class="language-bash">-Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace    #PMC --namespace Your.Namespace --context-namespace Your.DbContext.Namespace #.NET Core CLI</code></pre> <p></p> <h2 id="5-测试">5 测试</h2> <h3 id="51-数据库准备">5.1 数据库准备</h3> <p>由于是 DbFirst，所以这里我们先创建一个数据库，名为 efcore</p> <p>新建一张表 Test</p> <pre><code class="language-sql">CREATE TABLE [dbo].[Test]( 	[Id] [uniqueidentifier] NOT NULL, 	[Name] [nvarchar](128) NULL,  CONSTRAINT [PK_Test] PRIMARY KEY CLUSTERED  ( 	[Id] ASC )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY] ) ON [PRIMARY]</code></pre> <h3 id="52-新建一个控制台程序">5.2 新建一个控制台程序</h3> <p>这里命名为：DbFirstTest</p> <pre><code class="language-bash">mkdir DbFirstTest &amp; cd DbFirstTest #新建文件夹DbFirstTest并切换至该目录下 dotnet new console -f net6.0       #新建.NET6.0控制台程序</code></pre> <h3 id="53-引入-nuget-包">5.3 引入 Nuget 包</h3> <pre><code class="language-bash"># 引入 EF Core 核心包 dotnet add package Microsoft.EntityFrameworkCore.Design -v 6.0.4 # 引入 SQL Server 提供程序 dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 6.0.4</code></pre> <h3 id="54-执行-scaffold-命令">5.4 执行 Scaffold 命令</h3> <p>在控制台程序的根目录下，执行命令（连接串请自行修改成自己的）：</p> <pre><code class="language-bash">dotnet ef dbcontext scaffold "server=localhost;database=efcore;uid=sa;pwd=Qwe123456;" Microsoft.EntityFrameworkCore.SqlServer --data-annotations --context EfCoreContext --context-dir Data --output-dir Models</code></pre> <p>--data-annotations：数据注释在实体上</p> <p>--context EfCoreContext：上下文指定命名为 EfCoreContext</p> <p>--context-dir Data：上下文保存在根目录的 Data 文件夹下</p> <p>--output-dir Models：实体保存在根目录的 Models 文件夹下</p> <h3 id="55-测试源码">5.5 测试源码</h3> <p>在 Program.cs 添加测试代码：</p> <pre><code class="language-csharp">using DbFirstTest.Data; using DbFirstTest.Models;  EfCoreContext db = new EfCoreContext(); Test test = new Test() {     Id = Guid.NewGuid(),     Name = "Add" }; db.Tests.Add(test); db.SaveChanges(); Console.WriteLine("Add Successful！");</code></pre> <p>在项目根目录下，执行：</p> <pre><code class="language-bash">dotnet build #编译 dotnet run   #运行</code></pre> <p>执行以后，可以看到，数据库中添加了相应的记录。</p> <h3 id="56-源码">5.6 源码</h3> <p>Gitee：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://gitee.com/lisheng741/testnetcore/tree/master/EFCore/DbFirstTest"  target="_blank" rel="nofollow">https://gitee.com/lisheng741/testnetcore/tree/master/EFCore/DbFirstTest</a></p> <p>Github：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/lisheng741/testnetcore/tree/master/EFCore/DbFirstTest"  target="_blank" rel="nofollow">https://github.com/lisheng741/testnetcore/tree/master/EFCore/DbFirstTest</a></p> <p></p> <h2 id="6-ef-core-power-tools">6 EF Core Power Tools</h2> <p>开源的 EF Core 界面工具，可以作为一个 vs 的插件，在 vs 里运作。</p> <p>项目 Github 地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/ErikEJ/EFCorePowerTools/"  target="_blank" rel="nofollow">https://github.com/ErikEJ/EFCorePowerTools/</a></p> <p>VS 插件下载：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools"  target="_blank" rel="nofollow">https://marketplace.visualstudio.com/items?itemName=ErikEJ.EFCorePowerTools</a></p> <p>在 VS 插件市场下载以后，安装即可。</p> <p>本人的 vs 版本是 vs2022，安装以后，右键项目多了一个选项【EF Core工具】，点击【反向工程】即可进行 DbFirst 的相关操作了。</p> <p>界面化操作比较直观，这里不在赘述。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/772b3d39e98935996529d89282839081.jpg" alt="EFCore 的 DbFirst 模式"></p> <p></p> <h2 id="参考来源">参考来源</h2> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/zh-cn/ef/core/managing-schemas/scaffolding?tabs=dotnet-core-cli"  target="_blank" rel="nofollow">EF Core官方文档：反向工程</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-50530.htm">南京宠物领养平台电话是多少（南京最大的宠物店免费领养）</a></p>
+                                        <p>下一个：<a href="/news/article-51035.htm">动物医院大众点评怎么写评价的（动物医院的号码是多少）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-47498.htm" title="小型狗粮加工设备价格表图片（小型狗粮生产设备）">小型狗粮加工设备价格表图片（小型狗粮生产设备）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-2-node-share.htm" title="12月2日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S">12月2日 | 最新Clash/V2ray/SSR/Shadowrocket高速免费节点，最高速度22M/S</a></li>
+                        <li class="py-2"><a href="/news/article-22969.htm" title="android系统修改深色模式（Dark theme） 默认值">android系统修改深色模式（Dark theme） 默认值</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-31-clash-node-daily-updates.htm" title="1月31日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.7M/S">1月31日 | 最新SSR/Clash/Shadowrocket/V2ray高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-29-free-ssr-node.htm" title="1月29日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度18.7M/S">1月29日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度18.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-clash-node.htm" title="1月16日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.6M/S">1月16日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度20.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-26683.htm" title="基于YARN HA集群的Spark HA集群">基于YARN HA集群的Spark HA集群</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-5-clash-node.htm" title="11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度21.1M/S">11月5日 | 最新V2ray/Clash/Shadowrocket/SSR高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-26216.htm" title="猫咪疫苗3针打什么疫苗呢（猫咪打的三针疫苗多少钱）">猫咪疫苗3针打什么疫苗呢（猫咪打的三针疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-45528.htm" title="git下载安装教程">git下载安装教程</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
