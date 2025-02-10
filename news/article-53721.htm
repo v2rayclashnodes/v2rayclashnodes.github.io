@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-53721.htm" />
+    <meta charset="utf-8">
+    <title>C# 实现登录并跳转界面</title>
+        <meta name="description" content="前言：本篇文章没有使用连接数据库验证登录名和密码，只是最基本的字符串对比，下篇文章会在本文基础上增加数据库连接和验证。 正文： 1. 登录窗口界面的布局设计 &nbsp; &nbsp; （1）新建一个" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-53721.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="C# 实现登录并跳转界面" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/09b36dee9871dfdcf5b9cb9a87498758.webp" />
+        <meta property="og:release_date" content="2025-02-09T10:05:27" />
+    <meta property="og:updated_time" content="2025-02-09T10:05:27" />
+        <meta property="og:description" content="前言：本篇文章没有使用连接数据库验证登录名和密码，只是最基本的字符串对比，下篇文章会在本文基础上增加数据库连接和验证。 正文： 1. 登录窗口界面的布局设计 &nbsp; &nbsp; （1）新建一个" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="C# 实现登录并跳转界面">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">C# 实现登录并跳转界面</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p><strong>前言：</strong>本篇文章没有使用连接数据库验证登录名和密码，只是最基本的字符串对比，下篇文章会在本文基础上增加数据库连接和验证。</p> <p><strong>正文：</strong></p> <p>1. 登录窗口界面的布局设计</p> <p style="text-indent:0px;">&nbsp; &nbsp; （1）新建一个form窗体，并且修改属性值。如图</p> <p>&nbsp; &nbsp;&nbsp; 属性Text：Form1 改为 登录界面 ；</p> <p>&nbsp; &nbsp; &nbsp;属性Name：Form1 改为 Login ；</p> <p><img fetchpriority="high" decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220904/ccb8ceb90d3bed3d63e10f3c222e6763.jpg"></p> <p><img decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/2bcd50e61d8657d416868104c60459b0.jpg"></p> <p><img decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/613b6d7dae9b8aacd042f35e39216b6c.jpg"></p> <p><img loading="lazy" decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/62b0ab4d5be7f4ebdd4f7aba65cbd879.jpg"></p> <p>&nbsp;（2）在工具箱搜索寻找需要的控件，登录界面一般需要Label，Button，TextBox。<br /> &nbsp;&nbsp;同样，在属性窗格修改属性值，方便代码书写的命名。这里命名为：</p> <p><img loading="lazy" decoding="async" alt="" class="has" height="300" src="http://img.555519.xyz/uploads3/20220904/70e2617869b627578327d793e9a1d932.jpg"></p> <p>&nbsp;（3）调整各个控件的大小，字体，布局：</p> <p><img loading="lazy" decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/631843eb5777b002cda58d9e4fd52ade.jpg"></p> <p>（4）双击登录按钮，进行代码编辑</p> <pre class="has"><code class="language-csharp">private void btnLogin_Click(object sender, EventArgs e)         {             //1. 获取数据             //从TextBox中获取用户输入信息             string userName = this.txtUserName.Text;                  string userPassword = this.txtPassword.Text;              //2. 验证数据             // 验证用户输入是否为空，若为空，提示用户信息             if( userName.Equals("") || userPassword.Equals(""))             {                 MessageBox.Show("用户名或密码不能为空！");             }             // 若不为空，验证用户名和密码是否与数据库匹配             // 这里只做字符串对比验证             else             {                    //用户名和密码验证正确，提示成功，并执行跳转界面。                 if( userName.Equals("admin") &amp;&amp; userPassword.Equals("admin"))                 {                     MessageBox.Show("登录成功！");                      /**                      * 待添加代码区域                      * 实现界面跳转功能                      *                       */                 }                 //用户名和密码验证错误，提示错误。                 else                 {                     MessageBox.Show("用户名或密码错误！");                 }             }              //3. 处理数据         }</code></pre> <p>2. 跳转主界面实现</p> <p><span style="color:#4f4f4f;">&nbsp;（1）右键资源管理器中项目名 "blog1"，依次单击 "添加"、"Windows窗体"。</span></p> <p><img loading="lazy" decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/bb2107e1e97cc2f73dd6bad68b0b7fd6.jpg"><img loading="lazy" decoding="async" alt="" class="has" height="500" src="http://img.555519.xyz/uploads3/20220904/a8202f473a830c6a4a548f20a6be6f62.jpg"></p> <p>（2）单击添加按钮。对新的窗口像前面一样操作，对相应属性进行修改。并且添加一个label，用于界面的辨识。</p> <p><img loading="lazy" decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220904/761aedff1d0068e9727e1e3c999b74cf.jpg"></p> <p>（3）在programma.cs中的Main函数中，添加代码：</p> <p><img loading="lazy" decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220904/54d4b9c2b7e11838e9c7670842395e24.jpg"></p> <pre class="has"><code class="language-csharp">&nbsp;static void Main()         {             Application.EnableVisualStyles();             Application.SetCompatibleTextRenderingDefault(false);             //Application.Run(new Login());             Login login = new Login();              //界面转换             login.ShowDialog();              if (login.DialogResult == DialogResult.OK)             {                 login.Dispose();                 Application.Run(new MainForm());             }             else if (login.DialogResult == DialogResult.Cancel)             {                 login.Dispose();                 return;             }         }</code>static void Main()         {             Application.EnableVisualStyles();             Application.SetCompatibleTextRenderingDefault(false);             //Application.Run(new Login());             Login login = new Login();              //界面转换             login.ShowDialog();              if (login.DialogResult == DialogResult.OK)             {                 login.Dispose();                 Application.Run(new MainForm());             }             else if (login.DialogResult == DialogResult.Cancel)             {                 login.Dispose();                 return;             }         }</pre> <p>&nbsp;（4）并在Form1.cs中，验证用户名和密码后面（有注释：待添加代码区），添加代码：</p> <pre class="has"><code class="language-csharp">//跳转主界面      this.DialogResult = DialogResult.OK;      this.Dispose();      this.Close();</code></pre> <p>3.启动运行，一起检查代码实现情况。</p> <p style="text-indent:32px;">（1）不输入用户名和密码，单击登录；</p> <p style="text-indent:32px;">（2）正确输入用户名，错误输入密码，单击登录；</p> <p style="text-indent:32px;">（3）正确输入用户名和密码，单击登录；</p> <p style="text-indent:32px;">（4）单击提示框确定按钮，查看跳转情况。</p> <p style="text-indent:32px;"> <p style="text-indent:32px;"><span style="color:#4f4f4f;"><strong>后续：</strong></span><span style="color:#4f4f4f;">我是一个C#的初学者，目前只是学了最基本的语法。想在实践中边练习边学习，</span>于是找了点小项目</p> <p style="text-indent:32px;">作为学习C#的练手利器，文中有错误或者不是很好的地方，望各位大神批评指正。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-53170.htm">猫抓十天后猫没死人用***吗好大夫在线（家猫抓十天后猫没死人用***吗）</a></p>
+                                        <p>下一个：<a href="/news/article-53722.htm">MySQL 事务和锁_在线工具</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-31278.htm" title="宠物领养机构哪里有卖（宠物领养去哪里领养）">宠物领养机构哪里有卖（宠物领养去哪里领养）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-19-clash-node.htm" title="1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S">1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S</a></li>
+                        <li class="py-2"><a href="/news/article-48974.htm" title="Vue-跑马灯效果">Vue-跑马灯效果</a></li>
+                        <li class="py-2"><a href="/news/article-43544.htm" title="动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写范文（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/news/article-48379.htm" title="C语言 推理证明带环链表详细过程_C 语言">C语言 推理证明带环链表详细过程_C 语言</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-22-free-v2ray.htm" title="11月22日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S">11月22日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.3M/S</a></li>
+                        <li class="py-2"><a href="/news/article-37611.htm" title="开宠物医院需要办什么证（开宠物医院需要什么许可证）">开宠物医院需要办什么证（开宠物医院需要什么许可证）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-free-clash.htm" title="1月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度21.3M/S">1月11日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度21.3M/S</a></li>
+                        <li class="py-2"><a href="/news/article-52116.htm" title="宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元">宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-8-free-ssr-node.htm" title="12月8日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.2M/S">12月8日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度19.2M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

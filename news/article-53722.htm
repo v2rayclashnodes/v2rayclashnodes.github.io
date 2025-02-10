@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-53722.htm" />
+    <meta charset="utf-8">
+    <title>MySQL 事务和锁_在线工具</title>
+        <meta name="description" content="事务概述 当多个用户访问同一份数据时，一个用户在更改数据的过程中，可能有其他用户同时发起更改请求，为保证数据库记录的更新从一个一致性状态变为另外一个一致性状态，使用事务处理是非常必要的，事务具有以下四" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-53722.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="MySQL 事务和锁_在线工具" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/b05e38e23632d15581abf15ddcb32f08.webp" />
+        <meta property="og:release_date" content="2025-02-09T10:05:27" />
+    <meta property="og:updated_time" content="2025-02-09T10:05:27" />
+        <meta property="og:description" content="事务概述 当多个用户访问同一份数据时，一个用户在更改数据的过程中，可能有其他用户同时发起更改请求，为保证数据库记录的更新从一个一致性状态变为另外一个一致性状态，使用事务处理是非常必要的，事务具有以下四" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="MySQL 事务和锁_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">MySQL 事务和锁_在线工具</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p></p> <h2 id="事务概述">事务概述</h2> <p>当多个用户访问同一份数据时，一个用户在更改数据的过程中，可能有其他用户同时发起更改请求，为保证数据库记录的更新从一个一致性状态变为另外一个一致性状态，使用事务处理是非常必要的，事务具有以下四个特性：</p> <ol> <li>原子性（Atomicity）：事务中所有操作视为一个原子单位，即对事务所进行的数据修改等操作只能是完全回滚或完全提交</li> <li>一致性（Consistency）：事务在完成时，必须使用所有的数据从一种一致性变更为另一种一致性状态，所有的变更都必须应用于事务的修改，以确保数据的完整性。事务的一致性由原子性、持久性和隔离性一起实现</li> <li>隔离性（Isolation）：一个事务中的操作语句所做的修改必须与其他事务所做的修改相隔离。在进行事务查看数据时，数据所处的状态，要么是被另一个并发事务修改之前的状态，要么是被另一并发事务修改之后的状态，即当前事务不会查询由另一个并发事务正在修改的数据。隔离性由 MySQL 锁机制实现</li> <li>持久性（Durability）：事务完成之后，所做的修改对数据的影响是永久的，即使系统重启或者出现系统故障，数据仍可恢复</li> </ol> <p>MySQL 提供了多种事务型存储引擎，如 InnoDB 和 BDB 等，而 MyISAM 不支持事务。为了支持事务，InnoDB 存储引擎引入了与事务处理相关的 REDO 日志和 UNDO 日志，同时事务依赖于 MySQL 提供的锁机制</p> <h4 id="1-redo-日志">1. REDO 日志</h4> <p>事务执行时需要将执行的事务日志写入日志文件，对应的文件为 REDO 日志。当每条 SQL 进行数据更新操作时，首先将 REDO 日志写进日志缓冲区。当客户端执行 COMMIT 命令提交时，日志缓冲区的内容将被刷新到磁盘，日志缓冲区的刷新方式或者时间间隔可以通过参数 innodb_flush_log_at_trx_commit 控制</p> <p>REDO 日志对应磁盘上的 ib_logifleN 文件，该文件默认为 5MB，建议设置为 512MB，以便容纳较大的事务。MySQL 崩溃恢复时会重新执行 REDO 日志的记录，恢复最新数据，保证已提交事务的持久性</p> <h4 id="2-undo-日志">2. UNDO 日志</h4> <p>与 REDO 日志相反，UNDO 日志主要用于事务异常时的数据回滚，具体内容就是记录数据被修改前的信息到 UNDO 缓冲区，然后在合适的时间将内容刷新到磁盘</p> <p>假如由于系统错误或者 rollback 操作而导致事务回滚，可以根据 undo 日志回滚到没修改前的状态，保证未提交事务的原子性</p> <p>与 REDO 日志不同的是，磁盘上不存在单独的 UNDO 日志文件，所有的 UNDO 日志均存在表空间对应的 .ibd 数据文件中，即使 MySQL 服务启动了独立表空间</p> <p></p> <h2 id="事务控制语句">事务控制语句</h2> <p>在 MySQL 中，可以使用 BEGIN 开始事务，使用 COMMIT 结束事务，中间可以使用 ROLLBACK 回滚事务。MySQL 通过 SET AUTOCOMMIT、START TRANSACTION、COMMIT 和 ROLLBACK 等语句支持本地事务</p> <pre><code class="language-sql">START TRANSACTION | BEGIN [WORK] COMMIT [WORK] ROLLBACK [WORK] SET AUTOCOMMIT = {0 | 1}</code></pre> <ul> <li>BEGIN | START TRANSACTION：开始事务</li> <li>COMMIT：结束事务</li> <li>ROLLBACK：回滚事务</li> <li>WORK：SQL 语句</li> <li>SET AUTOCOMMIT：是否自动提交，0 禁止，1 开启，默认为 1</li> </ul> <p></p> <h2 id="事务隔离级别">事务隔离级别</h2> <p>MySQL 定义了四种隔离级别，指定事务中哪些数据改变其他事务可见、哪些数据该表其他事务不可见。低级别的隔离级别可以支持更高的并发处理，同时占用的系统资源更少</p> <p>InnoDB 系统级事务隔离级别可以使用以下语句设置：</p> <ul> <li>未提交读：<code>SET GLOBAL TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</code></li> <li>提交读：<code>SET GLOBAL TRANSACTION ISOLATION LEVEL READ COMMITTED;</code></li> <li>可重复读：<code>SET GLOBAL TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></li> <li>串行化：<code>SET GLOBAL TRANSACTION ISOLATION LEVEL SERIALIZABLE;</code></li> </ul> <p>查看系统级事务隔离级别：</p> <pre><code class="language-sql">SELECT @@global.tx_isolation;</code></pre> <p>InnoDB 会话级事务隔离级别可以使用以下语句设置：</p> <ul> <li>未提交读：<code>SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;</code></li> <li>提交读：<code>SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;</code></li> <li>可重复读：<code>SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</code></li> <li>串行化：<code>SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;</code></li> </ul> <p>查看会话级事务隔离级别：</p> <pre><code class="language-sql">SELECT @@tx_isolation;</code></pre> <h4 id="1-读未提交">1. 读未提交</h4> <p>在该隔离级别，所有事务都可以看到其他未提交事务的执行结果。读取未提交的数据称为脏读（Dirty Read），即是：首先开启 A 和 B 两个事务，在 B 事务更新但未提交之前，A 事务读取到了更新后的数据，但由于 B 事务回滚，导致 A 事务出现了脏读现象</p> <h4 id="2-读已提交">2. 读已提交</h4> <p>所有事务只能看见已经提交事务所做的改变，此级别可以解决脏读，但也会导致不可重复读（Nonrepeatable Read）：首先开启 A 和 B 两个事务，A事务读取了 B 事务的数据，在 B 事务更新并提交后，A 事务又读取到了更新后的数据，此时就出现了同一 A 事务中的查询出现了不同的查询结果</p> <h4 id="3-可重复读">3. 可重复读</h4> <p>MySQL 默认的事务隔离级别，能确保同一事务的多个实例在并发读取数据时看到同样的数据行，理论上会导致一个问题，幻读（Phontom Read）。例如，第一个事务对一个表中的数据做了修改，这种修改会涉及表中的全部数据行，同时第二个事务也修改这个表中的数据，这次的修改是向表中插入一行新数据，此时就会发生操作第一个事务的用户发现表中还有没有修改的数据行</p> <p>InnoDB 通过多版本并发控制机制（MVCC）解决了该问题：InnoDB 通过为每个数据行增加两个隐含值的方式来实现，这两个隐含值记录了行的创建时间、过期时间以及每一行存储时间发生时的系统版本号，每个查询根据事务的版本号来查询结果</p> <h4 id="4-串行化">4. 串行化</h4> <p>通过强制事务排序，使其不可能相互冲突，从而解决幻读问题。简而言之，就是在每个读的数据行上加上共享锁实现，这个级别会导致大量的超时现象和锁竞争，一般不推荐使用</p> <p></p> <h2 id="innodb-锁机制">InnoDB 锁机制</h2> <p>为了解决数据库并发控制问题，如走到同一时刻客户端对同一张表做更新或者查询操作，需要对并发操作进行控制，因此产生了锁</p> <h4 id="1-锁的类型">1. 锁的类型</h4> <h5 id="11-共享锁">1.1 共享锁</h5> <p>共享锁的粒度是行或者元组（多个行），一个事务获取了共享锁以后，可以对锁定范围内的数据执行读操作</p> <h5 id="12-排他锁">1.2 排他锁</h5> <p>排他锁的粒度与共享锁相同，一个事务获取排他锁以后，可以对锁定范围内的数据执行写操作</p> <p>有两个事务 A 和 B，如果事务 A 获取了一个元组的共享锁，事务 B 还可以立即获取这个元组的共享锁，但不能获取这个元组的排他锁，必须等到事务 A 释放共享锁之后。如果事务 A 获取了一个元组的排他锁，事务 B 不能立即获取这个元组的共享锁，也不能立即获取这个元组的排他锁，必须等到 A 释放排他锁之后</p> <h5 id="13-意向锁">1.3 意向锁</h5> <p>意向锁是一种表锁，锁定的粒度是整张表，分为意向共享锁和意向排他锁。意向共享锁表示一个事务有意对数据上共享锁或者排他锁。有意表示事务想执行操作但还没真正执行</p> <h4 id="2-锁的粒度">2. 锁的粒度</h4> <p>锁的粒度主要分为表锁和行锁</p> <p>表锁的开销最小，同时允许的并发量也是最小。MyISAM 存储引擎使用该锁机制。当要写入数据时，整个表记录被锁，此时其他读/写动作一律等待。一些特定的动作，如 ALTER TABLE 执行时使用的也是表锁</p> <p>行锁可以支持最大的并发，InnoDB 存储引擎使用该锁机制。如果要支持并发读/写，建议采用 InnoDB 存储引擎</p> <p></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-53721.htm">C# 实现登录并跳转界面</a></p>
+                                        <p>下一个：<a href="/news/article-54258.htm">宠物医院的好评怎么写啊（给宠物医院好评怎么写）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-46032.htm" title="瑞鹏宠物医院是公立还是私立（瑞鹏宠物医院属于什么企业）">瑞鹏宠物医院是公立还是私立（瑞鹏宠物医院属于什么企业）</a></li>
+                        <li class="py-2"><a href="/news/article-32320.htm" title="合肥宠物领养中心有哪些地方啊（合肥有宠物收容中心吗）">合肥宠物领养中心有哪些地方啊（合肥有宠物收容中心吗）</a></li>
+                        <li class="py-2"><a href="/news/article-25281.htm" title="动物用的狂犬疫苗多少钱（动物注射狂犬疫苗多少钱）">动物用的狂犬疫苗多少钱（动物注射狂犬疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-clash-node-daily-updates.htm" title="12月21日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.1M/S">12月21日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-39096.htm" title="Python——import、time、os、random模块">Python——import、time、os、random模块</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-30-free-v2ray-subscribe.htm" title="1月30日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.7M/S">1月30日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-24-clash-node.htm" title="1月24日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.1M/S">1月24日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度20.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-21135.htm" title="动物疫苗审批管理制度（动物疫苗经营许可证办理条件）">动物疫苗审批管理制度（动物疫苗经营许可证办理条件）</a></li>
+                        <li class="py-2"><a href="/news/article-46527.htm" title="宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全">宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-shadowrocket-node.htm" title="12月12日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.1M/S">12月12日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度22.1M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
