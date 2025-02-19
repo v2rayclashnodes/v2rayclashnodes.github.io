@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-58475.htm" />
+    <meta charset="utf-8">
+    <title>Python 垃圾回收机制原理详解</title>
+        <meta name="description" content="目录  1. 引用计数 2. 标记-清除 3. 分代回收  4. 其他   4.1 JNI(Java Native Interface)    总结   Python 的GC模块主要运用了引用计数来跟" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-58475.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="Python 垃圾回收机制原理详解" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/b32602a8049b5c46321c3f465535f5d4.webp" />
+        <meta property="og:release_date" content="2025-02-18T00:37:29" />
+    <meta property="og:updated_time" content="2025-02-18T00:37:29" />
+        <meta property="og:description" content="目录  1. 引用计数 2. 标记-清除 3. 分代回收  4. 其他   4.1 JNI(Java Native Interface)    总结   Python 的GC模块主要运用了引用计数来跟" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python 垃圾回收机制原理详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">Python 垃圾回收机制原理详解</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>目录</p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_label0"  title="1. 引用计数" rel="nofollow">1. 引用计数</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_label1"  title="2. 标记-清除" rel="nofollow">2. 标记-清除</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_label2"  title="3. 分代回收" rel="nofollow">3. 分代回收</a></li> <li> <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_label3"  title="4. 其他" rel="nofollow">4. 其他</a> </p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_lab2_3_0"  title="4.1 JNI(Java Native Interface)" rel="nofollow">4.1 JNI(Java Native Interface)</a></li> </ul> </li> <li> <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://freexyz.cn/dev/109919.html#_label4"  title="总结" rel="nofollow">总结</a> </li> </ul> <p>Python 的GC模块主要运用了引用计数来跟踪和回收垃圾；通过“标记-清除”解决容器对象可能产生的循环引用问题；通过分代回收以空间换时间进一步提高垃圾回收的效率。</p> <p>也即采用“引用计数“为主(实时性，一旦没有引用，内存就直接释放了)，“标记-清除”与“分代收集”两种机制为辅的策略。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> <p><a name="_label0" rel="nofollow"></a></p> <h2>1. 引用计数</h2> <p>为每一个对象维护一个引用计数器，当一个对象的引用被创建或者复制时，(对象的引用)计数器+1，当一个对象的引用被销毁时，计数器的值-1，当计数器的值为0时，就意味着对象已经再没有被使用了，可以将其内存释放掉。</p> <p><a name="_label1" rel="nofollow"></a></p> <h2>2. 标记-清除</h2> <p>“标记-清除”的出现打破了循环引用，也就是它只关注那些可能会产生循环引用的对象，Python中的循环引用总是发生在容器container对象之间，也就是能够在内部持有其他对象的对象(比如：list、dict、class等)。这也使得该方法带来的开销只依赖于容器对象的数量。</p> <p><strong>原理：</strong></p> <p>将集合中对象的引用计数复制一份副本，用于找寻root object集合(该set中的对象是不能被回收的)。当成功找到root object集合，首先将现在的内存链表一分为二，一条链表维护root object集合，成为root链表；另外一条维护剩下的对象，成为unreachable链表。</p> <p>一旦在标记的过程中，发现现在在unreachable链表且可能存在被root链表中直接或间接引用的对象，就将其从unreachable链表中移到root链表中；当完成标记后，unreachable链表中剩下的所有对象就是垃圾对象了，接下来的垃圾回收只需限制在unreachable链表中即可。</p> <p><strong>缺点：</strong></p> <p>该机制所带来的额外操作和需要回收的内存块成正比。</p> <p><a name="_label2" rel="nofollow"></a></p> <h2>3. 分代回收</h2> <p>活的越长的对象，就越不可能是垃圾，就应该减少对它的垃圾收集频率。</p> <p><a name="_label3" rel="nofollow"></a></p> <h2>4. 其他</h2> <p><a name="_lab2_3_0" rel="nofollow"></a></p> <h3>4.1 JNI(Java Native Interface)</h3> <p>提供了若干的API，实现Java与其他语言的通信。</p> <p><a name="_label4" rel="nofollow"></a></p> <h2>总结</h2> <p>本篇文章就到这里了，希望能够给你带来帮助，也希望您能够多多关注的更多内容!</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-58159.htm">宠物粮食哪里批发便宜又好吃（宠物粮食在哪里进货）</a></p>
+                                        <p>下一个：<a href="/news/article-58476.htm">参观动物园心得300字（参观动物园心得体会80字）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-clash-node-daily-updates.htm" title="12月21日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.1M/S">12月21日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-29737.htm" title="狗窝还是狗洞四年级(狗窝狗洞有什么区别图片)">狗窝还是狗洞四年级(狗窝狗洞有什么区别图片)</a></li>
+                        <li class="py-2"><a href="/news/article-56465.htm" title="专业养鱼咨询网（养鱼专家咨询）">专业养鱼咨询网（养鱼专家咨询）</a></li>
+                        <li class="py-2"><a href="/news/article-47008.htm" title="农药批发价目表农药批发（最全的农药批发网）">农药批发价目表农药批发（最全的农药批发网）</a></li>
+                        <li class="py-2"><a href="/news/article-31842.htm" title="动物疫苗许可证过期了怎么办（动物疫苗过期怎么处理）">动物疫苗许可证过期了怎么办（动物疫苗过期怎么处理）</a></li>
+                        <li class="py-2"><a href="/news/article-20675.htm" title="动物疫苗排名前十位有哪些种类 动物疫苗排名前十位有哪些种类的">动物疫苗排名前十位有哪些种类 动物疫苗排名前十位有哪些种类的</a></li>
+                        <li class="py-2"><a href="/news/article-35937.htm" title="领养宠物和买宠物有什么区别（领养和买狗有什么不同）">领养宠物和买宠物有什么区别（领养和买狗有什么不同）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-shadowrocket-node.htm" title="11月10日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S">11月10日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S</a></li>
+                        <li class="py-2"><a href="/news/article-48380.htm" title="领养协议范本模板图片（领养协议有法律效力吗）">领养协议范本模板图片（领养协议有法律效力吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-free-ssr-subscribe.htm" title="2月11日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.4M/S">2月11日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度19.4M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
