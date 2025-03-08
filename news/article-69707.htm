@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-69707.htm" />
+    <meta charset="utf-8">
+    <title>Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法</title>
+        <meta name="description" content="目录  一、问题描述 二、原因分析 三、解决办法     在学习使用Kafka时，为了方便，写了一个群里脚本，用于同时启动所有虚拟机端的Kafka，群起的脚本如下：  #!/bin/bashcase$" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-69707.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/4dbc59a6cfdaf47499280f750adf8bac.webp" />
+        <meta property="og:release_date" content="2025-03-08T05:06:28" />
+    <meta property="og:updated_time" content="2025-03-08T05:06:28" />
+        <meta property="og:description" content="目录  一、问题描述 二、原因分析 三、解决办法     在学习使用Kafka时，为了方便，写了一个群里脚本，用于同时启动所有虚拟机端的Kafka，群起的脚本如下：  #!/bin/bashcase$" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>目录</h3> <ul> <li><a href="#_1" rel="nofollow">一、问题描述</a></li> <li><a href="#_34" rel="nofollow">二、原因分析</a></li> <li><a href="#_50" rel="nofollow">三、解决办法</a></li> </ul> </div> </h1> <ul> <li>在学习使用Kafka时，为了方便，写了一个群里脚本，用于同时启动所有虚拟机端的Kafka，群起的脚本如下：</li> </ul> <pre><code class="prism language-bash"><span class="token shebang important">#!/bin/bash</span><span class="token keyword">case</span><span class="token variable">$1</span><span class="token keyword">in</span><span class="token string">"start"</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">for</span> i<span class="token keyword">in</span> hadoop02 hadoop03 hadoop04<span class="token keyword">do</span><span class="token keyword">echo</span><span class="token string">"**********<span class="token variable">$i</span> starting...**********"</span><span class="token function">ssh</span><span class="token variable">$i</span><span class="token string">'/opt/module/kafka_2.11-0.11.0.0/bin/kafka-server-start.sh -daemon /opt/module/kafka_2.11-0.11.0.0/config/server.properties'</span><span class="token keyword">done</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token string">"stop"</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">for</span> i<span class="token keyword">in</span> hadoop02 hadoop03 hadoop04<span class="token keyword">do</span><span class="token keyword">echo</span><span class="token string">"**********<span class="token variable">$i</span> stoping...**********"</span><span class="token function">ssh</span><span class="token variable">$i</span><span class="token string">"/opt/module/kafka_2.11-0.11.0.0/bin/kafka-server-stop.sh"</span><span class="token keyword">done</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span class="token punctuation">;</span> esac</code></pre> <ul> <li>但是在执行后，发现Kafka并没有被启动，也没有日志信息或日志文件。因此我将上述代码中start部分的-daemon删除，关闭其静默启动，再次启动Kafka，观察输出结果，得到的结果如下图所示。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/48178bd942972694628ed991f01ffa98.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> <li>可以看到，报出的错误如下：</li> </ul> <pre><code class="prism language-bash">/opt/module/kafka_2.11-0.11.0.0/bin/kafka-run-class.sh: line 258: exec: java: not found</code></pre> <hr/> </h1> <ul> <li>该错误的字面意思是：在kafka-run-class.sh脚本文件中的第258行处执行时，找不到“java”字符串的含义。</li> <li>经过仔细排查，已确定<strong>不是</strong>脚本输入错误或是安装出错的问题。</li> <li>于是，我打开了这个脚本，查看其源代码，找到第258行。</li> <li>由于报错的原因主要和“java”有关，所以查找标注出“java”字符串<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/e8c5fba693c701f8134601c095ce1cb5.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> <li>在第258行，可以看到有$JAVA变量，猜测是这个变量出了问题，于是向前查找该变量。果不其然，在前文中找到该变量定义的位置，如下图所示。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/1b4e55fd33aa844dbcf7f2fc100a6e8b.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> <li>可以看到，这是指定系统使用java的地方，于是想到与JAVA_HOME环境变量的配置有关。</li> <li>由于交互式shell和非交互式shell、登录shell和非登录shell是有区别的。</li> <li>在登录shell里，环境信息需要读取/etc/profile和~ /.bash_profile, ~/.bash_login, and ~/.profile按顺序最先的一个，并执行其中的命令。除非被 —noprofile选项禁止了；</li> <li>在非登录shell里，环境信息只读取 /etc/bash.bashrc和~/.bashrc 手工执行是属于登录shell，脚本执行数据非登录shell，而我的linux环境配置中只对/etc/profile进行了jdk1.8等环境的配置，所以脚本执行启动Kafka失败了<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/5feb3add4beec32a65c144d40010829e.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> </ul> <hr/> </h1> <ul> <li>直接在源代码中显式指定JAVA_HOME的路径（注意要根据自己系统中的路径进行更改，不要直接照抄），如下图所示。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/d3ba5c3166081f4f6371ae1ad5d6acdd.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> <li>修改完成后，:wq保存退出。然后在群起脚本中加回-daemon指令，静默启动。可以看到启动结果如下<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220829/0375fc71425f50df19d7cf000849b031.jpg" alt="Kafka群起时报错：kafka-run-class.sh: line 258: exec: java: not found的解决办法"></li> <li>可见，此时Kafka已经正常启动，照此方法修改其它主机的配置信息即可，问题得到解决。</li> </ul> <hr/> <p>有用的话记得点个赞哦~</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-69065.htm">动物医院设备 动物医院设备清单</a></p>
+                                        <p>下一个：<a href="/news/article-69709.htm">1970年农历4月20日出生命运（1970年农历四月二十是几月几号）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-46527.htm" title="宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全">宠物粮食加工厂设备生产厂家有哪些呢图片 宠物粮食加工厂设备生产厂家有哪些呢图片大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-shadowrocket-node.htm" title="1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S">1月22日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/news/article-57586.htm" title="买狗去哪个平台好（买狗去哪个app）">买狗去哪个平台好（买狗去哪个app）</a></li>
+                        <li class="py-2"><a href="/news/article-39575.htm" title="兽药排名前十强正规厂家（排名前十的兽药厂家）">兽药排名前十强正规厂家（排名前十的兽药厂家）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-free-shadowrocket-node.htm" title="1月9日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.5M/S">1月9日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-node-share-links.htm" title="1月28日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.4M/S">1月28日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-47498.htm" title="小型狗粮加工设备价格表图片（小型狗粮生产设备）">小型狗粮加工设备价格表图片（小型狗粮生产设备）</a></li>
+                        <li class="py-2"><a href="/news/article-52643.htm" title="js开发实例仿京东侧边导航栏&amp;网页轮播图">js开发实例仿京东侧边导航栏&amp;网页轮播图</a></li>
+                        <li class="py-2"><a href="/news/article-49503.htm" title="从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具">从零开始，开发一个 Web Office 套件（16）：拖动控制点，调整编辑器大小_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-46529.htm" title="中国十大宠物粮品牌排行榜最新名单（国内十大宠物粮食品牌）">中国十大宠物粮品牌排行榜最新名单（国内十大宠物粮食品牌）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">24</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

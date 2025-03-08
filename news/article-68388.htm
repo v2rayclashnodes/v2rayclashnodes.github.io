@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-68388.htm" />
+    <meta charset="utf-8">
+    <title>ForkJoin详解及应用</title>
+        <meta name="description" content="ForkJoin是由JDK1.7后提供多线并发处理框架。主要用于并行计算中，和 MapReduce 原理类似，都是把大的计算任务拆分成多个小任务并行计算。  应用场景 计算1~10的和，每组计算3个，" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-68388.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="ForkJoin详解及应用" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/0ff169fe90109cef4ae06a1ca13b0b41.webp" />
+        <meta property="og:release_date" content="2025-03-06T11:02:28" />
+    <meta property="og:updated_time" content="2025-03-06T11:02:28" />
+        <meta property="og:description" content="ForkJoin是由JDK1.7后提供多线并发处理框架。主要用于并行计算中，和 MapReduce 原理类似，都是把大的计算任务拆分成多个小任务并行计算。  应用场景 计算1~10的和，每组计算3个，" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ForkJoin详解及应用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">ForkJoin详解及应用</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <p>ForkJoin是由JDK1.7后提供多线并发处理框架。主要用于并行计算中，和 MapReduce 原理类似，都是把大的计算任务拆分成多个小任务并行计算。</p> <div class="mermaid"></div> <h2><a id="_12" rel="nofollow"></a>应用场景</h2> <p>计算1~10的和，每组计算3个，代码如下：</p> <pre><code>public class ForkJoinExample extends RecursiveTask&lt;Integer&gt; {      private final int threshold = 3;     private int first;     private int last;      public ForkJoinExample(int first, int last) {         this.first = first;         this.last = last;     }      @Override     protected Integer compute() {         int result = 0;         if (last - first &lt;= threshold) {             // 任务足够小则直接计算             for (int i = first; i &lt;= last; i++) {                 result += i;             }             System.out.println(Thread.currentThread().getName() + "：∑(" + first + "," + last + ") = " + result);         } else {             // 拆分成小任务             int middle = first + (last - first) / 2;             ForkJoinExample leftTask = new ForkJoinExample(first, middle);             ForkJoinExample rightTask = new ForkJoinExample(middle + 1, last);             leftTask.fork();             rightTask.fork();             result = leftTask.join() + rightTask.join();             System.out.println(Thread.currentThread().getName() + "："                     + "∑(" + first + "," + last + ") = "                     + "∑(" + first + "," + middle + ") + "                     + "∑(" + (middle + 1) + "," + last + ") = "                     + result);         }         return result;     }      public static void main(String[] args) throws ExecutionException, InterruptedException {         ForkJoinExample example = new ForkJoinExample(1, 10);         ForkJoinPool forkJoinPool = new ForkJoinPool();         Future result = forkJoinPool.submit(example);         System.out.println("result = " + result.get());     } }</code></pre> <pre><code>ForkJoinPool-1-worker-2：∑(1,3) = 6 ForkJoinPool-1-worker-1：∑(4,5) = 9 ForkJoinPool-1-worker-2：∑(1,5) = ∑(1,3) + ∑(4,5) = 15 ForkJoinPool-1-worker-2：∑(9,10) = 19 ForkJoinPool-1-worker-3：∑(6,8) = 21 ForkJoinPool-1-worker-3：∑(6,10) = ∑(6,8) + ∑(9,10) = 40 ForkJoinPool-1-worker-1：∑(1,10) = ∑(1,5) + ∑(6,10) = 55 result = 55</code></pre> <p>ForkJoin 使用 ForkJoinPool 来启动，它是一个特殊的线程池，线程数量取决于 CPU 核数。</p> <p>ForkJoinPool 实现了工作窃取算法来提高 CPU 的利用率。每个线程都维护了一个双端队列，用来存储需要执行的任务。工作窃取算法允许空闲的线程从其它线程的双端队列中窃取一个任务来执行。窃取的任务必须是最晚的任务，避免和队列所属线程发生竞争。</p> </h1> <blockquote> <p>ForkJoinTask是RecursiveAction与RecursiveTask的父类， ForkJoinTask中使用了模板模式进行设计<br /> ,将ForkJoinTask的执行相关的代码进行隐藏，通过提供抽象类暴露用户的实际业务处理。</p> </blockquote> <h2><a id="RecursiveTask_78" rel="nofollow"></a>RecursiveTask</h2> <p>通过源码的查看我们可以发现RecursiveTask在进行exec之后会使用一个result的变量进行接受返回的结果。而result返回结果类型是通过泛型进行传入。也就是说RecursiveTask执行后是有返回结果。</p> <h2><a id="RecursiveAction_80" rel="nofollow"></a>RecursiveAction</h2> <p>RecursiveAction在exec后是不会保存返回结果，因此RecursiveAction与RecursiveTask区别在与RecursiveTask是有返回结果而RecursiveAction是没有返回结果。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67792.htm">开宠物店多少钱（开宠物店一年能赚多少）</a></p>
+                                        <p>下一个：<a href="/news/article-68389.htm">灵感乍现！造了个与众不同的Dubbo注册中心扩展轮子</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-47498.htm" title="小型狗粮加工设备价格表图片（小型狗粮生产设备）">小型狗粮加工设备价格表图片（小型狗粮生产设备）</a></li>
+                        <li class="py-2"><a href="/news/article-64025.htm" title="宠物零售批发（宠物批发店）">宠物零售批发（宠物批发店）</a></li>
+                        <li class="py-2"><a href="/news/article-66505.htm" title="关于天津宠物领养中心官网电话号码的信息">关于天津宠物领养中心官网电话号码的信息</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-free-ssr-subscribe.htm" title="3月2日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度22.2M/S">3月2日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度22.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-21-node-share-links.htm" title="1月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S">1月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-6-clash-node.htm" title="2月6日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.6M/S">2月6日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-61631.htm" title="猫为什么要打了疫苗才可以洗澡（猫为什么打了疫苗才能洗澡）">猫为什么要打了疫苗才可以洗澡（猫为什么打了疫苗才能洗澡）</a></li>
+                        <li class="py-2"><a href="/news/article-51583.htm" title="同安宠物领养中心地址电话多少（同安宠物领养中心地址电话多少号）">同安宠物领养中心地址电话多少（同安宠物领养中心地址电话多少号）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-14-clash-node-daily-updates.htm" title="1月14日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.1M/S">1月14日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-52116.htm" title="宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元">宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">24</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
