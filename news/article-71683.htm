@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-71683.htm" />
+    <meta charset="utf-8">
+    <title>C语言实现随机抽签</title>
+        <meta name="description" content="C语言随机抽签程序 //BME1班抽签器// #include&lt;stdio.h&gt; #include&lt;stdlib.h&gt; #include&lt;time.h&gt; #defi" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-71683.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="C语言实现随机抽签" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/c0484c1fe00cff356f960f77eff827d6.webp" />
+        <meta property="og:release_date" content="2025-03-11T07:47:53" />
+    <meta property="og:updated_time" content="2025-03-11T07:47:53" />
+        <meta property="og:description" content="C语言随机抽签程序 //BME1班抽签器// #include&lt;stdio.h&gt; #include&lt;stdlib.h&gt; #include&lt;time.h&gt; #defi" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="C语言实现随机抽签">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">C语言实现随机抽签</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <p>C语言随机抽签程序<br /> //BME1班抽签器//</p> <pre><code class="prism language-c"><span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdio.h&gt;</span></span> <span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;stdlib.h&gt;</span></span> <span class="token macro property">#<span class="token directive keyword">include</span><span class="token string">&lt;time.h&gt;</span></span> <span class="token macro property">#<span class="token directive keyword">define</span> CLASSMATE_NUM 62</span>  <span class="token keyword">char</span> <span class="token operator">*</span>name<span class="token punctuation">[</span>CLASSMATE_NUM<span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">{<!-- --></span> <span class="token string">"白天"</span><span class="token punctuation">,</span> <span class="token string">"邱创辰"</span><span class="token punctuation">,</span> <span class="token string">"罗杨林"</span><span class="token punctuation">,</span> <span class="token string">"蔡慕天"</span><span class="token punctuation">,</span> <span class="token string">"杨爽"</span><span class="token punctuation">,</span> <span class="token string">"陈章武"</span><span class="token punctuation">,</span> <span class="token string">"陈卓"</span><span class="token punctuation">,</span> <span class="token string">"邓贵锋"</span><span class="token punctuation">,</span> <span class="token string">"黄河翔"</span><span class="token punctuation">,</span> <span class="token string">"黄俊泓"</span><span class="token punctuation">,</span> <span class="token string">"蒋佳辰"</span><span class="token punctuation">,</span> <span class="token string">"蓝荣熙"</span><span class="token punctuation">,</span> <span class="token string">"林天予"</span><span class="token punctuation">,</span> <span class="token string">"刘庆彬"</span><span class="token punctuation">,</span> <span class="token string">"刘岩"</span><span class="token punctuation">,</span> <span class="token string">"卢冠霖"</span><span class="token punctuation">,</span> <span class="token string">"魏坚锐"</span><span class="token punctuation">,</span> <span class="token string">"温钦正"</span><span class="token punctuation">,</span> <span class="token string">"巫烨力"</span><span class="token punctuation">,</span> <span class="token string">"伍浩然"</span><span class="token punctuation">,</span> <span class="token string">"周胤宏"</span><span class="token punctuation">,</span> <span class="token string">"庄承一"</span><span class="token punctuation">,</span> <span class="token string">"艾熠恒"</span><span class="token punctuation">,</span> <span class="token string">"胡文智"</span><span class="token punctuation">,</span> <span class="token string">"花正荣"</span><span class="token punctuation">,</span>  <span class="token string">"金家臣"</span><span class="token punctuation">,</span> <span class="token string">"李煦徽"</span><span class="token punctuation">,</span> <span class="token string">"潘昊宇"</span><span class="token punctuation">,</span> <span class="token string">"王云彪"</span><span class="token punctuation">,</span> <span class="token string">"谭晓鹏"</span><span class="token punctuation">,</span> <span class="token string">"汪远洋"</span><span class="token punctuation">,</span> <span class="token string">"游若飞"</span><span class="token punctuation">,</span> <span class="token string">"余辉阳"</span><span class="token punctuation">,</span> <span class="token string">"张彬彬"</span><span class="token punctuation">,</span> <span class="token string">"张鹏程"</span><span class="token punctuation">,</span> <span class="token string">"蔡致宁"</span><span class="token punctuation">,</span> <span class="token string">"陈丽盈"</span><span class="token punctuation">,</span> <span class="token string">"陈敏"</span><span class="token punctuation">,</span> <span class="token string">"陈燕华"</span><span class="token punctuation">,</span> <span class="token string">"纪嘉蒞"</span><span class="token punctuation">,</span> <span class="token string">"邓静雯"</span><span class="token punctuation">,</span> <span class="token string">"陈亿彤"</span><span class="token punctuation">,</span> <span class="token string">"韩楚欣"</span><span class="token punctuation">,</span> <span class="token string">"庞昕"</span><span class="token punctuation">,</span> <span class="token string">"阮柔"</span><span class="token punctuation">,</span> <span class="token string">"申信"</span><span class="token punctuation">,</span> <span class="token string">"石颖"</span><span class="token punctuation">,</span> <span class="token string">"袁雨柔"</span><span class="token punctuation">,</span> <span class="token string">"张碧昀"</span><span class="token punctuation">,</span> <span class="token string">"张嘉轩"</span><span class="token punctuation">,</span> <span class="token string">"张靖宜"</span><span class="token punctuation">,</span> <span class="token string">"程金玉"</span><span class="token punctuation">,</span> <span class="token string">"龚晨曦"</span><span class="token punctuation">,</span> <span class="token string">"张怡馨"</span><span class="token punctuation">,</span> <span class="token string">"孟楠欣"</span><span class="token punctuation">,</span> <span class="token string">"欧阳嫣然"</span><span class="token punctuation">,</span> <span class="token string">"林梦露"</span><span class="token punctuation">,</span> <span class="token string">"彭佳瑾"</span><span class="token punctuation">,</span> <span class="token string">"杨思思"</span><span class="token punctuation">,</span> <span class="token string">"李加林"</span><span class="token punctuation">,</span> <span class="token string">"姚佳妹"</span><span class="token punctuation">,</span> <span class="token string">"姚怡然"</span><span class="token punctuation">}</span> <span class="token punctuation">;</span> <span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span> 	<span class="token keyword">int</span> numbers_now<span class="token punctuation">,</span>numbers_needed<span class="token punctuation">,</span>id<span class="token punctuation">,</span>i<span class="token punctuation">,</span>count<span class="token punctuation">;</span>     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"****************************\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"BME1班大家庭专属班级活动抽签器\n\n\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 	<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"请输入本次抽签需要抽出的人数:\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>numbers_needed<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token keyword">if</span><span class="token punctuation">(</span>numbers_needed<span class="token operator">&gt;</span>CLASSMATE_NUM<span class="token punctuation">)</span>     <span class="token punctuation">{<!-- --></span>     	<span class="token function">puts</span><span class="token punctuation">(</span><span class="token string">"Not so many classmates!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     	<span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 	<span class="token punctuation">}</span>     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"本次抽签结果为:\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\t人数\t班级排号\t姓名\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token keyword">int</span> list<span class="token punctuation">[</span>numbers_needed<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>     list<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>     <span class="token keyword">for</span><span class="token punctuation">(</span>numbers_now<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>numbers_now<span class="token operator">&lt;=</span>numbers_needed<span class="token punctuation">;</span><span class="token punctuation">)</span>     <span class="token punctuation">{<!-- --></span>     	<span class="token function">srand</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token function">time</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 	    id<span class="token operator">=</span><span class="token function">rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">%</span>CLASSMATE_NUM<span class="token punctuation">;</span>         <span class="token keyword">if</span><span class="token punctuation">(</span>id<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span>         <span class="token punctuation">{<!-- --></span>         	<span class="token keyword">for</span><span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>count<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>numbers_now<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span>         	<span class="token punctuation">{<!-- --></span>         		<span class="token keyword">if</span><span class="token punctuation">(</span>id<span class="token operator">!=</span>list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>         			count<span class="token operator">++</span><span class="token punctuation">;</span> 			<span class="token punctuation">}</span> 			<span class="token keyword">if</span><span class="token punctuation">(</span>count<span class="token operator">==</span>numbers_now<span class="token punctuation">)</span> 			<span class="token punctuation">{<!-- --></span> 				list<span class="token punctuation">[</span>numbers_now<span class="token punctuation">]</span><span class="token operator">=</span>id<span class="token punctuation">;</span> 				<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\t%d\t%d\t\t%s\n\n"</span><span class="token punctuation">,</span>numbers_now<span class="token punctuation">,</span>id<span class="token punctuation">,</span>name<span class="token punctuation">[</span>id<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 				numbers_now<span class="token operator">++</span><span class="token punctuation">;</span> 			<span class="token punctuation">}</span> 		<span class="token punctuation">}</span>     <span class="token punctuation">}</span>     <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"抽签结束,恭喜以上同学参加活动!!!\n\n\n\n"</span><span class="token punctuation">)</span> <span class="token punctuation">;</span>      <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span>  </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-71682.htm">Python：多个tiff转csv，并按照像元合并成一个csv</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-64635.htm" title="mysql 时间戳定义_mysql之TIMESTAMP（时间戳）用法详解">mysql 时间戳定义_mysql之TIMESTAMP（时间戳）用法详解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-8-clash-node-daily-updates.htm" title="2月8日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.6M/S">2月8日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度20.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-67141.htm" title="狗粮批发哪里便宜又好卖（狗粮批发市场）">狗粮批发哪里便宜又好卖（狗粮批发市场）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-7-node-share-links.htm" title="3月7日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度18.1M/S">3月7日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度18.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-42049.htm" title="动物疫苗分几类（动物疫苗分几类类别）">动物疫苗分几类（动物疫苗分几类类别）</a></li>
+                        <li class="py-2"><a href="/news/article-40067.htm" title="动物医院下载app 动物医院下载无限金币">动物医院下载app 动物医院下载无限金币</a></li>
+                        <li class="py-2"><a href="/news/article-47981.htm" title="C#实现DataTable转TXT、CSV文件_C#教程_">C#实现DataTable转TXT、CSV文件_C#教程_</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-14-free-node-subscribe-links.htm" title="2月14日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.1M/S">2月14日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-57587.htm" title="动物疫苗的保存温度是多少摄氏度（动物疫苗的保管注意事项）">动物疫苗的保存温度是多少摄氏度（动物疫苗的保管注意事项）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-19-clash-node.htm" title="1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S">1月19日 | 最新Clash/Shadowrocket/V2ray/SSR高速免费节点，最高速度19.5M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
