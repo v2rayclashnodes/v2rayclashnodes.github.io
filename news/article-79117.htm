@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-79117.htm" />
+    <meta charset="utf-8">
+    <title>面试题目:手写一个LRU算法实现</title>
+        <meta name="description" content="一、常见的内存淘汰算法    FIFO&nbsp; 先进先出   在这种淘汰算法中，先进⼊缓存的会先被淘汰   命中率很低     LRU        Least recently used，最近最" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-79117.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="面试题目:手写一个LRU算法实现" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/ef4972e5506a9de512d13d70b9798cd8.webp" />
+        <meta property="og:release_date" content="2025-03-22T08:49:11" />
+    <meta property="og:updated_time" content="2025-03-22T08:49:11" />
+        <meta property="og:description" content="一、常见的内存淘汰算法    FIFO&nbsp; 先进先出   在这种淘汰算法中，先进⼊缓存的会先被淘汰   命中率很低     LRU        Least recently used，最近最" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="面试题目:手写一个LRU算法实现">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">面试题目:手写一个LRU算法实现</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<h3>一、常见的内存淘汰算法</h3> <div> <ul> <li> <p>FIFO&nbsp; 先进先出</p> <ul> <li> <p>在这种淘汰算法中，先进⼊缓存的会先被淘汰</p> </li> <li> <p>命中率很低</p> </li> </ul> </li> <li> <p>LRU</p> </li> </ul> <div> <ul> <li style="list-style-type: none"> <ul> <li> <p>Least recently used，最近最少使⽤get</p> </li> </ul> </li> </ul> <div> <ul> <li style="list-style-type: none"> <ul> <li> <p>根据数据的历史访问记录来进⾏淘汰数据，其核⼼思想是“如果数据最近被访问过，那么将来被访问的⼏率也更⾼”</p> </li> </ul> </li> </ul> <ul> <li style="list-style-type: none"> <ul> <li> <p>LRU算法原理剖析</p> </li> </ul> </li> </ul> </div> </div> <div> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/64e6aa49e4b949ab7d8137cbc62de7c6.jpg" alt="面试题目:手写一个LRU算法实现"></p> <ul> <li> <p>LFU</p> <ul> <li>Least Frequently Used</li> <li> <div> <p>算法根据数据的历史访问频率来淘汰数据，其核⼼思想是“如果数据过去被访问多次，那么将来被访问的频率也更⾼”</p> </div> </li> </ul> </li> </ul> <ul> <li style="list-style-type: none"> <ul> <li> <p>LFU算法原理剖析</p> </li> </ul> </li> </ul> <ul> <li style="list-style-type: none"> <ul> <li style="list-style-type: none"> <ul> <li> <p>新加⼊数据插⼊到队列尾部（因为引⽤计数为1）</p> </li> </ul> </li> </ul> </li> </ul> <div> <ul> <li style="list-style-type: none"> <ul> <li style="list-style-type: none"> <ul> <li class="_mce_tagged_br"> <p>队列中的数据被访问后，引⽤计数增加，队列重新排序；</p> </li> <li class="_mce_tagged_br"> <p>当需要淘汰数据时，将已经排序的列表最后的数据块删除。</p> </li> </ul> </li> </ul> </li> </ul> </div> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/cf39945b3bd6c52d6d3bd30ba465d795.jpg" alt="面试题目:手写一个LRU算法实现"></p> <div> <ul> <li>LFU的缺点</li> <ul> <li>复杂度</li> <li>存储成本</li> <li>尾部容易被淘汰</li> </ul> </ul> </div> <h3>二、手写LRU算法实现</h3> <p>利用了LinkedHashMap双向链表插入可排序</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 0, 1)">@Slf4j</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">class</span> LRUCache&lt;K, V&gt;<span style="color: rgba(0, 0, 255, 1)">extends</span> LinkedHashMap&lt;K, V&gt;<span style="color: rgba(0, 0, 0, 1)"> {</span><span style="color: rgba(0, 0, 255, 1)">private</span><span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> cacheSize;</span><span style="color: rgba(0, 0, 255, 1)">public</span> LRUCache(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> cacheSize) {</span><span style="color: rgba(0, 0, 255, 1)">super</span>(16, 0.75f,<span style="color: rgba(0, 0, 255, 1)">true</span><span style="color: rgba(0, 0, 0, 1)">);</span><span style="color: rgba(0, 0, 255, 1)">this</span>.cacheSize =<span style="color: rgba(0, 0, 0, 1)"> cacheSize;     }      @Override</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">synchronized</span><span style="color: rgba(0, 0, 0, 1)"> V get(Object key) {</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">.get(key);     }      @Override</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">synchronized</span><span style="color: rgba(0, 0, 0, 1)"> V put(K key, V value) {</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">.put(key, value);     }      @Override</span><span style="color: rgba(0, 0, 255, 1)">protected</span><span style="color: rgba(0, 0, 255, 1)">boolean</span> removeEldestEntry(Map.Entry&lt;K, V&gt;<span style="color: rgba(0, 0, 0, 1)"> eldest) {</span><span style="color: rgba(0, 0, 255, 1)">boolean</span> f = size() &gt;<span style="color: rgba(0, 0, 0, 1)"> cacheSize;</span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (f) {             log.info(</span>"LRUCache清除第三方密钥缓存Key:[{}]"<span style="color: rgba(0, 0, 0, 1)">, eldest.getKey());         }</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 0, 1)"> f;     }</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">static</span><span style="color: rgba(0, 0, 255, 1)">void</span><span style="color: rgba(0, 0, 0, 1)"> main(String[] args) {         LRUCache</span>&lt;String, Object&gt; cache =<span style="color: rgba(0, 0, 255, 1)">new</span> LRUCache&lt;&gt;(5<span style="color: rgba(0, 0, 0, 1)">);         cache.put(</span>"A","A"<span style="color: rgba(0, 0, 0, 1)">);         cache.put(</span>"B","B"<span style="color: rgba(0, 0, 0, 1)">);         cache.put(</span>"C","C"<span style="color: rgba(0, 0, 0, 1)">);         cache.put(</span>"D","D"<span style="color: rgba(0, 0, 0, 1)">);         cache.put(</span>"E","E"<span style="color: rgba(0, 0, 0, 1)">);         System.out.println(</span>"初始化:" +<span style="color: rgba(0, 0, 0, 1)"> cache.keySet());         System.out.println(</span>"访问值:" + cache.get("C"<span style="color: rgba(0, 0, 0, 1)">));         System.out.println(</span>"访问C后:" +<span style="color: rgba(0, 0, 0, 1)"> cache.keySet());         System.out.println(</span>"PUT F后:" + cache.put("F","F"<span style="color: rgba(0, 0, 0, 1)">));         System.out.println(cache.keySet());     }  }</span></pre> </div> <p>main函数执行效果：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/ff4d87a52766005a295eb888e9a8ad9a.jpg" alt="面试题目:手写一个LRU算法实现"></p> <h3>三、注意事项</h3> <p>LinkedHashMap有五个构造函数</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/be4cb82a55d3442838cc75db355ced3c.jpg" alt="面试题目:手写一个LRU算法实现"></p> <div class="cnblogs_code"><img decoding="async" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="面试题目:手写一个LRU算法实现" id="code_img_closed_e57bb9e0-b7ee-46ae-97fe-789d845e4581" class="code_img_closed"/><img decoding="async" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="面试题目:手写一个LRU算法实现" id="code_img_opened_e57bb9e0-b7ee-46ae-97fe-789d845e4581" class="code_img_opened" style="display: none"/></p> <div id="cnblogs_code_open_e57bb9e0-b7ee-46ae-97fe-789d845e4581" class="cnblogs_code_hide"> <pre><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">使用父类中的构造，初始化容量和加载因子，该初始化容量是指数组大小。</span><span style="color: rgba(0, 0, 255, 1)">public</span> LinkedHashMap(<span style="color: rgba(0, 0, 255, 1)">int</span> initialCapacity,<span style="color: rgba(0, 0, 255, 1)">float</span><span style="color: rgba(0, 0, 0, 1)"> loadFactor) {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">(initialCapacity, loadFactor);         accessOrder</span>=<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;     }</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">一个参数的构造</span><span style="color: rgba(0, 0, 255, 1)">public</span> LinkedHashMap(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> initialCapacity) {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">(initialCapacity);         accessOrder</span>=<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;     }</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">无参构造</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 0, 1)"> LinkedHashMap() {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">();         accessOrder</span>=<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;     }</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">这个不用多说，用来接受map类型的值转换为LinkedHashMap</span><span style="color: rgba(0, 0, 255, 1)">public</span> LinkedHashMap(Map&lt;?<span style="color: rgba(0, 0, 255, 1)">extends</span> K, ?<span style="color: rgba(0, 0, 255, 1)">extends</span> V&gt;<span style="color: rgba(0, 0, 0, 1)"> m) {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">(m);         accessOrder</span>=<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">;     }</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">真正有点特殊的就是这个，多了一个参数accessOrder。存储顺序，LinkedHashMap关键的参数之一就在这个，</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">true：指定迭代的顺序是按照访问顺序(近期访问最少到近期访问最多的元素)来迭代的。 false：指定迭代的顺序是按照插入顺序迭代，也就是通过插入元素的顺序来迭代所有元素</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">如果你想指定访问顺序，那么就只能使用该构造方法，其他三个构造方法默认使用插入顺序。</span><span style="color: rgba(0, 0, 255, 1)">public</span> LinkedHashMap(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> initialCapacity,</span><span style="color: rgba(0, 0, 255, 1)">float</span><span style="color: rgba(0, 0, 0, 1)"> loadFactor,</span><span style="color: rgba(0, 0, 255, 1)">boolean</span><span style="color: rgba(0, 0, 0, 1)"> accessOrder) {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">(initialCapacity, loadFactor);</span><span style="color: rgba(0, 0, 255, 1)">this</span>.accessOrder =<span style="color: rgba(0, 0, 0, 1)"> accessOrder;     }</span></pre> </div> <p><span class="cnblogs_code_collapse">View Code</span></div> <p>　　参数accessOrder。存储顺序，LinkedHashMap关键的参数之一就在这个， true：指定迭代的顺序是按照访问顺序(近期访问最少到近期访问最多的元素)来迭代的。 false：指定迭代的顺序是按照插入顺序迭代，也就是通过插入元素的顺序来迭代所有元素。</p> <p>　　如果你想指定访问顺序，那么就只能使用该构造方法，其他三个构造方法默认使用插入顺序。</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">public</span> LinkedHashMap(<span style="color: rgba(0, 0, 255, 1)">int</span><span style="color: rgba(0, 0, 0, 1)"> initialCapacity,</span><span style="color: rgba(0, 0, 255, 1)">float</span><span style="color: rgba(0, 0, 0, 1)"> loadFactor,</span><span style="color: rgba(0, 0, 255, 1)">boolean</span><span style="color: rgba(0, 0, 0, 1)"> accessOrder) {</span><span style="color: rgba(0, 0, 255, 1)">super</span><span style="color: rgba(0, 0, 0, 1)">(initialCapacity, loadFactor);</span><span style="color: rgba(0, 0, 255, 1)">this</span>.accessOrder =<span style="color: rgba(0, 0, 0, 1)"> accessOrder;     }</span></pre> </div> <p>LinkedHashMap是非线程安全的，需要加互斥锁解决并发问题。</p> <h3>四、思考</h3> <p>　　需要根据应用场景确定cacheSize大小，如果实际缓存数量过小，会导致缓存中的数据长期得不到刷新，为防止这种或偶发情况的发生，可配合定时任务如起一个newSingleThreadScheduledExecutor，将上面存储的value修改封装为一个对象，里面增加一个时间戳储存，每次访问实时更新，定时扫描该队列将最近30分钟未访问的key删除；还需增加一个初始进入队列的历史时间记录，将超过1小时的数据清除。</p> </div> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-78433.htm">广州宠物领养网站有哪些（广州宠物领养网站有哪些平台）</a></p>
+                                        <p>下一个：<a href="/news/article-79118.htm">新手做电商卖什么产品好（新手做电商选择哪类产品）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-69061.htm" title="2021公务员国考报考时间和考试时间是多少（2022年公务员国考考试报名时间）">2021公务员国考报考时间和考试时间是多少（2022年公务员国考考试报名时间）</a></li>
+                        <li class="py-2"><a href="/news/article-47497.htm" title="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程">SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程</a></li>
+                        <li class="py-2"><a href="/news/article-65266.htm" title="被猫抓伤出一丝丝血要***吗（被猫抓伤出一丝丝血要***吗,猫打了一针疫苗）">被猫抓伤出一丝丝血要***吗（被猫抓伤出一丝丝血要***吗,猫打了一针疫苗）</a></li>
+                        <li class="py-2"><a href="/news/article-50529.htm" title="lambda表达式里的anyMatch函数">lambda表达式里的anyMatch函数</a></li>
+                        <li class="py-2"><a href="/news/article-79800.htm" title="js数组删除的方法">js数组删除的方法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-21-free-node-subscribe.htm" title="2月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.3M/S">2月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度20.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-node-share-links.htm" title="2月25日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度20.7M/S">2月25日 | 最新Shadowrocket/Clash/V2ray/SSR高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/news/article-41557.htm" title="如何将CONCAT_WS()函数与MySQL WHERE子句一起使用？">如何将CONCAT_WS()函数与MySQL WHERE子句一起使用？</a></li>
+                        <li class="py-2"><a href="/news/article-56465.htm" title="专业养鱼咨询网（养鱼专家咨询）">专业养鱼咨询网（养鱼专家咨询）</a></li>
+                        <li class="py-2"><a href="/news/article-53722.htm" title="MySQL 事务和锁_在线工具">MySQL 事务和锁_在线工具</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

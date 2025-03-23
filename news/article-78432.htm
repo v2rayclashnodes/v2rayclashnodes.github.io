@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-78432.htm" />
+    <meta charset="utf-8">
+    <title>spring boot2 (28)-cache缓存</title>
+        <meta name="description" content="数据库的数据是存储在硬盘上的，频繁访问性能较低。而缓存数据存储在内存中，访问性能比硬盘快了一个数量级。如果将一些需要频繁查询的热数据放到缓存中，可以大大减轻数据库的访问压力。  &lt;depende" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-78432.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="spring boot2 (28)-cache缓存" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/524708abf40352a4b74618199843757f.webp" />
+        <meta property="og:release_date" content="2025-03-21T10:31:15" />
+    <meta property="og:updated_time" content="2025-03-21T10:31:15" />
+        <meta property="og:description" content="数据库的数据是存储在硬盘上的，频繁访问性能较低。而缓存数据存储在内存中，访问性能比硬盘快了一个数量级。如果将一些需要频繁查询的热数据放到缓存中，可以大大减轻数据库的访问压力。  &lt;depende" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="spring boot2 (28)-cache缓存">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">spring boot2 (28)-cache缓存</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p><span style="font-family:'Microsoft YaHei';"><span style="font-size:14px;">数据库的数据是存储在硬盘上的，频繁访问性能较低。而缓存数据存储在内存中，访问性能比硬盘快了一个数量级。如果将一些需要频繁查询的热数据放到缓存中，可以大大减轻数据库的访问压力。</span></span></p> </h1> <pre><code class="language-html">&lt;dependency&gt;     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;     &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt; &lt;/dependency&gt;</code></pre> </h1> <p><span style="font-family:'Microsoft YaHei';"><span style="font-size:14px;">在配置类中添加以下注解</span></span></p> <pre><code class="language-java">@EnableCaching</code></pre> </h1> <p>出于方便，这里直接在控制层做缓存。</p> <pre><code class="language-java">	@GetMapping("/find") 	@Cacheable(cacheNames = "hello")  	public String find() { 		System.out.println("从数据库查询数据，并用return返回"); 		return "该数据会被缓存"; 	}</code></pre> <ul> <li>@Cacheable：指在执行find方法前，首先查找该方法是否有缓存，如果有则直接返回缓存，如果没有则执行方法。</li> <li>cacheNames：指定缓存的名称，不同缓存的数据是彼此隔离的。 </li> </ul> </h1> <p>上面cacheNames指定了缓存名称，但是每个方法由于传参不同，其return数据也会不同，所以一个方法中可能会有多个缓存。要在同一个cacheNames中区别不同的缓存，就需要使用key。修改前两行代码，给find方法传入了一个User，这是我自定义的类，其中有一个id参数。同时指定了key为"#user.id"，这是SpEL表达示，指使用user的id作为当前缓存的key。关于SpEL更多 语法可自行百度。</p> <pre><code class="language-java">@GetMapping("/find")	 @Cacheable(cacheNames = "hello",key = "#user.id")  public String find(User user) {<!-- --></code></pre> <ul> <li>现在访问http://localhost:8080/find?id=1，此时id参数会传入user，最终该缓存的key为1。</li> <li>然后访问http://localhost:8080/find?id=2，此缓存的key为2，与上面的1不一样，所以它们不是同一个缓存。</li> </ul> </h1> <pre><code class="language-java">	@GetMapping("/update") 	@CachePut(cacheNames = "hello", key = "#id")  	public String update(String id) { 		System.out.println("读取修改后的数据"); 		return "修改后的缓存数据"; 	}</code></pre> <ul> <li>@CachePut：无论是否存在缓存，它都会执行，而且用return数据刷新缓存。 </li> <li>cacheNames：指定要修改的key所属的cacheNames。 </li> <li>key：这里方法参数就是id，所以可以直接用#id。</li> </ul> <p>访问http://localhost:8080/update?id=1，此时key为1的缓存将被修改。之后再访问http://localhost:8080/find?id=1，都会得到修改后的数据，find方法中原有的数据被替换了。</p> </h1> <p>访问http://localhost:8080/delete?id=1，即可删除key为1的缓存，和上面一样的原理。</p> <pre><code class="language-java">	@GetMapping("/delete") 	@CacheEvict(cacheNames = "hello", key = "#id")  	public String delete(String id) { 		return "删除成功"; 	}</code></pre> </h1> <p>如果只想将id为1的查询写入缓存，而其他数据不需要缓存。可以添加condition缓存条件，如下。这里id参数是个字符串型，所以加了单引号，否则1就是整数，条件不成立。</p> <pre><code class="language-java">@Cacheable(cacheNames = "hello",key="#user.id",condition ="#user.id=='1'" ) </code></pre> <p>此时，只有访问http://localhost:8080/find?id=1才会使用缓存，如果id为其他值将不使用缓存。</p> </h1> <p>condition是在调用方法之前判断条件，决定是否缓存。unless是在调用方法之后判断条件，决定是否不缓存。</p> <pre><code class="language-java">	@GetMapping("/find") 	@Cacheable(cacheNames = "hello",unless="#result.id.contains('1')" )  	public User find(String id) { 		System.out.println("从数据库查询数据"); 		User user = new User(); 		user.setId(id); 		return user; 	}</code></pre> <ul> <li>unless：如果SpEL条件成立，则不缓存。 </li> <li>#result.id.contains：result指方法return的数据，id指return的user的id参数，contains指id的值是否包含'1'，如果包含则unless条件成立，不进行缓存。</li> </ul> </h1> <p>spring boot支持多种不同的缓存供应商。在默认情况下使用的是简单缓存，不建议在正式环境使用。我们可以配置一些更加强大的缓存，比如Hibernate的默认缓存EhCache等，而caffeine则是基于java8新出的一个高性能缓存，官方称其接近完美。下面就来介绍在spring boot中集成caffeine。</p> <pre><code class="language-html">		&lt;dependency&gt; 			&lt;groupId&gt;com.github.ben-manes.caffeine&lt;/groupId&gt; 			&lt;artifactId&gt;caffeine&lt;/artifactId&gt; 		&lt;/dependency&gt;</code></pre> </h1> <p><span style="font-size:14px;">在pom.xml中增加以上依赖，spring boot就会自动用caffeine替换默认的简单缓存，用法都是一样的。</span></p> </h1> <pre><code class="language-html">spring.cache.type=caffeine spring.cache.cache-names=hello,world spring.cache.caffeine.spec=maximumSize=1,expireAfterAccess=5s</code></pre> <ul> <li>spring.cache.type：指定使用哪个缓存供应商 </li> <li>spring.cache.cache-names：在启动时创建缓存名称，即前面的cacheNames，多个名称用逗号分隔。</li> <li>spring.cache.caffeine.spec：这是caffeine缓存的专用配置。 </li> <li>maximumSize=1：最大缓存数量，假如有缓存1，再写入缓存2时，就有2个缓存，超出最大数量，缓存1就会被清除。 </li> <li>expireAfterAccess=5s：缓存5秒，即缓存在5秒之内没有被使用，就会被清除。</li> </ul> <p>默认情况下，缓存的数据会一直保存在内存中，有些数据可能用一次后很长时间都不会再用，这样会有大量无用的数据长时间占用内存，通过配置properties可以及时清除不需要的缓存。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77738.htm">狗粮颗粒机最好产品是什么牌子（狗粮颗粒大小有什么区别）</a></p>
+                                        <p>下一个：<a href="/news/article-78433.htm">广州宠物领养网站有哪些（广州宠物领养网站有哪些平台）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-20-free-shadowrocket-node.htm" title="2月20日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.6M/S">2月20日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-36622.htm" title="狗狗领养平台公众号（狗狗领养平台公众号有哪些）">狗狗领养平台公众号（狗狗领养平台公众号有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-52643.htm" title="js开发实例仿京东侧边导航栏&amp;网页轮播图">js开发实例仿京东侧边导航栏&amp;网页轮播图</a></li>
+                        <li class="py-2"><a href="/news/article-47497.htm" title="SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程">SpringCloudRPC远程调用核心原理：Feign远程调用的执行流程</a></li>
+                        <li class="py-2"><a href="/news/article-67140.htm" title="领养协议范本模板图片（领养协议有法律效力吗）">领养协议范本模板图片（领养协议有法律效力吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-node-share-links.htm" title="1月28日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.4M/S">1月28日 | 最新Shadowrocket/SSR/Clash/V2ray高速免费节点，最高速度18.4M/S</a></li>
+                        <li class="py-2"><a href="/news/article-79801.htm" title="合肥宠物领养救助站电话地址（合肥宠物领养合肥宠物赠送）">合肥宠物领养救助站电话地址（合肥宠物领养合肥宠物赠送）</a></li>
+                        <li class="py-2"><a href="/news/article-59281.htm" title="合肥宠物猫免费领养 合肥宠物猫免费领养地址">合肥宠物猫免费领养 合肥宠物猫免费领养地址</a></li>
+                        <li class="py-2"><a href="/news/article-40567.htm" title="芭比堂动物医院营业时间（芭比堂动物医院有限责任公司）">芭比堂动物医院营业时间（芭比堂动物医院有限责任公司）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-30-free-v2ray-subscribe.htm" title="1月30日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.7M/S">1月30日 | 最新Shadowrocket/V2ray/SSR/Clash高速免费节点，最高速度21.7M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">69</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
