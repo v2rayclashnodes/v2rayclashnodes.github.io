@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-81839.htm" />
+    <meta charset="utf-8">
+    <title>HCNP Routing&amp;Switching之端口隔离</title>
+        <meta name="description" content="　　前文我们了解了组播路由协议稀疏模式中的RP相关话题，回顾请参考https://www.cnblogs.com/qiuhom-1874/p/16154347.html；今天我们来聊一聊二层交换机中有" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-81839.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="HCNP Routing&amp;Switching之端口隔离" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/1c3003b3261cd1d9fff42c22ae315819.webp" />
+        <meta property="og:release_date" content="2025-03-26T08:56:55" />
+    <meta property="og:updated_time" content="2025-03-26T08:56:55" />
+        <meta property="og:description" content="　　前文我们了解了组播路由协议稀疏模式中的RP相关话题，回顾请参考https://www.cnblogs.com/qiuhom-1874/p/16154347.html；今天我们来聊一聊二层交换机中有" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="HCNP Routing&amp;Switching之端口隔离">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">HCNP Routing&amp;Switching之端口隔离</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>　　前文我们了解了组播路由协议稀疏模式中的RP相关话题，回顾请参考<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/qiuhom-1874/p/16154347.html"  target="_blank" rel="nofollow">https://www.cnblogs.com/qiuhom-1874/p/16154347.html</a>；今天我们来聊一聊二层交换机中有关vlan隔离相关话题；</p> <p>　　我们知道在二层交换机上划分vlan可以实现将一个广播域划分为多个广播域，从而避免广播域过大而造成的广播风暴；简单讲划分vlan就是隔离广播域；默认情况下在同一广播域的主机，只要有一台pc发送广播，同一广播域中的其他主机也会收到对应广播，这样一来可能造成同一广播域中的主机相互干扰；那有没有一种方法避免同一广播域中的主机互不干扰呢？</p> <p>　　端口隔离</p> <p>　　所谓端口隔离就是指在同一vlan内端口之间的隔离，它是交换机端口之间的一种安全访问控制机制，配置端口隔离后，无论是那个vlan都不能互相通信；</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/9733d16a6f4e6ffad30d3a64f0f084e4.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：如上图所示，pc1和pc2同属于vlan10，在没有配置端口隔离pc1和pc2可以通过交换机 相互通信，即fa0/1和fa0/2可以相互转发数据；配置了端口隔离以后pc1和pc2就不能相互通信了；当然pc1和pc2都可以和gi0/1接口通信；</p> <p>　　双向端口隔离</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/084995dc146c76f5800f201bcc97c73e.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：双向隔离是指在同一隔离组的端口两两相互隔离；报文不能达到通信双方的任何一端；</p> <p>　　单向端口隔离</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/f23f787e1724b00dd393ced8f0fa8f20.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：单向隔离是某一端口到另一些端口的单向隔离；报文只能从某一个方向发送到对端；</p> <p>　　实验：如下图所示，配置双向隔离和单向隔离</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/137918e95b1ef77549dd3f16e99e5219.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　实验环境：在一个交换机上有三台主机，它们同属vlan12，在交换机上配置实现，pc1和pc2双向隔离，pc1到pc3单向隔离</p> <p>　　交换机配置</p> <div class="cnblogs_code"><img decoding="async" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" alt="HCNP Routing&amp;Switching之端口隔离" id="code_img_closed_e25e22ce-a614-43f5-a2d9-96dba8c4032b" class="code_img_closed"/><img decoding="async" src="https://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" alt="HCNP Routing&amp;Switching之端口隔离" id="code_img_opened_e25e22ce-a614-43f5-a2d9-96dba8c4032b" class="code_img_opened" style="display: none"/></p> <div id="cnblogs_code_open_e25e22ce-a614-43f5-a2d9-96dba8c4032b" class="cnblogs_code_hide"> <pre><span style="color: rgba(0, 0, 0, 1)">sys sys sw1 vlan</span><span style="color: rgba(128, 0, 128, 1)">12</span><span style="color: rgba(0, 0, 255, 1)">int</span> g0/<span style="color: rgba(128, 0, 128, 1)">0</span>/<span style="color: rgba(128, 0, 128, 1)">1</span><span style="color: rgba(0, 0, 0, 1)"> port link</span>-<span style="color: rgba(0, 0, 0, 1)">type access port default vlan</span><span style="color: rgba(128, 0, 128, 1)">12</span><span style="color: rgba(0, 0, 255, 1)">int</span> g0/<span style="color: rgba(128, 0, 128, 1)">0</span>/<span style="color: rgba(128, 0, 128, 1)">2</span><span style="color: rgba(0, 0, 0, 1)"> port link</span>-<span style="color: rgba(0, 0, 0, 1)">type access port default vlan</span><span style="color: rgba(128, 0, 128, 1)">12</span><span style="color: rgba(0, 0, 255, 1)">int</span> g0/<span style="color: rgba(128, 0, 128, 1)">0</span>/<span style="color: rgba(128, 0, 128, 1)">3</span><span style="color: rgba(0, 0, 0, 1)"> port link</span>-<span style="color: rgba(0, 0, 0, 1)">type access port default vlan</span><span style="color: rgba(128, 0, 128, 1)">12</span></pre> </div> <p><span class="cnblogs_code_collapse">View Code</span></div> <p>　　验证vlan信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3a0ae6eeb7bf8374daad691a2f7d79e6.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　验证pc1,pc2,pc3是否能够正常通信？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/19271f34ab185611ada95fe55d472101.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到默认情况下在同一vlan下的主机是可以相互通信；并不隔离；</p> <p>　　在交换机上配置pc1和pc2双向端口隔离</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/d168315d728e5c660035abba944e01bf.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：配置双向端口隔离，我们只需把对应需要隔离的端口加入同一隔离组即可；默认不写隔离组就是组1；</p> <p>　　把pc2直连所在端口加入到隔离组</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/68cce08712bd240552d3d0016d272322.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　验证端口隔离信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ce64ac5d088a45ba7eec5b52285953f6.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到现在有一个隔离组group1，里面有两个端口分别是g0/0/1和g0/0/2；</p> <p>　　验证：pc1和pc2是否还能正常通信呢？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4383bc03fca126e1a6c47679a7cc5b21.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到现在pc1和pc2就不能正常通信了；</p> <p>　　在交换机的1口和2口抓包查看其过程</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e179f631d22e4a7cda12a67d34c69ae7.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到做了端口双向隔离以后，在同一vlan下的两台主机就不能正常通信了，其实不能正常通信的最主要原因是通信双方发送的arp对方收不到，所以导致没有通信对方的mac，二层封装就不能完成；</p> <p>　　验证：pc1和pc3是否能正常通信呢？pc2和pc3是否能正常通信呢？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/131f4a9ecc09afd4f8df65b8652edd32.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到pc1和pc3通信，pc2和pc3的通信并不受pc1和pc2所在端口做双向端口隔离的影响；也就是说只有在同一隔离组里的端口通信才会相互隔离；</p> <p>　　在交换机上配置pc1和pc3单向隔离</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8d4aabe48ee712c84ca148943011ea0b.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：上述配置表示pc1所在端口单向隔离pc3,即pc1能将arp发送给pc3，但是pc3回复报文被隔离，pc1收不到pc3的回答；反之pc3发送arp，pc1和pc3做了单向隔离，所以pc3发送的arppc1根本就收不到；</p> <p>　　验证：用pc1pingpc3看看是否能够正常ping通？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/411b3a6f3e253be08507302f925e9bef.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到现在pc1pingpc3提示我们目标主机不可达；其原因是pc1发送的arp广播迟迟没有回复；所以pc1认为pc3不可达；</p> <p>　　在g0/0/1和g0/0/3上抓包，看看通信过程</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/4988dce4d4514d5b87e125189de6e3a5.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> <p>　　提示：可以看到做了单向端口隔离以后，pc1的arp能够正常到达pc3,但是pc3回复的arp被阻断，pc1收不到pc3回复的mac，所以二层封装不能正常完成，所以icmp提示我们目标主机不可达；相反pc3pingpc1，由于之前pc1发送的arp pc3收到了，即pc3拿到了pc1的mac，所以pc3pingpc1的时候是直接封装icmp包发送，并没有先发arp；由于pc1和pc3做了单向端口隔离，所以pc3发送的icmp报文pc1并没有收到，当然也就没有回复报文，所以pc3pingpc1提示超时，并不是目标主机不可达；</p> <p>　　当然端口隔离技术不仅仅限于可管理的二三层交换机上实现，有的傻瓜交换机也有端口隔离，不同的是二三层交换机可以由管理员手动定义端口隔离，而傻瓜交换机的端口隔离是通过一个拨码按钮实现，且不能手动定义端口隔离；如下图所示</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/d468fb659e6a118570682d70271d9cbf.jpg" alt="HCNP Routing&amp;Switching之端口隔离"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-81203.htm">宠物医院医疗许可证（宠物医疗许可证多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-81840.htm">宠物粮食有哪些食物（宠物粮食有哪些食物图片）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-1-6-free-v2ray-subscribe.htm" title="1月6日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度19.5M/S">1月6日 | 最新SSR/V2ray/Shadowrocket/Clash高速免费节点，最高速度19.5M/S</a></li>
+                        <li class="py-2"><a href="/news/article-77053.htm" title="免费领养狗狗正规网站平台有哪些软件（免费领养狗狗的软件叫什么名字）">免费领养狗狗正规网站平台有哪些软件（免费领养狗狗的软件叫什么名字）</a></li>
+                        <li class="py-2"><a href="/news/article-44026.htm" title="动物医院办理条件要求是什么呢（动物医院收费标准）">动物医院办理条件要求是什么呢（动物医院收费标准）</a></li>
+                        <li class="py-2"><a href="/news/article-79800.htm" title="js数组删除的方法">js数组删除的方法</a></li>
+                        <li class="py-2"><a href="/news/article-70361.htm" title="宠物领养网站设计的需求调研怎么写 宠物领养网站设计的需求调研怎么写文案">宠物领养网站设计的需求调研怎么写 宠物领养网站设计的需求调研怎么写文案</a></li>
+                        <li class="py-2"><a href="/news/article-58475.htm" title="Python 垃圾回收机制原理详解">Python 垃圾回收机制原理详解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-12-node-share.htm" title="3月12日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.8M/S">3月12日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度18.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-9-free-shadowrocket-node.htm" title="1月9日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.5M/S">1月9日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-21-node-share-links.htm" title="1月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S">1月21日 | 最新Clash/SSR/Shadowrocket/V2ray高速免费节点，最高速度21M/S</a></li>
+                        <li class="py-2"><a href="/news/article-66505.htm" title="关于天津宠物领养中心官网电话号码的信息">关于天津宠物领养中心官网电话号码的信息</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">78</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
