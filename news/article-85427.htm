@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-85427.htm" />
+    <meta charset="utf-8">
+    <title>SSM框架中实现数据库操作-从零学习SSM框架（3）</title>
+        <meta name="description" content="前言  我的所有博客操作均有相应截图，所以只要跟着做，一定是能跑通的。  本篇讲到了在后台实现数据库的操作，涉及的数据的增删改查，以及一些框架自带函数的初步使用。如果没有配置好SSM框架，那就赏脸看一" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-85427.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="SSM框架中实现数据库操作-从零学习SSM框架（3）" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/9b1bbda239d2da6072d9b4d98b19c73c.webp" />
+        <meta property="og:release_date" content="2025-03-31T08:41:44" />
+    <meta property="og:updated_time" content="2025-03-31T08:41:44" />
+        <meta property="og:description" content="前言  我的所有博客操作均有相应截图，所以只要跟着做，一定是能跑通的。  本篇讲到了在后台实现数据库的操作，涉及的数据的增删改查，以及一些框架自带函数的初步使用。如果没有配置好SSM框架，那就赏脸看一" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SSM框架中实现数据库操作-从零学习SSM框架（3）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">SSM框架中实现数据库操作-从零学习SSM框架（3）</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <h2><a id="_0" rel="nofollow"></a>前言</h2> <ul> <li>我的所有博客操作均有相应截图，所以只要跟着做，一定是能跑通的。</li> </ul> <p>本篇讲到了在后台实现数据库的操作，涉及的数据的增删改查，以及一些框架自带函数的初步使用。如果没有配置好SSM框架，那就赏脸看一下<br /><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/babybabyup/article/details/79687097"  rel="nofollow">https://blog.csdn.net/babybabyup/article/details/79687097</a> 配置篇呗！</p> <h2><a id="_7" rel="nofollow"></a>工具</h2> <ul> <li>本机mysql数据库（database=helloword，table=user）</li> <li>IDEA</li> </ul> <h2><a id="_11" rel="nofollow"></a>具体操作</h2> <h4><a id="_12" rel="nofollow"></a>自动生成数据库函数</h4> <ul> <li>打开IDEA左栏中的<code>Maven project</code>-&gt;<code>helloworld Maven WebAPP</code>-&gt;<code>Plugins</code>-&gt;<code>mybatis-generator</code> 双击出现的<code>mybatieos-generator:generator</code></li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/d1fc0fdd249ab96197771b14908988bd.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"></p> <p>等待其完成后，控制台输出<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/69efb1eb72870a732ef79d18b15f35b9.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"></p> <p>并且生成相应的函数以及实体代码，dao层接口</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/9e841fa3c6e15407bd0a66d3ed2de38c.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"><br /> 在<code>dao</code> 层接口中，<code>mybatis</code> 生成了六个函数接口，分别是</p> <pre><code>int deleteByPrimaryKey(Integer id);  int insert(User record);  int insertSelective(User record);  User selectByPrimaryKey(Integer id);  int updateByPrimaryKeySelective(User record);  int updateByPrimaryKey(User record);</code></pre> <p>解释一下各个函数的意义吧</p> <ul> <li><code>deleteByPrimaryKey(Integer id)</code> :通过主键id在数据库中删除一条数据，成功则返回1，失败则返回0；</li> <li><code>insert(User record)</code> :插入数据，要注意如果数据库中的属性不能为空，那么对象记录record的所有属性一定要全部不为null，否则会插入失败。</li> <li><code>insertSelective(User record)</code> :</li> <li><code>selectByPrimaryKey(Integer id)</code> :通过主键id进行查找，查找到了则返回实体User，也就是一个对象，数据库中没有此条记录，则返回null；</li> <li><code>updateByPrimaryKeySelective(User record)</code>:更新某条 User 记录，但是如果record某些属性为空，则不会用空值去代替已存在的属性，即只是更新record设置的属性。</li> <li><code>updateByPrimaryKey(User record)</code>：不考虑更新的数据如何，将User属性全部更新。</li> </ul> <p>任何函数都可以进行单元测试，挑<code>updateByPrimaryKeySelective(User record)</code>和<code>updateByPrimaryKey(User record)</code> 比较一下吧。<br /> 首先在<code>test</code>数据库<code>user</code>数据库中插入一条数据。如图：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/2ee56317b8661c1a778f57110690edc0.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"><br /> 然后生成这两个函数的测试，具体方法可以参考https://blog.csdn.net/babybabyup/article/details/79687097</p> <pre><code>package com.springmvc.dao;  import com.springmvc.entity.User; import org.junit.After; import org.junit.Before; import org.junit.Test; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.ApplicationContext; import org.springframework.context.support.ClassPathXmlApplicationContext;   public class UserMapperTest {       @Autowired     UserMapper userMapper;     ApplicationContext applicationContext;       @Before     public void setUp() throws Exception {         applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");         userMapper = applicationContext.getBean(UserMapper.class);      }      @After     public void tearDown() throws Exception {     }      @Test     public void updateByPrimaryKeySelective() throws Exception {         User user = new User();         user.setId(1);         user.setName("James");        System.out.println(userMapper.updateByPrimaryKeySelective(user));     }      @Test     public void updateByPrimaryKey() throws Exception {              } }</code></pre> <p>不去设置<code>sex</code>属性则不会将<code>sex</code>更新，运行后的数据库变为<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/dcce7be9ca0c161d13708e1d8c9d5dcc.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"><br /> 那么再看一下，另一个函数到底是什么结果，在测试类新增为：</p> <pre><code>@Test     public void updateByPrimaryKey() throws Exception {         User user = new User();         user.setId(1);         user.setSex("female");         System.out.println(userMapper.updateByPrimaryKey(user));       }</code></pre> <p>不设置<code>name</code>属性，更新后所有的属性都更新了，包括空属性<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/f744e7c2f2a3d5f2a2decb4e2a705ace.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"></p> <h4><a id="_113" rel="nofollow"></a>从前端进行数据库存储</h4> <p>在<code>index.jsp</code>中新建一个<code>form</code>进行数据传输</p> <pre><code>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt; &lt;%@ page contentType="text/html;charset=UTF-8" language="java" %&gt; &lt;html&gt; &lt;head&gt;     &lt;title&gt;Index&lt;/title&gt;     &lt;script src="/js/jquery-3.2.1.min.js"&gt;&lt;/script&gt; &lt;/head&gt; &lt;body&gt; 这个是index页面&lt;br&gt; 新增代码&lt;br&gt; &lt;form action="/test2" method="post"&gt;     &lt;table&gt;         &lt;tr&gt;             &lt;td&gt;                 id:             &lt;/td&gt;             &lt;td&gt;                 &lt;input type="text" name="id" placeholder="id"&gt;             &lt;/td&gt;         &lt;/tr&gt;         &lt;tr&gt;             &lt;td&gt;                 姓名：             &lt;/td&gt;             &lt;td&gt;                 &lt;input type="text" name="name" placeholder="name"&gt;             &lt;/td&gt;         &lt;/tr&gt;         &lt;tr&gt;             &lt;td&gt;                 性别：             &lt;/td&gt;             &lt;td&gt;                 &lt;input type="text" name="sex" placeholder="sex"&gt;             &lt;/td&gt;         &lt;/tr&gt;         &lt;tr&gt;             &lt;td&gt;                 &amp;nbsp;             &lt;/td&gt;             &lt;td&gt;                 &lt;input type="submit" value="提交"&gt;             &lt;/td&gt;         &lt;/tr&gt;     &lt;/table&gt; &lt;/form&gt; &lt;/body&gt; &lt;/html&gt;</code></pre> <p>在<code>IndexController.java</code>中，新添接收代码</p> <pre><code>package com.springmvc.controller;   import com.springmvc.entity.User; import com.springmvc.services.UserServices; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.stereotype.Controller; import org.springframework.ui.Model; import org.springframework.web.bind.annotation.ModelAttribute; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RequestMethod;    @Controller public class IndexController {      @Autowired     private UserServices userServices;     @RequestMapping(value = "/test2", method = RequestMethod.POST)     public String test2(@ModelAttribute User user, Model model) {         userServices.insert(user);         model.addAttribute("end","插入成功");         return "test1";     }  }</code></pre> <p>运行成功后，再次刷新数据库，则已经新添了一行数据<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220817/5525aa1a10bdfa551033396994b9a3a6.jpg" alt="SSM框架中实现数据库操作-从零学习SSM框架（3）"><br /> 这样，基本的操作已经完全OK了，继续后台开发的笔记。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-84728.htm">免费领养狗狗网站正规（免费领养狗狗正规网站平台深圳）</a></p>
+                                        <p>下一个：<a href="/news/article-85428.htm">猫瘟打针（猫瘟打针几天可以停）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-71016.htm" title="什么宠物猫便宜（什么宠物猫价格便宜）">什么宠物猫便宜（什么宠物猫价格便宜）</a></li>
+                        <li class="py-2"><a href="/news/article-75711.htm" title="程序员需要知道的API接口开发常识_在线工具">程序员需要知道的API接口开发常识_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-clash-v2ray-ss-ssr.htm" title="3月29日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.9M/S">3月29日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-69065.htm" title="动物医院设备 动物医院设备清单">动物医院设备 动物医院设备清单</a></li>
+                        <li class="py-2"><a href="/news/article-82588.htm" title="上海24h宠物医院（上海宠物医院24小时急诊上门）">上海24h宠物医院（上海宠物医院24小时急诊上门）</a></li>
+                        <li class="py-2"><a href="/news/article-68388.htm" title="ForkJoin详解及应用">ForkJoin详解及应用</a></li>
+                        <li class="py-2"><a href="/news/article-84727.htm" title="优瑞派山茶油狗粮是天然粮吗（优瑞派狗粮好吗）">优瑞派山茶油狗粮是天然粮吗（优瑞派狗粮好吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-free-shadowrocket-node.htm" title="3月5日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19.1M/S">3月5日 | 最新V2ray/Clash/SSR/Shadowrocket高速免费节点，最高速度19.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-free-node-subscribe.htm" title="3月17日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.7M/S">3月17日 | 最新V2ray/SSR/Shadowrocket/Clash高速免费节点，最高速度19.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-23-free-ssr-subscribe.htm" title="3月23日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.7M/S">3月23日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.7M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

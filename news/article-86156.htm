@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-86156.htm" />
+    <meta charset="utf-8">
+    <title>OpenCV笔记 距离变换</title>
+        <meta name="description" content="距离变换于被广泛应用于图像分析、计算机视觉、模式识别等领域，人们利用它来实现目标细化、骨架提取、形状插值及匹配、粘连物体的分离等。距离变换的图像是二值图像针。二值图像可以做事两个部分组成的前景目标和背" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-86156.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="OpenCV笔记 距离变换" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/b32602a8049b5c46321c3f465535f5d4.webp" />
+        <meta property="og:release_date" content="2025-04-01T09:48:52" />
+    <meta property="og:updated_time" content="2025-04-01T09:48:52" />
+        <meta property="og:description" content="距离变换于被广泛应用于图像分析、计算机视觉、模式识别等领域，人们利用它来实现目标细化、骨架提取、形状插值及匹配、粘连物体的分离等。距离变换的图像是二值图像针。二值图像可以做事两个部分组成的前景目标和背" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="OpenCV笔记 距离变换">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">OpenCV笔记 距离变换</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>距离变换于被广泛应用于图像分析、计算机视觉、模式识别等领域，人们利用它来实现目标细化、骨架提取、形状插值及匹配、粘连物体的分离等。<span style="color:#fe2c24;"><strong>距离变换的图像是二值图像针</strong></span>。二值图像可以做事两个部分组成的前景目标和背景，前景目标的像素值为1，背景的像素值为0；距离变换的结果是一幅灰度级图像，即<strong>距离图像</strong>，图像中<span style="color:#fe2c24;"><strong>每个像素的灰度值为该像素与距其最近的背景像素间的距离。</strong></span><br /> 距离变换算法主要采用两类距离测度：非欧式距离和欧式距离。</p> <p><img fetchpriority="high" decoding="async" alt="" height="278" src="http://img.555519.xyz/uploads3/20220722/b8dbfcc7e8513900f4619b1b0f014239.jpg"></p> <p>1. 欧式距离:其物理意义表示<strong>距离小于等于某一个值得像素中心（x,y）且半径为R的圆平面,r</strong></p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220722/3b68608cea408a420344120c8f0dfb6f.jpg"></p> <p>如上图所示，p1h和p2 ,dist=1.4.14</p> <p>2. 棋盘距离:是指<strong>数字栅格上像素按照对角线方向移动形成的距离</strong>。</p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220722/fbe54f0b6b122b53fb2c61b3ead696a1.jpg"></p> <p>如上图所示，p1h和p2 ,dist=2</p> <p>3. 曼哈顿距离：<strong>从起点到终点所需要的最小步数，只允许横向移动和纵向移动</strong>。</p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads3/20220722/e7658724e34410b317ba92a8b8d0ef01.jpg"></p> <p>如上图所示，p1h和p2 ,dist=1</p> <p><img decoding="async" alt="" height="627" src="http://img.555519.xyz/uploads3/20220722/106f0099a16ff515244db32f5306f420.jpg"></p> <p>&nbsp;例如：如下1表示前景目标，0表示背景，则曼哈顿（城市街区）距离：</p> <p><img decoding="async" alt="" height="491" src="http://img.555519.xyz/uploads3/20220722/aa2ab443fdda1f4b6d253d53dbeee36a.jpg"></p> <h3>&nbsp;算子解释</h3> <pre><code class="language-cpp"> void cv::distanceTransform(   InputArray  src,  // cv_8U的单通道的图像   OutputArray  dst, // 输出图像， cv_8U或者CV_32F   OutputArray  labels,// 二维的标签数组（离散Voronoi图），与输入图像具有相同的尺寸，数据类型为CV_32S的单通道数据   int  distanceType, // 计算距离的方法  DIST_USER   -1 ，表示用户自定义距离                                           CV_DIST_L1,  1， 曼哈顿距离（城市街区距离）  距离的计算是精确的                                           CV_DIST_L2,  2，  欧式距离 计算有某些相对误差 (5×5 mask 给出更精确的结果)                                            CV_DIST_C    3，  棋盘距离  距离的计算是精确的    int  maskSize,// 掩码大小  ：DIST_MASK_3（3×3）和DIST_MASK_5（5×5）   int  labelType = DIST_LABEL_CCOMP  //labelType == DIST_LABEL_CCOMP时，该函数会自动在输入图像中找到0像素的连通分量，并用不同的标签标记它们。当labelType == DIST_LABEL_CCOMP时，该函数扫描输入图像并用不同的标签标记所有0像素。   )</code></pre> <p><img loading="lazy" decoding="async" alt="" height="878" src="http://img.555519.xyz/uploads3/20220722/6897f98f08e91b3a39e50f6d63e37840.jpg"></p> <p><img loading="lazy" decoding="async" alt="" height="891" src="http://img.555519.xyz/uploads3/20220722/d3d3d12644abbb9612a70ce7816e83b3.jpg"><img loading="lazy" decoding="async" alt="" height="460" src="http://img.555519.xyz/uploads3/20220722/88d85f1b29417520ef4a465a1c0fe862.jpg"></p> <h2 id="article-header-4">距离变换算法步骤：</h2> <h3 id="article-header-5">1.将图像进行二值化，<span style="color:#fe2c24;">子图像值为0，背景为255；</span></h3> <h3 id="article-header-6">2.利用Mask 1从左向右，从上到下扫描，p点是当前像素点，q点是Mask 1中AL邻域中的点，D为距离计算，包括棋盘距离、城市距离和欧式距离。Fpp为p点的像素值，计算</h3> <pre><code>F(p) = min( F(p),  F(q)+D(p,q) ), 其中，q属于AL.</code></pre> <h3 id="article-header-7">3.再利用Mask 2从右向左，从下向上扫描</h3> <p>Fpp&nbsp;= minF(pF(p, Fqq+Dp,qp,q&nbsp;), 其中，q属于BR</p> <h3 id="article-header-8">4.Fpp&nbsp;则为距离变换后的图像。</h3> <p>代码详情请看：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://mangoroom.cn/opencv/distance-transfer.html"  title="距离变换 - 芒果的博客 - 芒果的个人博客" rel="nofollow">距离变换 - 芒果的博客 - 芒果的个人博客</a></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-85428.htm">猫瘟打针（猫瘟打针几天可以停）</a></p>
+                                        <p>下一个：<a href="/news/article-86157.htm">.NET桌面程序集成Web网页开发的十种解决方案_在线工具</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-21-free-high-speed-nodes.htm" title="3月21日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.6M/S">3月21日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-77737.htm" title="苏州免费领养狗狗正规网（苏州免费领养狗狗正规网站有哪些）">苏州免费领养狗狗正规网（苏州免费领养狗狗正规网站有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-73676.htm" title="动物医院英语单词 动物医院英语单词怎么写">动物医院英语单词 动物医院英语单词怎么写</a></li>
+                        <li class="py-2"><a href="/news/article-69061.htm" title="2021公务员国考报考时间和考试时间是多少（2022年公务员国考考试报名时间）">2021公务员国考报考时间和考试时间是多少（2022年公务员国考考试报名时间）</a></li>
+                        <li class="py-2"><a href="/news/article-84727.htm" title="优瑞派山茶油狗粮是天然粮吗（优瑞派狗粮好吗）">优瑞派山茶油狗粮是天然粮吗（优瑞派狗粮好吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-23-free-ssr-subscribe.htm" title="3月23日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.7M/S">3月23日 | 最新Shadowrocket/V2ray/Clash/SSR高速免费节点，最高速度22.7M/S</a></li>
+                        <li class="py-2"><a href="/news/article-76390.htm" title="宠物用品一手货源批发（宠物用品批发代理）">宠物用品一手货源批发（宠物用品批发代理）</a></li>
+                        <li class="py-2"><a href="/news/article-75711.htm" title="程序员需要知道的API接口开发常识_在线工具">程序员需要知道的API接口开发常识_在线工具</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-2-free-clash.htm" title="4月2日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.5M/S">4月2日 | 最新V2ray/Shadowrocket/SSR/Clash高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/news/article-68388.htm" title="ForkJoin详解及应用">ForkJoin详解及应用</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
