@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-89014.htm" />
+    <meta charset="utf-8">
+    <title>根据第一个值分割数组-JavaScript</title>
+        <meta name="description" content="假设我们有一个数字数组，像这样- const&nbsp;arr&nbsp;=&nbsp;[[1,&nbsp;45],&nbsp;[1,&nbsp;34],&nbsp;[1,&nbsp;49],&nbs" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-89014.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="根据第一个值分割数组-JavaScript" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/c0484c1fe00cff356f960f77eff827d6.webp" />
+        <meta property="og:release_date" content="2025-04-05T08:19:16" />
+    <meta property="og:updated_time" content="2025-04-05T08:19:16" />
+        <meta property="og:description" content="假设我们有一个数字数组，像这样- const&nbsp;arr&nbsp;=&nbsp;[[1,&nbsp;45],&nbsp;[1,&nbsp;34],&nbsp;[1,&nbsp;49],&nbs" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="根据第一个值分割数组-JavaScript">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">根据第一个值分割数组-JavaScript</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>假设我们有一个数字数组，像这样-</p> <pre>const&nbsp;arr&nbsp;=&nbsp;[[1,&nbsp;45],&nbsp;[1,&nbsp;34],&nbsp;[1,&nbsp;49],&nbsp;[2,&nbsp;34],&nbsp;[4,&nbsp;78],&nbsp;[2,&nbsp;67],&nbsp;[4,&nbsp;65]];</pre> <p>每个子数组必须严格包含两个元素。我们需要编写一个构造新数组的函数，在该函数中，具有相似第一值的子数组的所有第二个元素都被分组在一起。</p> <p>因此，对于上面的数组，输出应类似于-</p> <pre>const&nbsp;output&nbsp;=&nbsp;[ &nbsp;&nbsp;&nbsp;[45,&nbsp;34,&nbsp;49], &nbsp;&nbsp;&nbsp;[34,&nbsp;67], &nbsp;&nbsp;&nbsp;[78,&nbsp;65] ];</pre> <p>我们可以利用Array.prototype.reduce()方法来帮助<code>Map()</code>构建所需的数组。</p> <h2>示例</h2> <p>以下是代码-</p> <pre>const&nbsp;arr&nbsp;=&nbsp;[[1,&nbsp;45],&nbsp;[1,&nbsp;34],&nbsp;[1,&nbsp;49],&nbsp;[2,&nbsp;34],&nbsp;[4,&nbsp;78],&nbsp;[2,&nbsp;67],&nbsp;[4,&nbsp;65]]; const&nbsp;constructSimilarArray&nbsp;=&nbsp;(arr&nbsp;=&nbsp;[])&nbsp;=&gt;&nbsp;{ &nbsp;&nbsp;&nbsp;const&nbsp;creds&nbsp;=&nbsp;arr.reduce((acc,&nbsp;val)&nbsp;=&gt;&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;const&nbsp;{&nbsp;map,&nbsp;res&nbsp;}&nbsp;=&nbsp;acc; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!map.has(val[0])){ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map.set(val[0],&nbsp;res.push([val[1]])&nbsp;-&nbsp;1); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res[map.get(val[0])].push(val[1]); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;{&nbsp;map,&nbsp;res&nbsp;}; &nbsp;&nbsp;&nbsp;},&nbsp;{ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;map:&nbsp;new&nbsp;Map(), &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res:&nbsp;[] &nbsp;&nbsp;&nbsp;}); &nbsp;&nbsp;&nbsp;return&nbsp;creds.res; }; console.log(constructSimilarArray(arr));</pre> <p>输出结果</p> <p>这将在控制台中产生以下输出-</p> <pre>[&nbsp;[&nbsp;45,&nbsp;34,&nbsp;49&nbsp;],&nbsp;[&nbsp;34,&nbsp;67&nbsp;],&nbsp;[&nbsp;78,&nbsp;65&nbsp;]&nbsp;]</pre> <div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-88292.htm">兽医疫苗批号怎么查（兽医疫苗批号怎么查询）</a></p>
+                                        <p>下一个：<a href="/news/article-89015.htm">IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-68389.htm" title="灵感乍现！造了个与众不同的Dubbo注册中心扩展轮子">灵感乍现！造了个与众不同的Dubbo注册中心扩展轮子</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-21-free-high-speed-nodes.htm" title="3月21日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.6M/S">3月21日 | 最新Clash/V2ray/Shadowrocket/SSR高速免费节点，最高速度19.6M/S</a></li>
+                        <li class="py-2"><a href="/news/article-81203.htm" title="宠物医院医疗许可证（宠物医疗许可证多少钱）">宠物医院医疗许可证（宠物医疗许可证多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-87592.htm" title="动物医学职业资格证书（动物医学医师证）">动物医学职业资格证书（动物医学医师证）</a></li>
+                        <li class="py-2"><a href="/news/article-89764.htm" title="办理动物诊疗许可证要多少钱（动物诊疗许可证要钱吗）">办理动物诊疗许可证要多少钱（动物诊疗许可证要钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-78432.htm" title="spring boot2 (28)-cache缓存">spring boot2 (28)-cache缓存</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-18-clash-node-daily-updates.htm" title="3月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20M/S">3月18日 | 最新Clash/Shadowrocket/SSR/V2ray高速免费节点，最高速度20M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-13-free-high-speed-nodes.htm" title="3月13日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度18.9M/S">3月13日 | 最新SSR/Clash/V2ray/Shadowrocket高速免费节点，最高速度18.9M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-28-free-node-subscribe-links.htm" title="3月28日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度21.1M/S">3月28日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/news/article-66504.htm" title="vue 封装图片路径">vue 封装图片路径</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

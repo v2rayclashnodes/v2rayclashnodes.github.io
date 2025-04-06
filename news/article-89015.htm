@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-89015.htm" />
+    <meta charset="utf-8">
+    <title>IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)</title>
+        <meta name="description" content="上一篇:IDEA SpringBoot-Mybatis实现增删改查(CRUD) 下一篇:Intellij IDEA 高效使用教程 (插件,实用技巧) 最好用的idea插件大全 一、前言  Mybati" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-89015.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/c682057526e0278a70a24eba5e932f9d.webp" />
+        <meta property="og:release_date" content="2025-04-05T08:19:16" />
+    <meta property="og:updated_time" content="2025-04-05T08:19:16" />
+        <meta property="og:description" content="上一篇:IDEA SpringBoot-Mybatis实现增删改查(CRUD) 下一篇:Intellij IDEA 高效使用教程 (插件,实用技巧) 最好用的idea插件大全 一、前言  Mybati" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>上一篇:<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/wnrun/article/details/122004122"  target="_blank" rel="nofollow">IDEA SpringBoot-Mybatis实现增删改查(CRUD)</a><br /> 下一篇:<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/wnrun/article/details/123710478"  target="_blank" rel="nofollow">Intellij IDEA 高效使用教程 (插件,实用技巧) 最好用的idea插件大全</a></p> <h2 id="一前言">一、前言</h2> <ul> <li><strong>Mybatis</strong>：数据持久化框架</li> <li><strong>Mybatis-Plus</strong>：对Mybatis进行了增强，它封装了基本的增删改查操作，使我们自己不需要再去写很多重复的代码，大大解放了生产力！</li> </ul> <h2 id="二创建项目">二、创建项目</h2> <ul> <li>新建项目时选择Spring Initializer。</li> <li>也可以选择maven新建,但是不建议新手,因为要自己导入依赖,会给自己搞懵</li> <li>打开IDEA,选择New Project &gt;&gt;&gt;<br /><img decoding="async" src="https://img-blog.csdnimg.cn/ec13696b73ca4436aa89dcc1eebcb22e.png" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"></li> <li>创建项目文件结构、选择jdk版本</li> <li>一般选择Java version8</li> <li>然后下一步 Next<br /><img decoding="async" src="https://img-blog.csdnimg.cn/2433e9c6ca39443792c350291b737b3f.png" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"></li> <li>选择项目需要的依赖</li> <li>首先点击web选择spring web，再点击SQL选择MySQL driver 等，然后再一路Finish到新建完成。<br /><img decoding="async" src="https://img-blog.csdnimg.cn/292a682c63a3498aacd1230015f159df.png" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /> 查看项目 修改pom.xml文件</li> </ul> <pre><code class="language-c">&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;     &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;     &lt;parent&gt;         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;         &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;         &lt;version&gt;2.6.5&lt;/version&gt;         &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;     &lt;/parent&gt;     &lt;groupId&gt;com.hao&lt;/groupId&gt;     &lt;artifactId&gt;demo&lt;/artifactId&gt;     &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;     &lt;name&gt;demo&lt;/name&gt;     &lt;description&gt;demo&lt;/description&gt;     &lt;properties&gt;         &lt;java.version&gt;1.8&lt;/java.version&gt;     &lt;/properties&gt;     &lt;dependencies&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;         &lt;/dependency&gt;         &lt;!--        热部署 可有可无自行选择--&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;         &lt;/dependency&gt;         &lt;!--        @Data 注解 省力的插件 自动生成set get 有参无参--&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;             &lt;artifactId&gt;lombok&lt;/artifactId&gt;         &lt;/dependency&gt;         &lt;!--        mysql--&gt;         &lt;dependency&gt;             &lt;groupId&gt;mysql&lt;/groupId&gt;             &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;         &lt;/dependency&gt;         &lt;!--      mybatis-plus--&gt;         &lt;dependency&gt;             &lt;groupId&gt;com.baomidou&lt;/groupId&gt;             &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;             &lt;version&gt;3.2.0&lt;/version&gt;         &lt;/dependency&gt;         &lt;!--        jdbc连接池--&gt;         &lt;dependency&gt;             &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;             &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;         &lt;/dependency&gt;     &lt;/dependencies&gt;      &lt;build&gt;         &lt;plugins&gt;             &lt;plugin&gt;                 &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;                 &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;             &lt;/plugin&gt;         &lt;/plugins&gt;     &lt;/build&gt;  &lt;/project&gt;</code></pre> <p>创建成功后删除src下面的test目录<br /> 说明：<br /> 中 spring-boot-starter-parent 帮我们做了SpringBoot相关依赖包的版本号管理，所以有些依赖包不需要我们自己去写<br /> 但像 mybatis-plus-boot-starter 它是不属于spring-boot相关的， parent中没有做版本号管理，所以还需要手动写一下。</p> <h2 id="三目录结构">三、目录结构</h2> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/26d460797f327ebd4f6c3ed812887ce0.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"></p> <h2 id="四sql和applicationyml">四、sql和application.yml</h2> <p><strong>4.1 导入sql语句</strong></p> <pre><code class="language-sql">CREATE TABLE `user_info` ( 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户id', 	`username` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '用户名' COLLATE 'utf8mb4_general_ci', 	`password` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '密码' COLLATE 'utf8mb4_general_ci', 	`create_time` DATETIME NOT NULL COMMENT '创建时间', 	PRIMARY KEY (`id`) USING BTREE );</code></pre> <p>说明：创建一个数据库，然后运行上述sql语句，生成用户表，主要就下面四个字段</p> <ul> <li>id 用户id 自增主键</li> <li>username 用户名</li> <li>password 密码</li> <li>create_time 创建时间</li> </ul> <p><strong>4.2 修改application.yml配置文件</strong></p> <p>把文件里的application.properties修改成yml格式 yml更加便于管理,看起来也更舒适</p> <pre><code class="language-python">server:   port: 8887 #端口号可以自定义 spring:   devtools:    #这个就是前面我下的热部署,自行了解     restart:       enabled: true  #开启       additional-paths: src/main/java        exclude: WEB-INF/**   freemarker:     cache: false     datasource:     driver-class-name: com.mysql.cj.jdbc.Driver     username: root #自己的数据库账号     password: 123456  #自己的密码     url: jdbc:mysql:///test?characterEncoding=utf-8&amp;serverTimezone=UTC  #"?"号前面是数据库名称 我的是test   "///"默认为localhost:3306 如果你的不是默认端口自行修改    #配置MP和在控制台打印sql语句 mybatis-plus:   mapper-locations: classpath*:/mapper/**/*.xml   configuration:     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  logging:   level:     com:       hao:         mapper: debug  //这里根据自己的路径添加debug</code></pre> <h2 id="五修改程序的启动入口类demoapplication">五,修改程序的启动入口类DemoApplication</h2> <p>作用是扫描到mapper里面中的类，注意路径要和项目中实际路径一致<br /><strong>@MapperScan(value = "com.对应自己的路径.mapper")</strong></p> <pre><code class="language-python">package com.hao;  import org.mybatis.spring.annotation.MapperScan; import org.springframework.boot.SpringApplication; import org.springframework.boot.autoconfigure.SpringBootApplication; @MapperScan("com.hao.mapper") @SpringBootApplication public class DemoApplication {      public static void main(String[] args) {         SpringApplication.run(DemoApplication.class, args);     }  }</code></pre> <h2 id="六在实体类包中新建userinfojava使之与数据库中的字段一一对应-我的包叫pojo---也可以叫entity">六,在实体类包中新建UserInfo.java，使之与数据库中的字段一一对应 我的包叫pojo   也可以叫entity</h2> <pre><code class="language-bash">package com.hao.pojo;  import com.baomidou.mybatisplus.annotation.IdType; import com.baomidou.mybatisplus.annotation.TableId; import com.baomidou.mybatisplus.annotation.TableName; import lombok.Data;  import java.time.LocalDateTime; //@Data 就是lombok 的注解 自动生成了set get @Data  @TableName(value = "user_info")  //@TableName 对应你的数据库表名 public class UserInfo {     @TableId(value = "id",type = IdType.AUTO)  //@TableId 说明这条数据自增长也是对应数据库自增长的     private Integer id;     private String username;     private String password;     private LocalDateTime createTime; }</code></pre> <p><strong>说明：这里类成员变量和数据库字段对应，Mybatis自动做了驼峰法到下划线的转换<br /> 如：数据库 create_time -&gt; 类变量 createTime</strong></p> <h2 id="七在mapper包中新建userinfomapper接口">七,在mapper包中新建UserInfoMapper接口</h2> <pre><code class="language-bash">package com.hao.mapper;  import com.baomidou.mybatisplus.core.mapper.BaseMapper; import com.hao.pojo.UserInfo;  public interface UserInfoMapper extends BaseMapper&lt;UserInfo&gt; { }</code></pre> <p><strong>说明：BaseMapper 类封装了dao层基本的增删改查操作</strong></p> <h2 id="八在srcmainresourcesmaping文件夹下新建userinfomapper的映射文件userinfomapperxml">八,在src/main/resources/maping文件夹下新建UserInfoMapper的映射文件UserInfoMapper.xml</h2> <pre><code class="language-bash">&lt;?xml version="1.0" encoding="UTF-8" ?&gt; &lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt; &lt;mapper namespace="com.自己的路径.UserInfoMapper"&gt;  &lt;/mapper&gt;</code></pre> <p><strong>说明：这里的namespace和上述的UserInfoMapper路径对应一致</strong></p> <h2 id="九在service里新建-impl和userinfoservice-接口类">九,在service里新建 impl和UserInfoService 接口类</h2> <pre><code class="language-bash">package com.hao.service;  import com.baomidou.mybatisplus.extension.service.IService; import com.hao.pojo.UserInfo;  public interface UserInfoService extends IService&lt;UserInfo&gt; { }</code></pre> <p><strong>说明：这里IService封装了service层基本的增删改查</strong></p> <h2 id="十在service里的impl新建userinfoserviceimpl-类">十,在service里的impl新建UserInfoServiceImpl 类</h2> <pre><code class="language-bash">package com.hao.service.impl;  import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl; import com.hao.mapper.UserInfoMapper; import com.hao.pojo.UserInfo; import com.hao.service.UserInfoService; import org.springframework.stereotype.Service;  @Service public class UserInfoServiceImpl extends ServiceImpl&lt;UserInfoMapper, UserInfo&gt; implements UserInfoService { }</code></pre> <h2 id="十一在controller里新建-userinfocontroller类">十一,在controller里新建 UserInfoController类</h2> <pre><code class="language-bash">package com.hao.controller;  import com.hao.pojo.UserInfo; import com.hao.service.UserInfoService; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.web.bind.annotation.*;  import java.time.LocalDateTime; import java.util.List;  @RestController @RequestMapping("/userInfo") public class UserInfoController {     @Autowired     private UserInfoService userInfoService;      //增加     @PostMapping("/add")     public Boolean add(@RequestBody UserInfo userInfo) {         userInfo.setCreateTime(LocalDateTime.now());         return userInfoService.save(userInfo);     }      //删除     @GetMapping("delete/{id}")     public Boolean delete(@PathVariable Integer id) {         return userInfoService.removeById(id);     }      //修改     @PostMapping("/update")     public Boolean update(@RequestBody UserInfo userInfo) {         return userInfoService.updateById(userInfo);     }      //查询     @GetMapping("/get/{id}")     public UserInfo get(@PathVariable Integer id) {         return userInfoService.getById(id);     }      //查询全部     @GetMapping("/list")     public List&lt;UserInfo&gt; list() {         return userInfoService.list();     }  }</code></pre> <p><strong>说明：增删改查接口，基本上不需要自己写sql，直接调用Mybatis-Plus封装好的接口。</strong> 没啥好讲的</p> <h2 id="十二使用postman进行测试">十二,使用Postman进行测试</h2> <p>到这里就完成了增删改查操作，接下来我们对上面的代码在Postman中进行验证</p> <p>1.新增一条信息</p> <pre><code class="language-bash">http://localhost:8887/userInfo/add</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/233910b75a8c8214e415b2dabaec3b07.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ad82fd6df2bf5c186fc1a08dcbc81b55.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /> 2.通过用户id删除用户</p> <pre><code class="language-bash">http://localhost:8887/userInfo/delete/215</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/02c8f47ec0b6e40748f6b58cd90f1c49.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/89a21a0ef574c1c4327a2cd2679aad28.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /> 3.根据用户id更新用户信息</p> <pre><code class="language-bash">http://localhost:8887/userInfo/update?id=1</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/10526a60864777d34dc7d2d8a6e521a9.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/6937e6f64ec161f2760c58ef120a9bc1.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /><strong>这里要注意要用JSON的方式写参数</strong></p> <p>4.通过用户id获取信息：</p> <pre><code class="language-bash">http://localhost:8887/userInfo/get/1</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/95ebba75bfe1b6740615a9dae81eddfb.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /> 5.打印所有信息</p> <pre><code class="language-bash">http://localhost:8887/userInfo/list</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/75c4d4e4c5bba814314c3174ac25c5e8.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/51ab9cc2a56ba94cc230f6ef5d10a198.jpg" alt="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)"><br /> 三条信息全部打印出来了</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-89014.htm">根据第一个值分割数组-JavaScript</a></p>
+                                        <p>下一个：<a href="/news/article-89764.htm">办理动物诊疗许可证要多少钱（动物诊疗许可证要钱吗）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-67141.htm" title="狗粮批发哪里便宜又好卖（狗粮批发市场）">狗粮批发哪里便宜又好卖（狗粮批发市场）</a></li>
+                        <li class="py-2"><a href="/news/article-89765.htm" title="宠物领养活动名字（宠物领养标语）">宠物领养活动名字（宠物领养标语）</a></li>
+                        <li class="py-2"><a href="/news/article-77052.htm" title="pyecharts绘制桑基图实现节点颜色自定义">pyecharts绘制桑基图实现节点颜色自定义</a></li>
+                        <li class="py-2"><a href="/news/article-76388.htm" title="动物疫苗防疫站上班时间安排最新（动物疫苗防疫站上班时间安排最新规定）">动物疫苗防疫站上班时间安排最新（动物疫苗防疫站上班时间安排最新规定）</a></li>
+                        <li class="py-2"><a href="/news/article-74358.htm" title="动物疫苗批号查询平台（动物疫苗检测标准）">动物疫苗批号查询平台（动物疫苗检测标准）</a></li>
+                        <li class="py-2"><a href="/news/article-71017.htm" title="宠物医院美团好评回复优美语句（给宠物医院的好评怎么写）">宠物医院美团好评回复优美语句（给宠物医院的好评怎么写）</a></li>
+                        <li class="py-2"><a href="/news/article-86156.htm" title="OpenCV笔记 距离变换">OpenCV笔记 距离变换</a></li>
+                        <li class="py-2"><a href="/news/article-80468.htm" title="动物疫苗企业名单公示（国内动物疫苗龙头企业）">动物疫苗企业名单公示（国内动物疫苗龙头企业）</a></li>
+                        <li class="py-2"><a href="/news/article-72357.htm" title="springMvc之拦截器的使用">springMvc之拦截器的使用</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-11-clash-node-daily-updates.htm" title="3月11日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度20.9M/S">3月11日 | 最新Clash/SSR/V2ray/Shadowrocket高速免费节点，最高速度20.9M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
