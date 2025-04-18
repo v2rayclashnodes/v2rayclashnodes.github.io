@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-95742.htm" />
+    <meta charset="utf-8">
+    <title>LocalDate、LocalDateTime、LocalTime方法的基本使用</title>
+        <meta name="description" content="文章目录  前言 Localdate创建方法 获取年月日星期几 进行加减日期 Instant   Instant的创建方法 设置时区偏移量 获取秒数 获取毫秒数   LocalDate,LocalTi" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-95742.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="LocalDate、LocalDateTime、LocalTime方法的基本使用" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/1c3003b3261cd1d9fff42c22ae315819.webp" />
+        <meta property="og:release_date" content="2025-04-14T08:03:21" />
+    <meta property="og:updated_time" content="2025-04-14T08:03:21" />
+        <meta property="og:description" content="文章目录  前言 Localdate创建方法 获取年月日星期几 进行加减日期 Instant   Instant的创建方法 设置时区偏移量 获取秒数 获取毫秒数   LocalDate,LocalTi" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="LocalDate、LocalDateTime、LocalTime方法的基本使用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">LocalDate、LocalDateTime、LocalTime方法的基本使用</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#_1" rel="nofollow">前言</a></li> <li><a href="#Localdate_8" rel="nofollow">Localdate创建方法</a></li> <li><a href="#_15" rel="nofollow">获取年月日星期几</a></li> <li><a href="#_29" rel="nofollow">进行加减日期</a></li> <li><a href="#Instant_56" rel="nofollow">Instant</a></li> <li> <ul> <li><a href="#Instant_58" rel="nofollow">Instant的创建方法</a></li> <li><a href="#_64" rel="nofollow">设置时区偏移量</a></li> <li><a href="#_69" rel="nofollow">获取秒数</a></li> <li><a href="#_73" rel="nofollow">获取毫秒数</a></li> </ul> </li> <li><a href="#LocalDateLocalTimeLocalDateTimeInstant_79" rel="nofollow">LocalDate,LocalTime,LocalDateTime,Instant类进行格式化</a></li> <li><a href="#LocalDate_115" rel="nofollow">LocalDate基本方法总结</a></li> <li><a href="#LocalDate__String__147" rel="nofollow">LocalDate 与 String 之间的转换</a></li> </ul> </div> </h1> <ul> <li>Java中1.8之前有date类和calendar类。其中date类到了1.8大部分的方法被弃用了说明这些方法都有很大的缺陷，而且date类如果不格式化可读性十分差，所以就需要格式化，而格式化使用simpledateformat来进行操作线程不安全。而calendar类是一个共享变量，而且没有做线程不安全，当多个线程同时使用simpledateformat调用format方法时，多个线程会同时调用calendar.setTime方法，而导致的后果时time值一直被修改从而返回的格式化的时间是错误的。而且simpledateformat方法中format和parse方法都是线程不安全的。</li> <li>Java1.8之后出现了localdate，localdatetime，localtime这些类，而这些类使用了final来修饰，使得这些类是不可变的，一旦实例化，值就固定了，有点类似于String类，所以这些类都是线程安全的。<br /> localdate是针对于年月日的，localtime是针对于时分秒，localdatetime是针对于年月日时分秒。</li> </ul> <ol> <li>LocalDate是一个不可变的日期时间对象，表示日期，通常被视为年月日。</li> <li>LocalDate可具有不可预测的结果，应当避免。</li> <li>LocalDate用<mark>equals</mark> 方法进行比较。</li> </ol> </h1> <pre><code class="prism language-java"><span class="token comment">//获取当前日期 年月日(2022-05-31)</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//输入年月日设置时间</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>year<span class="token punctuation">,</span>month<span class="token punctuation">,</span>day<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <pre><code class="prism language-java"><span class="token comment">//获取年份</span><span class="token keyword">int</span> year<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">getYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">int</span> year<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoField</span><span class="token punctuation">.</span>YEAR<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//注意getMonth方法返回的是Month类，可通过getValue方法获得一个long类型的值，然后可以强转为int类型进行使用</span><span class="token class-name">Month</span> month<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//MAY 对象</span><span class="token keyword">int</span> month1<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoField</span><span class="token punctuation">.</span>MONTH_OF_YEAR<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//5</span><span class="token keyword">int</span> day<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">getDayOfMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//31</span><span class="token keyword">int</span> day1<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoField</span><span class="token punctuation">.</span>DAY_OF_MONTH<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//注意getDayOfWeek方法返回的是DayOfWeek类，可通过getValue方法获得一个long类型的值，然后可以强转为int类型进行使用</span><span class="token class-name">DayOfWeek</span> dayOfWeek<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">getDayOfWeek</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//TUESDAY</span><span class="token keyword">int</span> dayOfWeek1<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoField</span><span class="token punctuation">.</span>DAY_OF_WEEK<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//2</span></code></pre> </h1> <pre><code class="prism language-java"><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//增加一年</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">plusYears</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">plus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>YEARS<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//减少一个月</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">minusMonths</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>MONTHS<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//减少一日</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">minusDays</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>DAYS<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通过使用with方法进行修改</span><span class="token comment">//修改年为2020</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">withYear</span><span class="token punctuation">(</span><span class="token number">2020</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//修改为2020</span> localDate<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">ChronoField</span><span class="token punctuation">.</span>YEAR<span class="token punctuation">,</span><span class="token number">2020</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>LocalTime相类似就是把年月日换成时分秒就可以了<br /> 创建LocalDateTime可以使用LocalDateTime.of(locaDate,localTime),LocalDate.atTime(localTime),LocalTime.atDate(localDate)来进行创建<br /> LocalDateTime获取LocalDate和LocalTime的方法如下</p> <pre><code class="prism language-java"><span class="token comment">//获取LocalDate</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span> localDateTime<span class="token punctuation">.</span><span class="token function">toLocalDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获取LocalTime</span><span class="token class-name">LocalTime</span> localTime<span class="token operator">=</span> localDateTime<span class="token punctuation">.</span><span class="token function">toLocalTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p>Instant类是1.8之后新增的，与1.8之前的Date类有点相似</p> <h2><a id="Instant_58" rel="nofollow"></a>Instant的创建方法</h2> <pre><code class="prism language-java"><span class="token class-name">Instant</span> instant<span class="token operator">=</span><span class="token class-name">Instant</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//l为1970年1月1日至所记录时间的的毫秒数</span><span class="token class-name">Instant</span> instant1<span class="token operator">=</span><span class="token class-name">Instant</span><span class="token punctuation">.</span><span class="token function">ofEpochMilli</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <h2><a id="_64" rel="nofollow"></a>设置时区偏移量</h2> <pre><code class="prism language-java"><span class="token comment">// 按时区设置偏移量</span><span class="token class-name">OffsetDateTime</span> offsetDateTime<span class="token operator">=</span> instant<span class="token punctuation">.</span><span class="token function">atOffset</span><span class="token punctuation">(</span><span class="token class-name">ZoneOffset</span><span class="token punctuation">.</span><span class="token function">ofHours</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 设置偏移量为8</span></code></pre> <h2><a id="_69" rel="nofollow"></a>获取秒数</h2> <pre><code class="prism language-java"><span class="token keyword">long</span> currentSecond<span class="token operator">=</span> instant<span class="token punctuation">.</span><span class="token function">getEpochSecond</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <h2><a id="_73" rel="nofollow"></a>获取毫秒数</h2> <p>获取1970年1月1日至所记录时间的的毫秒数，类似于Date类中的getTime方法。</p> <pre><code class="prism language-java"><span class="token comment">//获取毫秒数</span><span class="token keyword">long</span> l<span class="token operator">=</span> instant<span class="token punctuation">.</span><span class="token function">toEpochMilli</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p>对于LocalDate,LocalTime,LocalDateTime,Instant类进行格式化需要使用DateTimeFormatter类</p> <pre><code class="prism language-java"><span class="token comment">//String转换成日期类型</span><span class="token comment">//String类型转换成LocalDate类型</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2019-12-07"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//String类型转换为LocalTime类型</span><span class="token class-name">LocalTime</span> localTime<span class="token operator">=</span><span class="token class-name">LocalTime</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"17:26:00"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//String类型转换为LocalDateTime类型</span><span class="token comment">//按照12小时计算</span><span class="token class-name">DateTimeFormatter</span> formatter<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd hh:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//按照24小时计算</span><span class="token class-name">DateTimeFormatter</span> formatter<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2019-12-07 07:43:53"</span><span class="token punctuation">,</span>formatter<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//日期类型转换成String类型</span><span class="token comment">//localDate转换成String</span><span class="token class-name">LocalDate</span> localDate<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//按照yyyyMMdd样式进行更改</span><span class="token class-name">String</span> format<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span>BASIC_ISO_DATE<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//按照yyyy-MM-dd样式进行更改</span><span class="token class-name">String</span> format<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span>ISO_DATE<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//自定义样式进行更改</span><span class="token class-name">DateTimeFormatter</span> pattern<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy年MM月dd日"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> format<span class="token operator">=</span> localDate<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>pattern<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//LocalTime类型转换为String类型</span><span class="token comment">//按照xx:xx:xx.xx样式进行转换</span><span class="token class-name">LocalTime</span> localTime<span class="token operator">=</span><span class="token class-name">LocalTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> format3<span class="token operator">=</span> localTime<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span>ISO_TIME<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//按照自定义样式进行转换</span><span class="token class-name">DateTimeFormatter</span> formatter<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"hh:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> format4<span class="token operator">=</span> localTime<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>formatter<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//LocalDateTime类型转换为String类型</span><span class="token class-name">LocalDateTime</span> localDateTime<span class="token operator">=</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">DateTimeFormatter</span> formatter2<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd hh:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> format5<span class="token operator">=</span> localDateTime<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>formatter2<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <table> <thead> <tr> <th>方法</th> <th>返回类型</th> <th>介绍说明</th> </tr> </thead> <tbody> <tr> <td>getYear()</td> <td>int</td> <td>该日期的年份</td> </tr> <tr> <td>getMonth()</td> <td>Month</td> <td>该日期月份的对象</td> </tr> <tr> <td>getMonthValue()</td> <td>int</td> <td>该日期的月份</td> </tr> <tr> <td><mark>查询、直接修改年份日期等</mark></td> <td>——-——</td> <td>——————</td> </tr> <tr> <td>getDayOfWeek().getValue()</td> <td>int</td> <td>该日期是当前周的第几天</td> </tr> <tr> <td>getDayOfMonth()</td> <td>int</td> <td>该日期是当前月的第几天</td> </tr> <tr> <td>getDayOfYear()</td> <td>int</td> <td>该日期是当前年的第几天</td> </tr> <tr> <td>withYear(int year)</td> <td>LocalDate</td> <td>修改该日期的年份</td> </tr> <tr> <td>withMonth(int month)</td> <td>LocalDate</td> <td>修改该日期的月份</td> </tr> <tr> <td>withDayOfMonth(int dayOfMonth)</td> <td>LocalDate</td> <td>修改该日期在当月的天数</td> </tr> <tr> <td><mark>判断、比较</mark></td> <td>————</td> <td>——————</td> </tr> <tr> <td>isLeapYear()</td> <td>boolean</td> <td>判断是否是闰年</td> </tr> <tr> <td>lengthOfYear()</td> <td>int</td> <td>获取该年份是365还是366天</td> </tr> <tr> <td>lengthOfMonth()</td> <td>int</td> <td>当前月份有多少天</td> </tr> <tr> <td>compareTo(ChronoLocalDate other)</td> <td>int</td> <td>比较该日期与other日期的大小，返回正数，那么当前对象时间较晚(数字较大)</td> </tr> <tr> <td>isBefore(ChronoLocalDate other)</td> <td>boolean</td> <td>比较该日期是否比other日期早(true为早)</td> </tr> <tr> <td>isAfter(ChronoLocalDate other)</td> <td>boolean</td> <td>比较该日期是否比other日期晚(true为晚)</td> </tr> <tr> <td>isEqual(ChronoLocalDate other)</td> <td>boolean</td> <td>比较两个日期是否相等</td> </tr> <tr> <td><mark>在原有基础上增加年份等</mark></td> <td>————</td> <td>——————</td> </tr> <tr> <td>plusYears(long yearsToAdd)</td> <td>LocalDate</td> <td>当前日期增加指定的年数</td> </tr> <tr> <td>plusMonths(long monthsToAdd)</td> <td>LocalDate</td> <td>当前日期增加指定的月份</td> </tr> <tr> <td>plusWeeks(long weeksToAdd)</td> <td>LocalDate</td> <td>当前日期增加指定的周数</td> </tr> <tr> <td>plusDays(long daysToAdd)</td> <td>LocalDate</td> <td>当前日期增加指定的天数</td> </tr> <tr> <td><mark>在原有基础上减少年份等</mark></td> <td>————</td> <td>——————</td> </tr> <tr> <td>minusYears(long yearsToSubtract)</td> <td>LocalDate</td> <td>当前日期减少指定的年数</td> </tr> <tr> <td>minusMonths(long monthsToSubtract)</td> <td>LocalDate</td> <td>当前日期减少指定的月份</td> </tr> <tr> <td>minusWeeks(long weeksToSubtract)</td> <td>LocalDate</td> <td>当前日期减少指定的周数</td> </tr> <tr> <td>minusDays(long daysToSubtract)</td> <td>LocalDate</td> <td>当前日期减少指定的天数</td> </tr> </tbody> </table> </h1> <pre><code class="prism language-java"><span class="token class-name">LocalDate</span> today<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">DateTimeFormatter</span> fmt<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> dateStr<span class="token operator">=</span> today<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>fmt<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <pre><code class="prism language-java"><span class="token class-name">String</span> str<span class="token operator">=</span><span class="token string">"2019-03-03"</span><span class="token punctuation">;</span><span class="token comment">//指定转换格式</span><span class="token class-name">DateTimeFormatter</span> fmt<span class="token operator">=</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//进行转换</span><span class="token class-name">LocalDate</span> date<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> fmt<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-94949.htm">宠物店驱虫一次90元贵吗（一般宠物店驱虫药卖多少钱一颗?）</a></p>
+                                        <p>下一个：<a href="/news/article-95744.htm">dell固态硬盘启动bios设置方法（dell bios设置固态硬盘启动）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-89765.htm" title="宠物领养活动名字（宠物领养标语）">宠物领养活动名字（宠物领养标语）</a></li>
+                        <li class="py-2"><a href="/news/article-79118.htm" title="新手做电商卖什么产品好（新手做电商选择哪类产品）">新手做电商卖什么产品好（新手做电商选择哪类产品）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-9-clash-v2ray-ss-ssr.htm" title="4月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度19.3M/S">4月9日 | 最新SSR/V2ray/Clash/Shadowrocket高速免费节点，最高速度19.3M/S</a></li>
+                        <li class="py-2"><a href="/news/article-77737.htm" title="苏州免费领养狗狗正规网（苏州免费领养狗狗正规网站有哪些）">苏州免费领养狗狗正规网（苏州免费领养狗狗正规网站有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-82588.htm" title="上海24h宠物医院（上海宠物医院24小时急诊上门）">上海24h宠物医院（上海宠物医院24小时急诊上门）</a></li>
+                        <li class="py-2"><a href="/news/article-96494.htm" title="小动物打疫苗视频大全（小动物打疫苗视频大全图片）">小动物打疫苗视频大全（小动物打疫苗视频大全图片）</a></li>
+                        <li class="py-2"><a href="/news/article-70359.htm" title="Java空指针异常和解决办法">Java空指针异常和解决办法</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-clash-v2ray-ss-ssr.htm" title="3月29日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.9M/S">3月29日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度22.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-85427.htm" title="SSM框架中实现数据库操作-从零学习SSM框架（3）">SSM框架中实现数据库操作-从零学习SSM框架（3）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-clash-windows.htm" title="4月3日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.9M/S">4月3日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.9M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>

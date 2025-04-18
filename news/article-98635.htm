@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-98635.htm" />
+    <meta charset="utf-8">
+    <title>Java-NIO之Channel（通道）</title>
+        <meta name="description" content="通道表示与实体的开放连接，例如硬件设备、文件、网络套接字或能够执行一个或多个不同 I/O 操作（例如读取或写入）的程序组件。 1.1：Channel与Stream的对比     Stream Chan" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-98635.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="Java-NIO之Channel（通道）" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/c0484c1fe00cff356f960f77eff827d6.webp" />
+        <meta property="og:release_date" content="2025-04-18T09:40:12" />
+    <meta property="og:updated_time" content="2025-04-18T09:40:12" />
+        <meta property="og:description" content="通道表示与实体的开放连接，例如硬件设备、文件、网络套接字或能够执行一个或多个不同 I/O 操作（例如读取或写入）的程序组件。 1.1：Channel与Stream的对比     Stream Chan" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java-NIO之Channel（通道）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">Java-NIO之Channel（通道）</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				</h1> <p><u>通道表示与实体的开放连接，例如硬件设备、文件、网络套接字或能够执行一个或多个不同 I/O 操作（例如读取或写入）的程序组件。</u></p> <h2 id="11channel与stream的对比">1.1：Channel与Stream的对比</h2> <table> <thead> <tr> <th></th> <th>Stream</th> <th>Channel</th> <th>为什么</th> </tr> </thead> <tbody> <tr> <td>是否支持异步</td> <td>否</td> <td>是</td> <td></td> </tr> <tr> <td>是否同时支持输入和输出</td> <td>否</td> <td>是</td> <td>Stream的输入、输出分别需要InputStream、OutputStream</td> </tr> <tr> <td>是否必须结合Buffer使用</td> <td>否</td> <td>是</td> <td>缓冲区是通道内部发送数据和接收数据的端点</td> </tr> <tr> <td>性能</td> <td>低</td> <td>高</td> <td>通道是访问IO服务的导管，通过通道，我们可以以最小的开销来访问操作系统的I/O服务</td> </tr> </tbody> </table> <h2 id="12channel的类型">1.2：Channel的类型</h2> <p><strong><font color="red" size="4">文件类：</font></strong></p> <ul> <li>FileChannel</li> </ul> <p>可通过 FileInputStream/FileOutputStream 的getChannel方法获取通道。</p> <hr/> <p><strong><font color="red" size="4">网络类：</font></strong></p> <p><strong>面向流模式的socket协议：</strong></p> <ul> <li>SocketChannel</li> <li>ServerSocketChannel</li> </ul> <p>可通过 Socket/SocketServer 的getChannel方法获取通道。</p> <p><strong>面向数据报模式的UDP协议：</strong></p> <ul> <li>DatagramChannel</li> </ul> <p>可通过 DatagramSocket 的getChannel方法获取通道。</p> <h2 id="13操作系统io演变史">1.3：操作系统IO演变史</h2> <p>早一代IO操作是由CPU负责IO接口：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/709216e05416ab5d8f7757f64703682f.jpg" alt="Java-NIO之Channel（通道）"></p> <p>新一代DMA授权处理IO接口：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/cdc6a964fb58ed59fe4d64a2253e6f28.jpg" alt="Java-NIO之Channel（通道）"></p> <p>通道（Channel）模式：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/1d882d127cb1a6e6278aa8503d5419c0.jpg" alt="Java-NIO之Channel（通道）"></p> <p>通道的产生是由于操作系统的升级而支持的。</p> </h1> <p><u>在操作系统中对IO设备的控制方式一共有四种，按时间线依次是<strong><font color="red">轮询、中断、DMA、和通道</font></strong> 方式。</u></p> <ul> <li>轮旋</li> </ul> <p>轮询就是进行IO时操作系统一直问控制器数据准备好了没有。</p> <ul> <li>中断</li> </ul> <p>中断就是异步的方式进行了，CPU向设备控制器发送一条IO指令后接着返回继续做原来的工作，而当设备控制器从设备中取出数据放到控制器的寄存器中后便向CPU发送中断信号，CPU在检查完数据后便向控制器发送取走数据的信号，将数据写入内存，但仍是以字节为单位的。</p> <ul> <li>DMA</li> </ul> <p>DMA则是CPU和设备控制器之间的引入的一层加快速度的手段，由DMA代替CPU进行数据传送，CPU将指令发送给DMA，DMA向控制器发送请求，设备控制器将数据从缓冲区将数据直接写入内存。完成后设备控制器发送一个信号给DMA，DMA重复检查数据是否传送完成，确认完成后中断让CPU知道。</p> <p>DMA比起中断方式已经显著减少了CPU的干预，但是CPU每发出一条IO指令，只能去读写一个连续的数据块，当要读多个数据块并存放到不同的内存区域中去，CPU需要发送多条IO指令及进行多次中断。</p> <ul> <li>通道</li> </ul> <p>IO通道方式是DMA方式的发展，把对一个数据块的干预减少为对一组数据块的干预。</p> <hr/> <p><font color="red" size="5">IO通道有三种：</font></p> <ul> <li>字节多路通道(Byte Multiplexor Channel)</li> <li>选择通道(Block Selector Channel)</li> <li>数组多路通道(Block Multiplexor Channel)</li> </ul> <blockquote> <blockquote> <p>根据通道的工作方式分类，通道可以分为<u><font color="red" size="4">字节多路通道、选择通道、数组多路通道</font></u>。<br /><u><font color="red" size="4">字节多路通道</font>是一种简单的共享通道，主要用于连接大量的低速设备。</u><br /> 由于外围设备的工作速度较慢，通道在传送两个字节之间有很多空闲的时间，利用这段空闲时间字节多路通道可以为其他外围设备服务。因此字节多路通道采用分时工作方式，依赖它与CPU之间的高速总线分时为多台外围设备服务。<br /><u><font color="red" size="4">数据选择通道</font>用于连接高速的外围设备。</u><br /> 高速外围设备需要很高的数据传输率，因此不能采用字节多路通道那样的控制方式。选择通道在物理上可以连接多台外围设备，但多台设备不能同事工作。也就是在同一段时间内，选择通道只能为一台外围设备服务，在不同的时间内可以选择不同的外围设备。一旦选中某一设备，通道就进入<font color="red">忙</font>状态，知道该设备数据传输工作结束，才能为其他设备服务。<br /><u><font color="red" size="4">数组多路通道</font>是字节多路通道和选择通道的结合。</u><br /> 其基本思想是：当某设备进行数据传输时，通道只为该设备服务；当设备在进行寻址等控制性操作时，通道暂时断开与设备的连接，挂起该设备的通道程序，去为其他设备服务，即执行其他设备的通道程序。有数数组多路通道既保持了选择通道的告诉传输数据的有点，又充分利用了控制性操作偶读时间间隔为其他设备服务，使得通道效率充分得到发挥，因此数据多路通道在实际计算机系统中应用最多，适合于高速设备的数据传输。</p> <p>（以上引用内容来源于<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://easylearn.baidu.com/edu-page/tiangong/questiondetail?id=1722687790698845246&amp;source=tikushiti&amp;source_id=856013ef7d1cfad6195f312b3169a4517723e5f3"  title="百度教育" target="_blank" rel="nofollow">百度教育</a>）</p> </blockquote> </blockquote> <p>至于JAVA的Channel和操作系统的的通道是如何选择通道类型、如何交互的就没法深入了，暂且理解JAVA的Channel是对操作系统的通道的一种抽象实现吧。</p> </h1> <p>上一篇已经介绍过Channel的文件内存映射（map）,就不做介绍了。</p> <p><u>所谓的分散读取、聚集写入就是用多个buffer来接收数据、传输数据。</u><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/09b93d7d0088949ea4094fb6c1b2549e.jpg" alt="Java-NIO之Channel（通道）"></p> <p><font color="red" size="4">分散读取、聚集写入</font>代码示例：</p> <pre><code class="language-java">    @Test     public void gatherWrite() {         FileInputStream inputStream = null;         FileOutputStream outputStream = null;         FileChannel inChannel = null;         FileChannel outChannel = null;         try {             File file = new File("src/test/java/com/loper/mine/SQLParserTest.java");             inputStream = new FileInputStream(file);             inChannel = inputStream.getChannel();              ByteBuffer buffer1 = ByteBuffer.allocate(8);             ByteBuffer buffer2 = ByteBuffer.allocate(15);             ByteBuffer[] buffers = new ByteBuffer[]{buffer1, buffer2};              // 分散读取             inChannel.read(buffers);             for (ByteBuffer buffer : buffers) {                 buffer.flip();                 System.out.println(buffer.mark());             }              File outFile = new File("src/test/java/com/loper/mine/1.txt");             outputStream = new FileOutputStream(outFile);             outChannel = outputStream.getChannel();             // 聚集写入             outChannel.write(buffers);          } catch (Exception e) {             e.printStackTrace();         } finally {             try {                 if (inputStream != null)                     inputStream.close();                 if (outputStream != null)                     outputStream.close();                 if (inChannel != null)                     inChannel.close();                 if (outChannel != null)                     outChannel.close();             } catch (IOException e) {                 e.printStackTrace();             }         }     }</code></pre> </h1> <h2 id="41socket协议">4.1：socket协议</h2> <p>这部分代码比较复杂，可以翻看我的github代码，这里就不坐介绍了。<br /> 地址：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/zgq7/devloper-mine/tree/master/src/main/java/com/loper/mine/core/socket/nio"  target="_blank" rel="nofollow">https://github.com/zgq7/devloper-mine/tree/master/src/main/java/com/loper/mine/core/socket/nio</a></p> <h2 id="42udp协议">4.2：UDP协议</h2> <p>UDP发送数据：</p> <pre><code class="language-java">    @Test     public void send() {         DatagramChannel channel = null;         try {             channel = DatagramChannel.open();             // 设置为非阻塞             channel.configureBlocking(false);              ByteBuffer buffer = ByteBuffer.allocate(1024);             Scanner scanner = new Scanner(System.in);             while (true) {                 String nextLine = scanner.nextLine();                 buffer.put(nextLine.getBytes());                 buffer.flip();                 channel.send(buffer, new InetSocketAddress("127.0.0.1", 8056));                 buffer.clear();                 if ("over".equals(nextLine))                     break;             }         } catch (IOException e) {             e.printStackTrace();         } finally {             if (channel != null) {                 try {                     channel.close();                 } catch (IOException e) {                     e.printStackTrace();                 }             }         }     }</code></pre> <p>UDP接收数据：</p> <pre><code class="language-java">    @Test     public void receive() {         DatagramChannel channel = null;         try {             channel = DatagramChannel.open();             // 设置为非阻塞             channel.configureBlocking(false);             channel.bind(new InetSocketAddress(8056));              Selector selector = Selector.open();             channel.register(selector, SelectionKey.OP_READ);              while (true) {                 int select = selector.select();                 boolean exit = false;                  Iterator&lt;SelectionKey&gt; iterator = selector.selectedKeys().iterator();                 while (iterator.hasNext()) {                     SelectionKey selectionKey = iterator.next();                      if (selectionKey.isReadable()) {                         ByteBuffer buffer = ByteBuffer.allocate(1024);                         channel.receive(buffer);                         buffer.flip();                         byte[] data = new byte[buffer.limit()];                         buffer.get(data);                         String str = new String(data);                         System.out.println("收到：" + str);                         if ("over".equals(str))                             exit = true;                     }                     iterator.remove();                 }                 if (exit)                     break;             }          } catch (IOException e) {             e.printStackTrace();         } finally {             if (channel != null) {                 try {                     channel.close();                 } catch (IOException e) {                     e.printStackTrace();                 }             }         }     }</code></pre> <p>接收端接收数据并退出：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/7e3e359cb07833f1dfa865145330b3b8.jpg" alt="Java-NIO之Channel（通道）"></p> <hr/> <p><u><font color="red">以上即为本文理论知识+代码实战全部内容。如有错误欢迎指正。</font></u></p> <p>本文参考文章：</p> <ul> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/yy3b2007com/p/7263033.html"  title="通道(Channel)的原理与获取" target="_blank" rel="nofollow">通道(Channel)的原理与获取</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://cloud.tencent.com/developer/article/1739347"  title="10分钟看懂 Java NIO 底层原理" target="_blank" rel="nofollow">10分钟看懂 Java NIO 底层原理</a></li> <li><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/cool_flag/article/details/99618101"  title="java nio中channel和操作系统的关系" target="_blank" rel="nofollow">java nio中channel和操作系统的关系</a></li> </ul> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-98634.htm">vue动态加载静态资源</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-83991.htm" title="电视机上有哪些接口(电视机上有哪些接口类型)">电视机上有哪些接口(电视机上有哪些接口类型)</a></li>
+                        <li class="py-2"><a href="/news/article-88292.htm" title="兽医疫苗批号怎么查（兽医疫苗批号怎么查询）">兽医疫苗批号怎么查（兽医疫苗批号怎么查询）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-13-shadowrocket-node.htm" title="4月13日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度21M/S">4月13日 | 最新V2ray/Shadowrocket/Clash/SSR高速免费节点，最高速度21M/S</a></li>
+                        <li class="py-2"><a href="/news/article-67140.htm" title="领养协议范本模板图片（领养协议有法律效力吗）">领养协议范本模板图片（领养协议有法律效力吗）</a></li>
+                        <li class="py-2"><a href="/news/article-77052.htm" title="pyecharts绘制桑基图实现节点颜色自定义">pyecharts绘制桑基图实现节点颜色自定义</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-16-free-v2ray.htm" title="3月16日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.9M/S">3月16日 | 最新Shadowrocket/SSR/V2ray/Clash高速免费节点，最高速度19.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-81203.htm" title="宠物医院医疗许可证（宠物医疗许可证多少钱）">宠物医院医疗许可证（宠物医疗许可证多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-86157.htm" title=".NET桌面程序集成Web网页开发的十种解决方案_在线工具">.NET桌面程序集成Web网页开发的十种解决方案_在线工具</a></li>
+                        <li class="py-2"><a href="/news/article-74358.htm" title="动物疫苗批号查询平台（动物疫苗检测标准）">动物疫苗批号查询平台（动物疫苗检测标准）</a></li>
+                        <li class="py-2"><a href="/news/article-73003.htm" title="动物疫苗间隔多久打一次好 动物疫苗间隔多久打一次好呢">动物疫苗间隔多久打一次好 动物疫苗间隔多久打一次好呢</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">54</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
