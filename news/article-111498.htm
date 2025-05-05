@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://v2rayclashnodes.github.io/news/article-111498.htm" />
+    <meta charset="utf-8">
+    <title>spring cloud gateway和nacos整合</title>
+        <meta name="description" content="期望结果：  通过输入http://127.0.0.1:8080/first,跳到哔哩哔哩主页。然后通过修改nacos的配置中心里面gateway的配置，使得再次输入地址，跳到百度主页 整合nacos" />
+        <link rel="icon" href="/assets/website/img/v2rayclashnodes/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="V2rayClashNodes节点订阅站">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://v2rayclashnodes.github.io/news/article-111498.htm" />
+    <meta property="og:site_name" content="V2rayClashNodes节点订阅站" />
+    <meta property="og:title" content="spring cloud gateway和nacos整合" />
+    <meta property="og:image" content="https://v2rayclashnodes.github.io/uploads/20240602/1c3003b3261cd1d9fff42c22ae315819.webp" />
+        <meta property="og:release_date" content="2025-05-04T09:28:37" />
+    <meta property="og:updated_time" content="2025-05-04T09:28:37" />
+        <meta property="og:description" content="期望结果：  通过输入http://127.0.0.1:8080/first,跳到哔哩哔哩主页。然后通过修改nacos的配置中心里面gateway的配置，使得再次输入地址，跳到百度主页 整合nacos" />
+        
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="spring cloud gateway和nacos整合">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Libraries Stylesheet -->
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/bootstrap.min.css" rel="stylesheet">
+    <!-- Template Stylesheet -->
+    <link href="/assets/website/css/v2rayclashnodes/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCLWNSSS7Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LCLWNSSS7Y');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+                        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="/" class="navbar-brand p-0">
+                                        <span>V2ray Clash Nodes</span>
+                                    </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                                                <a href="/" class="nav-item nav-link">首页</a>
+                                                <a href="/free-nodes/" class="nav-item nav-link">免费节点</a>
+                                                <a href="/paid-subscribe/" class="nav-item nav-link">推荐机场</a>
+                                                <a href="/client.htm" class="nav-item nav-link">客户端</a>
+                                                <a href="/news/" class="nav-item nav-link">新闻资讯</a>
+                                            </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="container text-center">
+                    <h1 class="text-white animated zoomIn mb-3">spring cloud gateway和nacos整合</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/">首页</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="/news/">新闻资讯</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">正文</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl">
+            <div class="container">
+                <div class="row" id="list">
+                    <div class="col-md-9">
+                                        <input type="hidden" id="share-website-info" data-name="" data-url="">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      				  				  				<div id="content_views" class="htmledit_views"> </h1> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">期望结果：</span></span></p> <ol style="margin-left:0;"> <li>通过输入http://127.0.0.1:8080/first,跳到哔哩哔哩主页。然后通过修改nacos的配置中心里面gateway的配置，使得再次输入地址，跳到百度主页</li> <li>整合nacos和spring cloud gateway。使得spring cloud gateway能读取到naco的服务注册信息，通过这些服务注册信息进行分发。</li> </ol> <h2 id="spring-cloud-gateway配置" style="margin-left:0;text-align:left;"><strong><span style="color:#000000;"><span style="background-color:#ffffff;">spring cloud gateway配置</span></span></strong></h2> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>yml依赖：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-xml"><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependencies</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.cloud<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.boot<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-boot-starter-validation<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.cloud<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">version</span>&gt;</span>0.9.0.RELEASE<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">version</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.cloud<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">version</span>&gt;</span>0.9.0.RELEASE<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">version</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependencies</span>&gt;</span></code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>注意</strong>：Hoxton.SR4这个版本是需要添加spring-boot-starter-validation的，不然会报错的。其他版本不清楚会不会</span></span></p> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>bootstrap.yml配置：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-yml"><span style="color:#ff0000;">spring:</span><span style="color:#ff0000;">application:</span><span style="color:#ff0000;">name:</span><span style="color:#a31515;">gateway-nacos</span><span style="color:#ff0000;">cloud:</span><span style="color:#ff0000;">nacos:</span><span style="color:#ff0000;">discovery:</span><span style="color:#ff0000;">server-addr:</span> 127.0.0.1<span style="color:#a31515;">:8848</span><span style="color:#ff0000;">enabled:</span><span style="color:#a31515;">true</span><span style="color:#ff0000;">config:</span><span style="color:#ff0000;">file-extension:</span><span style="color:#a31515;">yaml</span><span style="color:#ff0000;">server-addr:</span> 127.0.0.1<span style="color:#a31515;">:8848</span><span style="color:#ff0000;">server:</span><span style="color:#ff0000;">port:</span> 8080</code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>java代码实现：</strong></span></span></p> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>启动类：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-java"><span style="color:#2b91af;">@SpringBootApplication</span><span style="color:#2b91af;">@EnableDiscoveryClient</span><span style="color:#008000;">//开启服务注册</span><span style="color:#0000ff;">public</span><span style="color:#0000ff;">class</span><span style="color:#a31515;">NacosGatewayApp</span> {<span style="color:#0000ff;">public</span><span style="color:#0000ff;">static</span><span style="color:#0000ff;">void</span><span style="color:#a31515;">main</span>(String[] args) {         SpringApplication.run(NacosGatewayApp.class,args);     } }</code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>nacos动态路由实现类：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-java"><span style="color:#008000;">/**  *<span style="color:#808080;">@Author</span>: gyc  *<span style="color:#808080;">@Date</span>: 2020/12/4 16:18  */</span><span style="color:#2b91af;">@Component</span><span style="color:#0000ff;">public</span><span style="color:#0000ff;">class</span><span style="color:#a31515;">NacosRouteDefinitionRepository</span><span style="color:#0000ff;">implements</span><span style="color:#a31515;">RouteDefinitionRepository</span> ,<span style="color:#a31515;">ApplicationContextAware</span> {<span style="color:#2b91af;">@Autowired</span><span style="color:#0000ff;">private</span> NacosConfigProperties nacosConfigProperties;<span style="color:#0000ff;">private</span> String dataId =<span style="color:#a31515;">"gatewayId"</span>;<span style="color:#0000ff;">private</span> String groupId =<span style="color:#a31515;">"gatewayGroup"</span>;<span style="color:#0000ff;">public</span> Flux&lt;RouteDefinition&gt;<span style="color:#a31515;">getRouteDefinitions</span>() {         List&lt;RouteDefinition&gt; list =<span style="color:#0000ff;">new</span> ArrayList();<span style="color:#0000ff;">try</span> {<span style="color:#008000;">//获取组名是gatewayGroup，dataId是gatewayId的配置。5000代表超时时间</span>             String  content = nacosConfigProperties.configServiceInstance().getConfig(dataId,groupId,5000);              List&lt;RouteDefinition&gt; tmpList = JSONObject.parseArray(content, RouteDefinition.class);<span style="color:#0000ff;">if</span>(tmpList !=<span style="color:#0000ff;">null</span>){                 list = tmpList;             }          }<span style="color:#0000ff;">catch</span> (Exception e) {             e.printStackTrace();         }<span style="color:#0000ff;">return</span> Flux.fromIterable(list);     }<span style="color:#0000ff;">public</span> Mono&lt;Void&gt;<span style="color:#a31515;">save</span>(Mono&lt;RouteDefinition&gt; route) {<span style="color:#0000ff;">return</span><span style="color:#0000ff;">null</span>;     }<span style="color:#0000ff;">public</span> Mono&lt;Void&gt;<span style="color:#a31515;">delete</span>(Mono&lt;String&gt; routeId) {<span style="color:#0000ff;">return</span><span style="color:#0000ff;">null</span>;     }<span style="color:#008000;">/**      * 项目启动的时候会触发这个方法。      * 方法实现： 监听节点的变化，如果节点变化就发送RefreshRoutesEvent事件。      * gateway收到RefreshRoutesEvent事件的话，就会触发getRouteDefinitions方法了      *<span style="color:#808080;">@param</span> applicationContext      *<span style="color:#808080;">@throws</span> BeansException      */</span><span style="color:#0000ff;">public</span><span style="color:#0000ff;">void</span><span style="color:#a31515;">setApplicationContext</span>(<span style="color:#0000ff;">final</span> ApplicationContext applicationContext)<span style="color:#0000ff;">throws</span> BeansException {<span style="color:#0000ff;">try</span> {             nacosConfigProperties.configServiceInstance().addListener(dataId, groupId,<span style="color:#0000ff;">new</span> Listener() {<span style="color:#0000ff;">public</span> Executor<span style="color:#a31515;">getExecutor</span>() {<span style="color:#0000ff;">return</span><span style="color:#0000ff;">null</span>;                 }<span style="color:#0000ff;">public</span><span style="color:#0000ff;">void</span><span style="color:#a31515;">receiveConfigInfo</span>(String s) {<span style="color:#008000;">//如果节点变化就发送RefreshRoutesEvent事件。</span>                     applicationContext.publishEvent(<span style="color:#0000ff;">new</span> RefreshRoutesEvent(<span style="color:#0000ff;">this</span>));                 }             });         }<span style="color:#0000ff;">catch</span> (NacosException e) {             e.printStackTrace();         }     } }</code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">整体实现：</span></span></p> <ul style="margin-left:30px;"> <li> <p style="margin-left:auto;">因为<code>NacosRouteDefinitionRepository</code>实现了<code>ApplicationContextAware</code>接口，所以项目启动的时候会触发<code>setApplicationContext</code>方法。</p> </li> <li> <p style="margin-left:auto;">setApplicationContext： 监听节点的变化，如果节点变化就发送RefreshRoutesEvent事件。</p> </li> <li> <p style="margin-left:auto;">gateway收到RefreshRoutesEvent事件的话，就会触发getRouteDefinitions方法了（这里需要实现RouteDefinitionRepository接口，才会触发方法）</p> </li> </ul> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">下面在下个图就是程序的走向。</span></span></p> <p style="text-align:center;"><img decoding="async" alt="gateway和nacos整合" class="medium-zoom-image" src="http://img.555519.xyz/uploads3/20220707/e2af4731c39b889195d3c2c9fb3d5f92.jpg"></p> <h2 id="nacos-client的配置" style="margin-left:0;text-align:left;"><strong><span style="color:#000000;"><span style="background-color:#ffffff;">nacos-client的配置</span></span></strong></h2> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>yml的依赖：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-xml"><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependencies</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.cloud<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">version</span>&gt;</span>0.9.0.RELEASE<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">version</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">groupId</span>&gt;</span>org.springframework.boot<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">groupId</span>&gt;</span><span style="color:#0000ff;">&lt;<span style="color:#0000ff;">artifactId</span>&gt;</span>spring-boot-starter-web<span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">artifactId</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependency</span>&gt;</span><span style="color:#0000ff;">&lt;/<span style="color:#0000ff;">dependencies</span>&gt;</span></code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>application.yml配置文件：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-yml"><span style="color:#ff0000;">server:</span><span style="color:#ff0000;">port:</span> 8061<span style="color:#ff0000;">spring:</span><span style="color:#ff0000;">application:</span><span style="color:#ff0000;">name:</span><span style="color:#a31515;">nacos-client</span><span style="color:#ff0000;">cloud:</span><span style="color:#ff0000;">nacos:</span><span style="color:#ff0000;">discovery:</span><span style="color:#ff0000;">register-enabled:</span><span style="color:#a31515;">true</span><span style="color:#ff0000;">server-addr:</span> 127.0.0.1<span style="color:#a31515;">:8848</span></code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><strong>代码实现：</strong></span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-java"><span style="color:#008000;">/**  *<span style="color:#808080;">@author</span> gyc  *<span style="color:#808080;">@date</span> 2020/12/6  */</span><span style="color:#2b91af;">@SpringBootApplication</span><span style="color:#2b91af;">@EnableDiscoveryClient</span><span style="color:#0000ff;">public</span><span style="color:#0000ff;">class</span><span style="color:#a31515;">NacosClientApp</span> {<span style="color:#0000ff;">public</span><span style="color:#0000ff;">static</span><span style="color:#0000ff;">void</span><span style="color:#a31515;">main</span>(String[] args) {         SpringApplication.run(NacosClientApp.class,args);     }  }</code></span></span></pre> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-java"><span style="color:#2b91af;">@RestController</span><span style="color:#2b91af;">@RequestMapping</span><span style="color:#0000ff;">public</span><span style="color:#0000ff;">class</span><span style="color:#a31515;">HelloController</span> {<span style="color:#2b91af;">@GetMapping("/sayHello")</span><span style="color:#0000ff;">public</span> String<span style="color:#a31515;">sayHello</span>(){<span style="color:#0000ff;">return</span><span style="color:#a31515;">"sayHello"</span>;     }      }</code></span></span></pre> <h2 id="nacos的一些配置" style="margin-left:0;text-align:left;"><strong><span style="color:#000000;"><span style="background-color:#ffffff;">nacos的一些配置</span></span></strong></h2> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"> 由上面的gateway的配置来看，我们是没有给gateway配置路由信息的。这时候我们是要通过nacos的统一的配置中心来做个配置。</span></span></p> <blockquote> <p style="margin-left:auto;"><span style="color:#FF0000;">注意： 我们这个是通过读取json的方式，来做解析的，这里断言和过滤器的的配置方式需要是使用Fully Expanded Arguments</span></p> <p style="margin-left:auto;">可以看会我之前的有一篇叫做Spring Cloud Gateway入门demo博文里面的断言和过滤器配置方式章节，地址如下：</p> <p style="margin-left:auto;">Spring Cloud Gateway入门demo - 大笨象会跳舞 - 博客园</p> </blockquote> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">新增一个配置信息：</span></span></p> <p style="text-align:center;"><img decoding="async" alt="image-20201208104613581" class="medium-zoom-image" src="http://img.555519.xyz/uploads3/20220707/a3023aa9f758303334b2b063fb28b324.jpg"></p> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">配置内容如下：</span></span></p> <pre style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;"><code class="language-json">[{<span style="color:#ff0000;">"id"</span>:<span style="color:#a31515;">"first_route"</span>,<span style="color:#ff0000;">"predicates"</span>: [{<span style="color:#ff0000;">"name"</span>:<span style="color:#a31515;">"Path"</span>,<span style="color:#ff0000;">"args"</span>: {<!-- --><span style="color:#ff0000;">"_genkey_0"</span>:<span style="color:#a31515;">"/first"</span>}   }],<span style="color:#ff0000;">"filters"</span>: [{<span style="color:#ff0000;">"name"</span> :<span style="color:#a31515;">"StripPrefix"</span>,<span style="color:#ff0000;">"args"</span>:{<!-- --><span style="color:#ff0000;">"parts"</span>:<span style="color:#a31515;">"1"</span>}   }],<span style="color:#ff0000;">"uri"</span>:<span style="color:#a31515;">"https://www.bilibili.com/"</span>,<span style="color:#ff0000;">"order"</span>: 0 }, {<span style="color:#ff0000;">"id"</span>:<span style="color:#a31515;">"nacos-client"</span>,<span style="color:#ff0000;">"predicates"</span>: [{<span style="color:#ff0000;">"name"</span>:<span style="color:#a31515;">"Path"</span>,<span style="color:#ff0000;">"args"</span>: {<!-- --><span style="color:#ff0000;">"_genkey_0"</span>:<span style="color:#a31515;">"/nacos/**"</span>}   }],<span style="color:#ff0000;">"filters"</span>: [{<span style="color:#ff0000;">"name"</span> :<span style="color:#a31515;">"StripPrefix"</span>,<span style="color:#ff0000;">"args"</span>:{<!-- --><span style="color:#ff0000;">"parts"</span>:<span style="color:#a31515;">"1"</span>}   }],<span style="color:#ff0000;">"uri"</span>:<span style="color:#a31515;">"lb://nacos-client"</span>,<span style="color:#ff0000;">"order"</span>: 0 } ]</code></span></span></pre> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">这个配置包括两个路由的信息</span></span></p> <ul style="margin-left:30px;"> <li>第一个路由first_route： 当输入127.0.0.1:8080/first_route 路径的时候会跳到https://www.bilibili.com/页面</li> <li>第二个路由nacos-client： 当输入127.0.0.1:8080/nacos/say/**的路径的时候会跳到lb://nacos-client/**页面。</li> </ul> <h2 id="效果展示" style="margin-left:0;text-align:left;"><strong><span style="color:#000000;"><span style="background-color:#ffffff;">效果展示</span></span></strong></h2> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">通过输入http://127.0.0.1:8080/first,跳到哔哩哔哩主页。然后通过修改nacos的配置中心里面gateway的配置，使得再次输入地址，跳到百度主页</span></span></p> <p style="margin-left:auto;text-align:left;"> <p style="margin-left:auto;text-align:left;"><span style="color:#000000;"><span style="background-color:#ffffff;">如果加载不出gif图请访问：登录 - Gitee.com</span></span></p> </div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-110567.htm">动物打疫苗注意事项和禁忌症（动物打疫苗后的不良反应）</a></p>
+                                        <p>下一个：<a href="/news/article-111501.htm">兽医成人本科可以考证吗（成人大学兽医专业可以考兽医医师资格证吗?）</a></p>
+                                    </div>
+                                    </div>
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-88292.htm" title="兽医疫苗批号怎么查（兽医疫苗批号怎么查询）">兽医疫苗批号怎么查（兽医疫苗批号怎么查询）</a></li>
+                        <li class="py-2"><a href="/news/article-111498.htm" title="spring cloud gateway和nacos整合">spring cloud gateway和nacos整合</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-12-free-clash-subscribe.htm" title="4月12日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度18.1M/S">4月12日 | 最新SSR/Shadowrocket/Clash/V2ray高速免费节点，最高速度18.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-clash-windows.htm" title="4月3日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.9M/S">4月3日 | 最新Shadowrocket/Clash/SSR/V2ray高速免费节点，最高速度19.9M/S</a></li>
+                        <li class="py-2"><a href="/news/article-89764.htm" title="办理动物诊疗许可证要多少钱（动物诊疗许可证要钱吗）">办理动物诊疗许可证要多少钱（动物诊疗许可证要钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-95744.htm" title="dell固态硬盘启动bios设置方法（dell bios设置固态硬盘启动）">dell固态硬盘启动bios设置方法（dell bios设置固态硬盘启动）</a></li>
+                        <li class="py-2"><a href="/news/article-90495.htm" title="内江宠物店哪家便宜又好（内江宠物店哪家便宜又好看）">内江宠物店哪家便宜又好（内江宠物店哪家便宜又好看）</a></li>
+                        <li class="py-2"><a href="/news/article-110567.htm" title="动物打疫苗注意事项和禁忌症（动物打疫苗后的不良反应）">动物打疫苗注意事项和禁忌症（动物打疫苗后的不良反应）</a></li>
+                        <li class="py-2"><a href="/news/article-89015.htm" title="IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)">IDEA SpringBoot-Mybatis-plus 实现增删改查(CRUD)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-19-free-ssr-node.htm" title="4月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.1M/S">4月19日 | 最新SSR/Shadowrocket/V2ray/Clash高速免费节点，最高速度18.1M/S</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">89</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+
+                <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                                <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                            V2rayClashNodes节点订阅站 版权所有 Powered by WordPress
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="#">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/wow/wow.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/easing/easing.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/waypoints/waypoints.min.js"></script>
+        <script src="/assets/website/js/frontend/v2rayclashnodes/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="/assets/website/js/frontend/v2rayclashnodes/main.js"></script>
+        <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script>
+        <script src="/assets/website/js/frontend/G.js"></script>
+    </div>
+</body>
+
+</html>
