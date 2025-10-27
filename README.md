@@ -1,4 +1,4 @@
-# 10月21日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Singbox节点/Clash节点高速免费节点，最高速度22.7M/S  更新时间 2025-10-21 03:42:53
+# 10月27日 | 最新Shadowrocket节点/Clash节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度19.2M/S  更新时间 2025-10-27 04:14:24
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://v2rayclashnodes.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://v2rayclashnodes.github.io/uploads/2025/10/0-20251021.yaml
-- https://v2rayclashnodes.github.io/uploads/2025/10/1-20251021.yaml
-- https://v2rayclashnodes.github.io/uploads/2025/10/2-20251021.yaml
-- https://v2rayclashnodes.github.io/uploads/2025/10/3-20251021.yaml
-- https://v2rayclashnodes.github.io/uploads/2025/10/4-20251021.yaml
+- https://v2rayclashnodes.github.io/uploads/2025/10/0-20251027.yaml
+- https://v2rayclashnodes.github.io/uploads/2025/10/1-20251027.yaml
+- https://v2rayclashnodes.github.io/uploads/2025/10/2-20251027.yaml
+- https://v2rayclashnodes.github.io/uploads/2025/10/3-20251027.yaml
+- https://v2rayclashnodes.github.io/uploads/2025/10/4-20251027.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://v2rayclashnodes.github.io/uploads/2025/10/0-20251021.txt
-- https://v2rayclashnodes.github.io/uploads/2025/10/1-20251021.txt
-- https://v2rayclashnodes.github.io/uploads/2025/10/2-20251021.txt
-- https://v2rayclashnodes.github.io/uploads/2025/10/3-20251021.txt
-- https://v2rayclashnodes.github.io/uploads/2025/10/4-20251021.txt
+- https://v2rayclashnodes.github.io/uploads/2025/10/0-20251027.txt
+- https://v2rayclashnodes.github.io/uploads/2025/10/1-20251027.txt
+- https://v2rayclashnodes.github.io/uploads/2025/10/2-20251027.txt
+- https://v2rayclashnodes.github.io/uploads/2025/10/3-20251027.txt
+- https://v2rayclashnodes.github.io/uploads/2025/10/4-20251027.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://v2rayclashnodes.github.io/uploads/2025/10/20251021.json
+- https://v2rayclashnodes.github.io/uploads/2025/10/20251027.json
 
 ## 更多Clash节点订阅 ：
 
