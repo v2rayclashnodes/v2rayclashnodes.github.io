@@ -152,19 +152,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Trojan 节点无法连接时应如何排查？</h5></div>
+    <div class="panel-heading"><h5>Shadowrocket 的节点测速结果如何优化网络体验？</h5></div>
     <div class="panel-body">
-        遇到 Trojan 无法连接时，需检查服务器证书是否有效、端口是否开放、密码配置是否匹配。还应确认防火墙未阻断相关端口，并尝试切换 TLS 版本或使用 IP 地址连接。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何用 iptables 限制 V2Ray 服务的访问来源？</h5></div>
-    <div class="panel-body">
-        使用 iptables 规则仅允许可信 IP 或 CDN 的中转 IP 访问服务端口，例如 `iptables -A INPUT -p tcp -s <trusted_ip> --dport 443 -j ACCEPT`，并在默认策略下拒绝其他来源，从而降低被扫描与滥用风险。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
-    <div class="panel-body">
-        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+        Shadowrocket 测量节点延迟和丢包率，将延迟低的节点优先使用。结合策略组和分流规则，可提升网页浏览、视频播放和游戏的访问速度和稳定性，优化整体网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Shadowrocket 如何处理域名直连与代理的冲突？</h5></div>
@@ -172,24 +162,29 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         在 Shadowrocket 的规则管理中优先设置具体规则（如 DOMAIN-KEYWORD 或 DOMAIN-SUFFIX），将直连规则放在规则列表靠前位置，避免被泛用的代理规则覆盖，从而确保特定域名走直连。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS 的 Flow 参数有什么作用？</h5></div>
-    <div class="panel-body">
-        Flow 参数用于控制 VLESS 的传输模式，如 XTLS Vision 或 Reality 模式。它能影响性能、安全性与兼容性，需根据客户端支持情况正确匹配配置。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 多策略组如何管理大量节点？</h5></div>
     <div class="panel-body">
         多策略组可将节点按地区、延迟或用途分类，并结合规则文件自动分流流量。这样可快速选择最优节点，提高访问速度和稳定性，同时优化节点管理和维护效率。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + XTLS 模式适合移动网络吗？</h5></div>
+    <div class="panel-heading"><h5>VLESS 的 Flow 参数有什么作用？</h5></div>
     <div class="panel-body">
-        XTLS 模式降低加密开销，减少握手次数，适合高延迟或不稳定移动网络。结合策略组和多出口节点，可提升访问速度和连接稳定性，确保用户体验流畅。<hr />    </div>
+        Flow 参数用于控制 VLESS 的传输模式，如 XTLS Vision 或 Reality 模式。它能影响性能、安全性与兼容性，需根据客户端支持情况正确匹配配置。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的节点测速结果如何优化网络体验？</h5></div>
+    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
     <div class="panel-body">
-        Shadowrocket 测量节点延迟和丢包率，将延迟低的节点优先使用。结合策略组和分流规则，可提升网页浏览、视频播放和游戏的访问速度和稳定性，优化整体网络体验。<hr />    </div>
+        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-body">
+        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何用 iptables 限制 V2Ray 服务的访问来源？</h5></div>
+    <div class="panel-body">
+        使用 iptables 规则仅允许可信 IP 或 CDN 的中转 IP 访问服务端口，例如 `iptables -A INPUT -p tcp -s <trusted_ip> --dport 443 -j ACCEPT`，并在默认策略下拒绝其他来源，从而降低被扫描与滥用风险。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Surfboard 的规则导入失败可能是什么原因？</h5></div>
@@ -197,9 +192,14 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         可能是规则格式不兼容、语法错误或策略组缺失。确保导入文件符合 Surfboard 的 YAML 规范，并检查节点或策略组是否完整，可解决导入失败问题。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
+    <div class="panel-heading"><h5>VLESS + XTLS 模式适合移动网络吗？</h5></div>
     <div class="panel-body">
-        首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。    </div>
+        XTLS 模式降低加密开销，减少握手次数，适合高延迟或不稳定移动网络。结合策略组和多出口节点，可提升访问速度和连接稳定性，确保用户体验流畅。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Trojan 节点无法连接时应如何排查？</h5></div>
+    <div class="panel-body">
+        遇到 Trojan 无法连接时，需检查服务器证书是否有效、端口是否开放、密码配置是否匹配。还应确认防火墙未阻断相关端口，并尝试切换 TLS 版本或使用 IP 地址连接。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -228,16 +228,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-2-free-clash-subscribe.htm" title="11月2日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度22.4M/S">11月2日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度22.4M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-11-free-v2ray.htm" title="10月11日 | 最新Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度21.3M/S">10月11日 | 最新Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度21.3M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-20-clash-node.htm" title="10月20日 | 最新SSR节点/Shadowrocket节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度22.6M/S">10月20日 | 最新SSR节点/Shadowrocket节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度22.6M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-22-clash-v2ray-ss-ssr.htm" title="10月22日 | 最新Singbox节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点高速免费节点，最高速度20.2M/S">10月22日 | 最新Singbox节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点高速免费节点，最高速度20.2M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-5-free-clash.htm" title="11月5日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度20M/S">11月5日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度20M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-16-shadowrocket-node.htm" title="10月16日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度18.6M/S">10月16日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度18.6M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-24-free-clash.htm" title="10月24日 | 最新V2ray节点/Singbox节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度18.4M/S">10月24日 | 最新V2ray节点/Singbox节点/Shadowrocket节点/Clash节点/SSR节点高速免费节点，最高速度18.4M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-19-free-subscribe-node.htm" title="10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S">10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-13-node-share-links.htm" title="10月13日 | 最新Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点高速免费节点，最高速度19.3M/S">10月13日 | 最新Shadowrocket节点/V2ray节点/Singbox节点/Clash节点/SSR节点高速免费节点，最高速度19.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-8-node-share.htm" title="11月8日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.5M/S">11月8日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-3-free-ssr-node.htm" title="10月3日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度21.5M/S">10月3日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度21.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-17-free-clash-subscribe.htm" title="10月17日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.5M/S">10月17日 | 最新Singbox节点/Clash节点/SSR节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度19.5M/S</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-10-12-free-ssr-node.htm" title="10月12日 | 最新Singbox节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.1M/S">10月12日 | 最新Singbox节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-21-free-shadowrocket-node.htm" title="10月21日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度18M/S">10月21日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度18M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-31-shadowrocket-node.htm" title="10月31日 | 最新Clash节点/V2ray节点/Singbox节点/SSR节点/Shadowrocket节点高速免费节点，最高速度21.7M/S">10月31日 | 最新Clash节点/V2ray节点/Singbox节点/SSR节点/Shadowrocket节点高速免费节点，最高速度21.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-2-free-clash-subscribe.htm" title="11月2日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度22.4M/S">11月2日 | 最新Clash节点/SSR节点/Shadowrocket节点/V2ray节点/Singbox节点高速免费节点，最高速度22.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-20-clash-node.htm" title="10月20日 | 最新SSR节点/Shadowrocket节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度22.6M/S">10月20日 | 最新SSR节点/Shadowrocket节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度22.6M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-19-free-subscribe-node.htm" title="10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S">10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-23-free-subscribe-node.htm" title="10月23日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.7M/S">10月23日 | 最新Singbox节点/SSR节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.7M/S</a></li>
                     </ul>
     </div>
 </div>
@@ -249,7 +249,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">11</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
