@@ -223,19 +223,18 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
 <p data-start="2634" data-end="2773" class="">本文详细讲解了梅林科学上网离线包的下载、安装与配置过程，内容详实且条理清晰。对于没有深入技术背景的用户来说，文章提供了易于理解的操作步骤，帮助他们顺利完成设置。文章语言简洁直观，步骤具体，特别适合初学者。通过常见问题的解答，进一步降低了用户在使用过程中可能遇到的困惑，非常实用。</p></div>
 <div class="clearfix"></div>
 <div class="col-md-12 mt-5">
-        <p>上一个：<a href="/free-nodes/2025-11-4-free-node-subscribe.htm">11月4日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度20M/S</a></p>
         <p>下一个：<a href="/free-nodes/2025-11-6-clash-v2ray-ss-ssr.htm">11月6日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度20.5M/S</a></p>
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray 的本地 PAC 模式与全局模式有什么区别？</h5></div>
+    <div class="panel-body">
+        PAC 模式通过规则文件自动判定哪些域名走代理，能兼顾速度与便利；全局模式则所有流量都通过代理，适合调试或访问被完全屏蔽的网络。两者可在界面一键切换，根据需求灵活选择。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Netch 如何为游戏流量提供加速？</h5></div>
     <div class="panel-body">
         Netch 支持 UDP 转发，可为游戏流量建立高速通道。结合策略组和节点延迟检测，可减少丢包和延迟，保证游戏访问稳定流畅，提高网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
-    <div class="panel-body">
-        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Shadowrocket 在使用订阅时要注意什么？</h5></div>
@@ -243,9 +242,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         在 Shadowrocket 中添加订阅时，应确保链接以 https 开头且格式正确。此外，若节点更新失败，可尝试关闭缓存或重新获取订阅链接，以保证配置文件同步最新节点数据。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
+    <div class="panel-heading"><h5>Potatso Lite 是否支持多节点测试？</h5></div>
     <div class="panel-body">
-        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+        Potatso Lite 支持手动测试单个节点延迟，但不支持批量自动测速。用户需逐个连接测试节点性能，或者结合其他客户端获取更全面的测速信息。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Surfboard 能否同步 iCloud 配置？</h5></div>
@@ -253,14 +252,19 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         可以。Surfboard 支持 iCloud 同步功能，用户可在不同苹果设备上共享同一配置文件。这样即使更换手机或重装系统，也能自动恢复节点与分流设置。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS + Reality 与 Trojan 在性能上差异大吗？</h5></div>
+    <div class="panel-body">
+        两者性能相近。VLESS + Reality 伪装更自然，适合强封锁地区；Trojan 则依托标准 TLS 实现高速连接。选择取决于服务器支持与环境稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
+    <div class="panel-body">
+        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Hiddify Next 的多机场订阅如何整合？</h5></div>
     <div class="panel-body">
         Hiddify Next 提供合并订阅功能，可将多个链接导入同一配置，自动去重并分类节点。用户可设置优先级与标签，方便快速选择不同提供商的线路，提升连接灵活性与冗余度。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VMess 节点的 alterId 参数还需要设置吗？</h5></div>
-    <div class="panel-body">
-        在新版 V2Ray/Xray 内核中，alterId 已被废弃，不再影响认证逻辑。建议用户设置为 0 或删除该字段，以避免连接异常或不兼容情况。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Hysteria2 多路复用对短连接性能有何提升？</h5></div>
@@ -268,14 +272,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         多路复用允许多个短连接共享同一通道，减少握手延迟和资源消耗。适合高频短连接场景，如游戏和即时通讯，可提高吞吐量和连接稳定性，优化整体网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 是否支持多节点测试？</h5></div>
+    <div class="panel-heading"><h5>VMess 节点的 alterId 参数还需要设置吗？</h5></div>
     <div class="panel-body">
-        Potatso Lite 支持手动测试单个节点延迟，但不支持批量自动测速。用户需逐个连接测试节点性能，或者结合其他客户端获取更全面的测速信息。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 的本地 PAC 模式与全局模式有什么区别？</h5></div>
-    <div class="panel-body">
-        PAC 模式通过规则文件自动判定哪些域名走代理，能兼顾速度与便利；全局模式则所有流量都通过代理，适合调试或访问被完全屏蔽的网络。两者可在界面一键切换，根据需求灵活选择。    </div>
+        在新版 V2Ray/Xray 内核中，alterId 已被废弃，不再影响认证逻辑。建议用户设置为 0 或删除该字段，以避免连接异常或不兼容情况。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -304,16 +303,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-8-node-share.htm" title="11月8日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.5M/S">11月8日 | 最新SSR节点/Clash节点/Singbox节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度22.5M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-7-free-node-subscribe.htm" title="10月7日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度22.5M/S">10月7日 | 最新Shadowrocket节点/Clash节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度22.5M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-8-node-share.htm" title="10月8日 | 最新SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度22.9M/S">10月8日 | 最新SSR节点/Shadowrocket节点/Singbox节点/V2ray节点/Clash节点高速免费节点，最高速度22.9M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-16-shadowrocket-node.htm" title="10月16日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度18.6M/S">10月16日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度18.6M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-22-clash-v2ray-ss-ssr.htm" title="10月22日 | 最新Singbox节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点高速免费节点，最高速度20.2M/S">10月22日 | 最新Singbox节点/V2ray节点/Shadowrocket节点/SSR节点/Clash节点高速免费节点，最高速度20.2M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-4-free-node-subscribe.htm" title="11月4日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度20M/S">11月4日 | 最新Shadowrocket节点/SSR节点/Clash节点/Singbox节点/V2ray节点高速免费节点，最高速度20M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-12-free-ssr-node.htm" title="10月12日 | 最新Singbox节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.1M/S">10月12日 | 最新Singbox节点/SSR节点/Clash节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.1M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-19-free-subscribe-node.htm" title="10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S">10月19日 | 最新Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Singbox节点高速免费节点，最高速度21.1M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-29-free-v2ray-subscribe.htm" title="11月29日 | 最新Shadowrocket节点/V2ray节点/Singbox节点/SSR节点/Clash节点高速免费节点，最高速度19.2M/S">11月29日 | 最新Shadowrocket节点/V2ray节点/Singbox节点/SSR节点/Clash节点高速免费节点，最高速度19.2M/S</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-9-shadowrocket-node.htm" title="11月9日 | 最新Singbox节点/Clash节点/V2ray节点/SSR节点/Shadowrocket节点高速免费节点，最高速度21.9M/S">11月9日 | 最新Singbox节点/Clash节点/V2ray节点/SSR节点/Shadowrocket节点高速免费节点，最高速度21.9M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-11-free-v2ray.htm" title="10月11日 | 最新Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度21.3M/S">10月11日 | 最新Clash节点/Shadowrocket节点/Singbox节点/SSR节点/V2ray节点高速免费节点，最高速度21.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-23-clash-v2ray-ss-ssr.htm" title="11月23日 | 最新V2ray节点/Singbox节点/Clash节点/SSR节点/Shadowrocket节点高速免费节点，最高速度20.4M/S">11月23日 | 最新V2ray节点/Singbox节点/Clash节点/SSR节点/Shadowrocket节点高速免费节点，最高速度20.4M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-17-free-clash-subscribe.htm" title="11月17日 | 最新Shadowrocket节点/V2ray节点/Clash节点/SSR节点/Singbox节点高速免费节点，最高速度19.3M/S">11月17日 | 最新Shadowrocket节点/V2ray节点/Clash节点/SSR节点/Singbox节点高速免费节点，最高速度19.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-6-clash-v2ray-ss-ssr.htm" title="11月6日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度20.5M/S">11月6日 | 最新Singbox节点/SSR节点/Shadowrocket节点/V2ray节点/Clash节点高速免费节点，最高速度20.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-13-free-clash-subscribe.htm" title="11月13日 | 最新SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点高速免费节点，最高速度21.3M/S">11月13日 | 最新SSR节点/Shadowrocket节点/Singbox节点/Clash节点/V2ray节点高速免费节点，最高速度21.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-3-shadowrocket-node.htm" title="12月3日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度19.2M/S">12月3日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Singbox节点/Clash节点高速免费节点，最高速度19.2M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-30-free-ssr-subscribe.htm" title="11月30日 | 最新Clash节点/V2ray节点/Singbox节点/SSR节点/Shadowrocket节点高速免费节点，最高速度22.7M/S">11月30日 | 最新Clash节点/V2ray节点/Singbox节点/SSR节点/Shadowrocket节点高速免费节点，最高速度22.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-4-free-node-subscribe.htm" title="12月4日 | 最新Shadowrocket节点/SSR节点/V2ray节点/Singbox节点/Clash节点高速免费节点，最高速度21.5M/S">12月4日 | 最新Shadowrocket节点/SSR节点/V2ray节点/Singbox节点/Clash节点高速免费节点，最高速度21.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-7-clash-node.htm" title="11月7日 | 最新SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Singbox节点高速免费节点，最高速度21.9M/S">11月7日 | 最新SSR节点/Shadowrocket节点/V2ray节点/Clash节点/Singbox节点高速免费节点，最高速度21.9M/S</a></li>
                     </ul>
     </div>
 </div>
@@ -325,10 +324,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">11</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
+                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                     </ul>
     </div>
