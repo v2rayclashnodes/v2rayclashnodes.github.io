@@ -147,31 +147,6 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 能否同时运行多个代理？</h5></div>
-    <div class="panel-body">
-        Nekoray 支持多配置运行。用户可在“多配置模式”下同时开启不同协议或节点的代理，程序会自动创建多个监听端口，方便多应用或分流测试使用。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Mihomo 启动后 CPU 占用高，有哪些优化建议？</h5></div>
-    <div class="panel-body">
-        检查是否启用了大量日志或复杂脚本，关闭不必要的规则提供者与日志调试；在多核服务器上启用并发或调整线程数；更新到最新版本以获得性能优化，并监控是否有异常连接导致处理压力。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些好处？</h5></div>
-    <div class="panel-body">
-        多路复用允许多个短连接共享同一 QUIC 通道，减少握手延迟和资源消耗。在高并发或频繁短连接场景下，能显著提升吞吐量和稳定性，尤其适合游戏或即时通讯应用。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的协议参数和混淆参数如何配置最安全？</h5></div>
-    <div class="panel-body">
-        选择 AEAD 或协议插件可提升安全性，混淆方式如 tls1.2_ticket_auth 可以模拟正常 HTTPS 流量。合理搭配协议和混淆参数，能够有效抵御 DPI 检测和流量封锁。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何在 macOS 上运行 ClashX？</h5></div>
-    <div class="panel-body">
-        ClashX 是 macOS 平台专用客户端，用户可在 GitHub 下载 DMG 安装包。安装后导入订阅即可使用，支持系统代理集成、自动更新和延迟测试。界面简洁直观，深受苹果用户欢迎。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>Netch 的 TCP/UDP 分流适合哪些应用？</h5></div>
     <div class="panel-body">
         TCP 分流适合网页、下载和视频播放，UDP 分流适合游戏、语音和实时视频。Netch 可同时代理 TCP 和 UDP 流量，实现精准分流，保证不同应用的最佳性能。<hr />    </div>
@@ -180,6 +155,31 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-heading"><h5>Potatso Lite 是否支持手动节点管理？</h5></div>
     <div class="panel-body">
         支持。用户可手动输入节点信息或扫描二维码导入节点，并可进行修改或删除。虽然不支持自动订阅更新，但足以满足轻量用户对节点管理和流量分流的需求。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray PAC 模式如何提高访问速度？</h5></div>
+    <div class="panel-body">
+        PAC 模式根据规则判断流量是否走代理，无需手动切换节点。适合访问国内外混合网站，提高访问速度和稳定性，减少误操作导致的访问失败。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Mihomo 启动后 CPU 占用高，有哪些优化建议？</h5></div>
+    <div class="panel-body">
+        检查是否启用了大量日志或复杂脚本，关闭不必要的规则提供者与日志调试；在多核服务器上启用并发或调整线程数；更新到最新版本以获得性能优化，并监控是否有异常连接导致处理压力。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的协议参数和混淆参数如何配置最安全？</h5></div>
+    <div class="panel-body">
+        选择 AEAD 或协议插件可提升安全性，混淆方式如 tls1.2_ticket_auth 可以模拟正常 HTTPS 流量。合理搭配协议和混淆参数，能够有效抵御 DPI 检测和流量封锁。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 能否同时运行多个代理？</h5></div>
+    <div class="panel-body">
+        Nekoray 支持多配置运行。用户可在“多配置模式”下同时开启不同协议或节点的代理，程序会自动创建多个监听端口，方便多应用或分流测试使用。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何在 macOS 上运行 ClashX？</h5></div>
+    <div class="panel-body">
+        ClashX 是 macOS 平台专用客户端，用户可在 GitHub 下载 DMG 安装包。安装后导入订阅即可使用，支持系统代理集成、自动更新和延迟测试。界面简洁直观，深受苹果用户欢迎。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>VMess AEAD 加密在高封锁网络中有何优势？</h5></div>
@@ -192,9 +192,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         Mihomo 完全兼容 Clash Premium 的 Rule-Set 格式，支持相同的远程规则订阅与策略分组。用户可直接迁移原 Clash 配置，无需额外修改或转换。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray PAC 模式如何提高访问速度？</h5></div>
+    <div class="panel-heading"><h5>Hysteria2 的多路复用功能有哪些好处？</h5></div>
     <div class="panel-body">
-        PAC 模式根据规则判断流量是否走代理，无需手动切换节点。适合访问国内外混合网站，提高访问速度和稳定性，减少误操作导致的访问失败。    </div>
+        多路复用允许多个短连接共享同一 QUIC 通道，减少握手延迟和资源消耗。在高并发或频繁短连接场景下，能显著提升吞吐量和稳定性，尤其适合游戏或即时通讯应用。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -223,16 +223,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2026-4-29-free-v2ray.htm" title="4月29日 | 最新Singbox节点/V2ray节点/Clash节点/Trojan节点/Shadowrocket节点/SSR节点高速免费节点，最高速度20.7M/S">4月29日 | 最新Singbox节点/V2ray节点/Clash节点/Trojan节点/Shadowrocket节点/SSR节点高速免费节点，最高速度20.7M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-26-shadowrocket-node.htm" title="4月26日 | 最新V2ray节点/SSR节点/Clash节点/Shadowrocket节点/Singbox节点/Trojan节点高速免费节点，最高速度20M/S">4月26日 | 最新V2ray节点/SSR节点/Clash节点/Shadowrocket节点/Singbox节点/Trojan节点高速免费节点，最高速度20M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-15-clash-v2ray-ss-ssr.htm" title="4月15日 | 最新V2ray节点/Clash节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点高速免费节点，最高速度21M/S">4月15日 | 最新V2ray节点/Clash节点/Shadowrocket节点/Singbox节点/Trojan节点/SSR节点高速免费节点，最高速度21M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-19-free-subscribe-node.htm" title="4月19日 | 最新Clash节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度22.5M/S">4月19日 | 最新Clash节点/Shadowrocket节点/Trojan节点/Singbox节点/V2ray节点/SSR节点高速免费节点，最高速度22.5M/S</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-4-13-free-shadowrocket-node.htm" title="4月13日 | 最新Trojan节点/Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度20.9M/S">4月13日 | 最新Trojan节点/Singbox节点/Shadowrocket节点/Clash节点/V2ray节点/SSR节点高速免费节点，最高速度20.9M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-26-shadowrocket-node.htm" title="3月26日 | 最新V2ray节点/Singbox节点/Trojan节点/SSR节点/Clash节点/Shadowrocket节点高速免费节点，最高速度20.5M/S">3月26日 | 最新V2ray节点/Singbox节点/Trojan节点/SSR节点/Clash节点/Shadowrocket节点高速免费节点，最高速度20.5M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-9-free-ssr-subscribe.htm" title="4月9日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度20.8M/S">4月9日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度20.8M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-11-node-share-links.htm" title="4月11日 | 最新V2ray节点/Clash节点/Shadowrocket节点/SSR节点/Trojan节点/Singbox节点高速免费节点，最高速度20.7M/S">4月11日 | 最新V2ray节点/Clash节点/Shadowrocket节点/SSR节点/Trojan节点/Singbox节点高速免费节点，最高速度20.7M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-22-clash-windows.htm" title="3月22日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Trojan节点高速免费节点，最高速度22.6M/S">3月22日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/SSR节点/Clash节点/Trojan节点高速免费节点，最高速度22.6M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-15-clash-windows.htm" title="3月15日 | 最新Clash节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点/V2ray节点高速免费节点，最高速度21M/S">3月15日 | 最新Clash节点/Singbox节点/Shadowrocket节点/Trojan节点/SSR节点/V2ray节点高速免费节点，最高速度21M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-19-free-clash.htm" title="3月19日 | 最新SSR节点/Singbox节点/Trojan节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.8M/S">3月19日 | 最新SSR节点/Singbox节点/Trojan节点/V2ray节点/Shadowrocket节点/Clash节点高速免费节点，最高速度19.8M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-30-node-share-links.htm" title="4月30日 | 最新Trojan节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.5M/S">4月30日 | 最新Trojan节点/V2ray节点/Singbox节点/Clash节点/Shadowrocket节点/SSR节点高速免费节点，最高速度21.5M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-28-clash-node.htm" title="4月28日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/Trojan节点高速免费节点，最高速度22.3M/S">4月28日 | 最新SSR节点/V2ray节点/Shadowrocket节点/Clash节点/Singbox节点/Trojan节点高速免费节点，最高速度22.3M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-10-node-share-links.htm" title="4月10日 | 最新Shadowrocket节点/Singbox节点/SSR节点/V2ray节点/Trojan节点/Clash节点高速免费节点，最高速度21.5M/S">4月10日 | 最新Shadowrocket节点/Singbox节点/SSR节点/V2ray节点/Trojan节点/Clash节点高速免费节点，最高速度21.5M/S</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-4-14-shadowrocket-node.htm" title="4月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度20.5M/S">4月14日 | 最新SSR节点/Trojan节点/Singbox节点/Clash节点/Shadowrocket节点/V2ray节点高速免费节点，最高速度20.5M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-5-free-node-subscribe-links.htm" title="3月5日 | 最新Shadowrocket节点/SSR节点/Singbox节点/V2ray节点/Clash节点/Trojan节点高速免费节点，最高速度18.1M/S">3月5日 | 最新Shadowrocket节点/SSR节点/Singbox节点/V2ray节点/Clash节点/Trojan节点高速免费节点，最高速度18.1M/S</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-14-free-node-subscribe-links.htm" title="3月14日 | 最新Trojan节点/Clash节点/Singbox节点/SSR节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.9M/S">3月14日 | 最新Trojan节点/Clash节点/Singbox节点/SSR节点/V2ray节点/Shadowrocket节点高速免费节点，最高速度18.9M/S</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-4-9-free-ssr-subscribe.htm" title="4月9日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度20.8M/S">4月9日 | 最新Singbox节点/Shadowrocket节点/V2ray节点/Trojan节点/SSR节点/Clash节点高速免费节点，最高速度20.8M/S</a></li>
                     </ul>
     </div>
 </div>
@@ -244,10 +244,10 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">8</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
+                <h4><span class="badge" style="float: right;">2</span> <a href="/date/2026-05/" title="2026-05 归档">2026-05</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-03/" title="2026-03 归档">2026-03</a></h4>
+                <h4><span class="badge" style="float: right;">22</span> <a href="/date/2026-04/" title="2026-04 归档">2026-04</a></h4>
             </li>
                     </ul>
     </div>
